@@ -1,0 +1,191 @@
+{% include 'base.html' %}
+
+{% load static %}
+{% block body %}
+
+
+<body>
+
+<!-- Google Analytics -->
+<!-- Google Analytics -->
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-PFK425"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PFK425');</script>
+<!-- End Google Tag Manager -->
+<!-- /Google Analytics -->
+
+<!-- /Google Analytics -->
+
+
+<body style="background-color:#f4f8fa">
+
+ <section class="menu cid-qKSs6VLKjY navbar-section_class" once="menu" id="menu1-h">
+
+
+
+
+    <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
+        <div class="navbar-brand">
+
+            <span class="navbar-caption-wrap"><a class="navbar-caption text-black display-2" href="">
+                    <i>Sankalp</i></a></span>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </button>
+      <div class="container collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true">
+                <li class="nav-item">
+                    <a class="nav-link link text-danger display-4" href="#">
+                        Social Media
+                    </a>
+                </li>
+				<li>
+                 <a class="nav-link link text-danger display-4" href="{% url 'all_ngo_view' %}">
+                        NGO
+                    </a>
+                </li>
+				<li>
+                 <a class="nav-link link text-danger display-4" href="#">
+                       About Us
+                    </a>
+                </li>
+                {% if username %}
+				<li>
+                 <a class="nav-link link text-danger display-4" href="{% url 'profile' %}">
+
+                     {{username}} <i class="material-icons" style="font-size: 20px;color:#1dc9cb">person</i>
+                    </a>
+                </li>
+				<li>
+                 <a class="nav-link link text-danger display-4" href="{% url 'logout' %}">
+
+                     Logout<i class="material-icons" style="font-size: 20px;color:#1dc9cb">power_settings_new</i>
+
+                    </a>
+                </li>
+				{% else %}
+				<li>
+                 <a class="nav-link link text-danger display-4" style="color:white" href="{% url 'register' %}">
+                        Register
+                    </a>
+				</li>
+
+				<li>
+                 <a class="nav-link link text-danger display-4" href="{% url 'login' %}">
+
+                     Login <i class="material-icons" style="font-size: 20px;color:#1dc9cb">person</i>
+                    </a>
+                </li>
+
+				{% endif %}
+
+            </ul>
+
+            </div>
+
+      </div>
+    </nav>
+</section>
+
+
+
+
+<section class="features11 cid-qKSpeMafIm" id="features11-d">
+
+
+
+
+    <div class="container">
+        <h2 class="mbr-section-title pb-3 mbr-fonts-style align-center display-2" data-appselector=".mbr-section-title "><b>You May Also Like</b></h2>
+
+
+    </div>
+
+    <div class="container">
+			<div class="row justify-content-center pt-4">
+			<div class="col-md-6 col-lg-3 row-item div_icon">
+				<div class="wrapper">
+					<div class="card-img pb-3 align-center">
+						<center><i class="material-icons md-48 div_icon_cl" style="font-size: 48px;color:#1dc9cb">local_hospital</i></center>
+					</div>
+					<center><h4 class="mbr-fonts-style mbr-card-title align-center display-7">Health Contribution</h4></center>
+				</div>
+			</div>
+
+			<div class="col-md-6 col-lg-3 row-item cc">
+				<div class="wrapper">
+					<div class="card-img pb-3 align-center">
+                         <center><i class="material-icons md-48 div_icon_cl" style="font-size: 48px;color:#1dc9cb">school</i></center>
+						<!--<img class ="mbr-iconfont" src="{% static 'image/health.png' %}">-->
+					</div>
+					<center><h4 class="mbr-fonts-style mbr-card-title align-center display-7">Educational Help</h4></center>
+				</div>
+			</div>
+
+			<div class="col-md-6 col-lg-3 row-item">
+				<div class="wrapper">
+					<div class="card-img pb-3 align-center div_icon_cl">
+						<center><i class="material-icons md-48 div_icon_cl" style="font-size: 48px;color:#1dc9cb">important_devices</i></center>
+					</div>
+					<center><h4 class="mbr-fonts-style mbr-card-title align-center display-7">Technology Contribution</h4></center>
+				</div>
+			</div>
+
+			<div class="col-md-6 col-lg-3 row-item">
+				<div class="wrapper">
+					<div class="card-img pb-3 align-center">
+						<center><i class="material-icons md-48 div_icon_cl" style="font-size: 48px;color:#1dc9cb">public</i></center>
+					</div>
+					<center><h4 class="mbr-fonts-style mbr-card-title align-center display-7">Public Welfare</h4></center>
+				</div>
+			</div>
+			<div class="col-md-6 col-lg-3 row-item">
+				<div class="wrapper">
+					<div class="card-img pb-3 align-center">
+						<center><i class="material-icons md-48 div_icon_cl" style="font-size: 48px;color:#1dc9cb">smoke_free</i></center>
+					</div>
+					<center><h4 class="mbr-fonts-style mbr-card-title align-center display-7">Smoking Cure</h4></center>
+				</div>
+			</div>
+			<div class="col-md-6 col-lg-3 row-item">
+				<div class="wrapper">
+					<div class="card-img pb-3 align-center">
+						<center><i class="material-icons md-48 div_icon_cl" style="font-size: 48px;color:#1dc9cb">all_inclusive</i></center>
+					</div>
+					<center><h4 class="mbr-fonts-style mbr-card-title align-center display-7">Infinite Group</h4></center>
+				</div>
+			</div>
+			<div class="col-md-6 col-lg-3 row-item">
+				<div class="wrapper">
+					<div class="card-img pb-3 align-center">
+						<center><i class="material-icons md-48 div_icon_cl" style="font-size: 48px;color:#1dc9cb">monetization_on</i></center>
+					</div>
+					<center><h4 class="mbr-fonts-style mbr-card-title align-center display-7">Donation</h4></center>
+				</div>
+			</div>
+			<div class="col-md-6 col-lg-3 row-item">
+				<div class="wrapper">
+					<div class="card-img pb-3 align-center">
+						<center><i class="material-icons md-48 div_icon_cl" style="font-size: 48px;color:#1dc9cb">favorite_border</i></center>
+					</div>
+					<center><h4 class="mbr-fonts-style mbr-card-title align-center display-7">Heart Help</h4></center>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</section>
+
+
+{% endblock %}

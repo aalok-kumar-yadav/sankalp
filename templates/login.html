@@ -1,0 +1,70 @@
+{% include 'base.html' %}
+
+{% block head %}
+<title>Login</title>
+{% load static %}
+<link href="{% static '/css/login.css'%}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+<body style="background-color:#f4f8fa"></body>
+<div class="wrapper fadeInDown zero-raduis login_div_class">
+  	  <div id="formContent">
+  	    <!-- Tabs Titles -->
+
+
+  	    {% if type == 'login' %}
+		  <!-- Icon -->
+  	    <div class="fadeIn first">
+  	      <!-- <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" /> -->
+  	      <h2 class="my-5"><b>LOG IN</b></h2>
+  	    </div>
+
+
+		  <!-- Login Form -->
+  	    <form role="form" method="post" action="{% url 'login' %}">
+			 {% csrf_token %}
+  	      <input type="text" id="username" class="fadeIn second zero-raduis login_input" name="username" placeholder="Username" required>
+  	      <input type="text" id="password" class="fadeIn third zero-raduis login_input" name="password" placeholder="Password" required>
+		      <div id="formFooter" style="margin-bottom:1%">
+  	      	<a class="underlineHover fadeIn fourth zero-raduis pc" href="#">Forgot Password?</a>
+  	      </div>
+			{% if message == 'invalid' %}
+			<center><p class="fadeIn fourth zero-raduis"><font color="red">Authentication Failed</font></p></center>
+			{% endif %}
+  	      <input type="submit" class="fadeIn fourth zero-raduis" value="login">
+  	      <p class="fadeIn fourth zero-raduis pc">You don't have a account ?</p>
+			<input type="button" class="fadeIn fourth zero-raduis pc" value="register">
+  	      <a></a>
+  	    </form>
+		  {% endif %}
+		{% if type == 'register' %}
+   <!-- Icon -->
+  	    <div class="fadeIn first">
+  	      <!-- <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" /> -->
+  	      <h2 class="my-5"><b>USER REGISTRATION</b></h2>
+  	    </div>
+		  <!-- Login Form -->
+  	    <form role="form" method="post" action="{% url 'register' %}">
+			 {% csrf_token %}
+			<input type="text" id="first_name" class="fadeIn second zero-raduis login_input" name="first_name" placeholder="First Name" required>
+			<input type="text" id="last_name" class="fadeIn second zero-raduis login_input" name="last_name" placeholder="Last Name">
+  	      <input type="text" id="username" class="fadeIn second zero-raduis login_input" name="username" placeholder="Username" required>
+			<input type="email" id="email" class="fadeIn second zero-raduis login_input" name="email" placeholder="Email" required>
+  	      <input type="text" id="password" class="fadeIn third zero-raduis login_input" name="password" placeholder="Password" required>
+
+			{% if message == 'invalid' %}
+			<center><p class="fadeIn fourth zero-raduis"><font color="red">User exist please enter another username</font></p></center>
+			{% endif %}
+			<input type="submit" class="fadeIn fourth zero-raduis pc" value="register">
+			<center><p style="font-size:13px">By signing up, you agree to our terms of use, privacy policy and cookie policy</p></center>
+  	      <a></a>
+  	    </form>
+
+		{% endif %}
+
+
+  	  </div>
+  </div>
+
+{% endblock %}

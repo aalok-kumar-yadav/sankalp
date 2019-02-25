@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--- Head Tag --->
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{% static 'css/bootstrap-grid.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap-reboot.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/mobirise/mobi_additional_style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/mobirise/mobi_style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/mobirise/style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/mobirise/mobi_style2.css' %}" rel="stylesheet">
+    <link href="{% static 'css/mobirise/mobi_style3.css' %}" rel="stylesheet">
+    <link href="{% static 'css/mobirise/mobirise-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'css/mobirise/icon_style.css' %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+
+    {% block head %}
+
+    {% endblock %}
+</head>
+
+<body>
+
+<!--- Start Of Block Body --->
+
+
+ <section class="menu cid-qKSs6VLKjY navbar-section_class" once="menu" id="menu1-h">
+
+    <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
+        <div class="navbar-brand">
+
+            <span class="navbar-caption-wrap"><a class="navbar-caption text-black display-2" href="{% url 'index' %}">
+                    <i>Sankalp</i></a></span>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </button>
+      <div class="container collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true">
+                <li class="nav-item">
+                    <a class="nav-link link text-danger display-4" href="#">
+                        Social Media
+                    </a>
+                </li>
+				<li>
+                 <a class="nav-link link text-danger display-4" href="{% url 'all_ngo_view' %}">
+                        NGO
+                    </a>
+                </li>
+				<li>
+                 <a class="nav-link link text-danger display-4" href="#">
+                       About Us
+                    </a>
+                </li>
+                {% if username %}
+				<li>
+                 <a class="nav-link link text-danger display-4" href="{% url 'profile' %}">
+
+                     {{username}} <i class="material-icons" style="font-size: 20px;color:#1dc9cb">person</i>
+                    </a>
+                </li>
+				<li>
+                 <a class="nav-link link text-danger display-4" href="{% url 'logout' %}">
+
+                     Logout<i class="material-icons" style="font-size: 20px;color:#1dc9cb">power_settings_new</i>
+
+                    </a>
+                </li>
+				{% else %}
+				<li>
+                 <a class="nav-link link text-danger display-4" style="color:white" href="{% url 'register' %}">
+                        Register
+                    </a>
+				</li>
+
+				<li>
+                 <a class="nav-link link text-danger display-4" href="{% url 'login' %}">
+
+                     Login <i class="material-icons" style="font-size: 20px;color:#1dc9cb">person</i>
+                    </a>
+                </li>
+
+				{% endif %}
+
+            </ul>
+
+            </div>
+
+      </div>
+    </nav>
+</section>
+
+
+{% block body %}
+
+{% endblock %}
+
+</body>
+</html>
+
+<!--- End Of Html Tag --->
