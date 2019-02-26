@@ -1,0 +1,69 @@
+.custom_card_div_class{
+
+background-color:white;
+
+}
+
+.navbar_new_section_class
+{
+  z-index: 1;
+padding-bottom:6%;
+background-color:white !important;
+}
+
+.content_section_class{
+margin-top:2%;
+z-index: 1;
+}
+
+.description_font_tag{
+font-size:14px;
+
+}
+.ngo_grid_view_image_class{
+height:220px;
+
+}
+
+/* Styles for wrapping the search box */
+
+.main {
+    width: 50%;
+    margin: 50px auto;
+}
+
+/* Bootstrap 4 text input with search icon */
+
+.has-search .form-control {
+    padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+}
+
+.search_container_div_class{
+padding:2%;
+width:65%;
+padding-bottom:0px !important;
+
+
+}
+
+.ngo_search_input_class{
+    outline: none;
+    box-shadow: none !important;
+    background-color: white;
+    margin-bottom: 1%;
+    min-height: 2.5em;
+    border: 1px solid #24c1da8a !important;
+
+}

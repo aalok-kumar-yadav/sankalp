@@ -59,10 +59,15 @@ class Register(View):
 
 
 def all_ngo_view(request):
+    first_name = None
+    try:
+        first_name = request.session['first_name']
+    except Exception as e:
+        print(e)
 
-    return render(request, 'all_ngo.html', {'data': "alok"})
+    return render(request, 'all_ngo.html', {'username': first_name})
 
 
 def profile(request):
     contributor_instance = Contributor.objects.get(user__username=request.session['username'])
-    return render(request, 'profile.html', {'profile': contributor_instance})
+    return render(request, 'profile.html', {'username':request.session['first_name'], 'profile': contributor_instance})

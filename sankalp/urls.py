@@ -17,14 +17,16 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from ngo_app import views
+from contributor_app.views import EditContributorProfile
 
 urlpatterns = [
     url(r'^$', views.Index.as_view(), name='index'),
     url(r'^login$', views.Login.as_view(), name='login'),
-    url(r'register', views.Register.as_view(), name='register'),
-    url(r'ngos', views.all_ngo_view, name='all_ngo_view'),
-    url(r'profile$', views.profile, name='profile'),
-    url(r'logout', views.logout, name='logout'),
+    url(r'^register', views.Register.as_view(), name='register'),
+    url(r'^ngos', views.all_ngo_view, name='all_ngo_view'),
+    url(r'^profile$', views.profile, name='profile'),
+    url(r'^edit_user_profile$', EditContributorProfile.as_view(), name='edit_user_profile'),
+    url(r'^logout', views.logout, name='logout'),
     url(r'^admin/', admin.site.urls),
 
 ]

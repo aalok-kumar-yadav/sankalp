@@ -2,22 +2,22 @@
 
 {% load static %}
 {% block head %}
-<title>Profile</title>
+<title>Edit Profile</title>
 <link href="{% static 'css/profile.css' %}" rel="stylesheet">
     {% endblock %}
 {% block body %}
 
-
 <div class="container emp-profile">
-
+                <form role="form" method="post" action="{% url 'edit_user_profile' %}">
+                       {% csrf_token %}
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
-
-                            <img id = "profile_image_id" src="https://i.ibb.co/t8BZkdQ/Alok-Yadav-20151107-193956.jpg" alt=""/>
+                            <input id="profile-image-upload" name="profile_pic" type="file" style="display:none">
+                            <img id="profile_image_id" src="https://i.ibb.co/t8BZkdQ/Alok-Yadav-20151107-193956.jpg" alt=""/>
                             <!--<div class="file btn btn-lg btn-primary">-->
                                 <!--Change Photo-->
-                                <!--<input type="file" name="file"/>-->
+                                <!--<input class ="form-control" type="file" name="profile_pic"/>-->
                             <!--</div>-->
                         </div>
                     </div>
@@ -29,7 +29,7 @@
                                     <h6>
                                         Web Developer and Designer
                                     </h6>
-                                    <p class="proile-rating">RANKINGS : <span>8/10</span></p>
+                                    <h6 class="proile-rating">Ngo Connection :<span> 8</span></h6>
                             <h6>Profile Complete</h6>
                             <div id="myProgress">
                         <div id="myBar"></div>
@@ -45,18 +45,19 @@
 
                     </div>
                     <div class="col-md-2">
-                        <button class="btn-info profile-edit-btn" style="background-color:#3abed8 !important" name="btnAddMore"><a href = "{% url 'edit_user_profile' %}" style="color:white;text-decoration:none">Edit Profile</a></button>
+                        <button type="submit" class="btn-info profile-edit-btn" style="background-color:#3abed8 !important" name="btnAddMore">Save</button>
                         <!--<input type="submit"  value="Edit Profile"/>-->
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-work">
-                            <p>SOCIAL MEDIA LINK</p>
-                            <a href="">Facebook</a><br/>
-                            <a href="">Instagram</a><br/>
-                            <a href="">LinkedIn</a> </br>
-                            <a href="">Personnel Website</a><br/>
+                            <p>TOP NGO LINK</p>
+                            <a href="">Sarthak</a><br/>
+                            <a href="">Guriya</a><br/>
+                            <a href="">Gunj</a> </br>
+                            <a href="">Aakash</a><br/>
+                            <a href="">Kavita</a>
 
                         </div>
                     </div>
@@ -64,44 +65,44 @@
                         <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-6 col-sm-12">
                                                 <label>User Id</label>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-6 col-sm-12">
                                                 <p>{{profile.user.username}}</p>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-4 col-sm-12">
                                                 <label>Name</label>
                                             </div>
-                                            <div class="col-md-6">
-                                                <p>{{profile.user.first_name}} {{profile.user.last_name}}</p>
+                                            <div class="col-md-8 col-sm-12">
+                                                <input type="text" class ="form-control edit_user_input_class" name="first_name" value="{{profile.user.first_name}}" required>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-4 col-sm-12">
                                                 <label>Email</label>
                                             </div>
-                                            <div class="col-md-6">
-                                                <p>{{profile.user.email}}</p>
+                                            <div class="col-md-8 col-sm-12">
+                                               <input type="email" class ="form-control edit_user_input_class" name="email" value="{{profile.user.email}}" required>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-4 col-sm-12">
                                                 <label>Phone</label>
                                             </div>
-                                            <div class="col-md-6">
-                                                <p>{{profile.phone_number}}</p>
+                                            <div class="col-md-8 col-sm-12">
+                                               <input type="text" class ="form-control edit_user_input_class" name="phone_number" value="{{profile.phone_number}}" required>
                                             </div>
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <label>Profile Bio</label>
                                             </div>
-                                            <div class="col-md-6">
-                                                <p>{{profile.profile_bio}}</p>
+                                            <div class="col-md-8">
+                                                <textarea name="profile_bio" class ="form-control edit_user_input_class" rows="4" cols="15"  required>{{profile.profile_bio}}</textarea>
                                             </div>
                                         </div>
                             </div>
@@ -156,6 +157,14 @@
                         </div>
                     </div>
                 </div>
+                </form>
         </div>
 
+<script>
+
+    $('#profile_image_id').on('click', function() {
+        $('#profile-image-upload').click();
+    });
+
+</script>
 {% endblock %}

@@ -8,16 +8,20 @@
     <link href="{% static 'css/bootstrap-grid.min.css' %}" rel="stylesheet">
     <link href="{% static 'css/bootstrap-reboot.min.css' %}" rel="stylesheet">
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'css/mobirise/mobi_additional_style.css' %}" rel="stylesheet">
-    <link href="{% static 'css/mobirise/mobi_style.css' %}" rel="stylesheet">
-    <link href="{% static 'css/mobirise/style.css' %}" rel="stylesheet">
-    <link href="{% static 'css/mobirise/mobi_style2.css' %}" rel="stylesheet">
-    <link href="{% static 'css/mobirise/mobi_style3.css' %}" rel="stylesheet">
+
+    <link href="{% static 'css/mobirise/dropdown_style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/mobirise/jquery.formstyler.css' %}" rel="stylesheet">
+    <link href="{% static 'css/mobirise/jquery.formstyler.theme.css' %}" rel="stylesheet">
+    <link href="{% static 'css/mobirise/mbr-additional.css' %}" rel="stylesheet">
     <link href="{% static 'css/mobirise/mobirise-icons.css' %}" rel="stylesheet">
-    <link href="{% static 'css/mobirise/icon_style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/mobirise/socicon_styles.css' %}" rel="stylesheet">
+    <link href="{% static 'css/mobirise/sound_cloud_plugin_style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/mobirise/tether.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/mobirise/theme_style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/custom_style.css' %}" rel="stylesheet">
+
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
-
 
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
@@ -32,13 +36,13 @@
 <!--- Start Of Block Body --->
 
 
- <section class="menu cid-qKSs6VLKjY navbar-section_class" once="menu" id="menu1-h">
+ <section class="menu cid-qKSs6VLKjY navbar-section_class navbar_new_section_class" once="menu" id="menu1-h">
 
     <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
         <div class="navbar-brand">
 
             <span class="navbar-caption-wrap"><a class="navbar-caption text-black display-2" href="{% url 'index' %}">
-                    <i>Sankalp</i></a></span>
+                    <b><i>Sankalp</i></b></a></span>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <div class="hamburger">
@@ -50,6 +54,9 @@
         </button>
       <div class="container collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true">
+                <!-- Search form -->
+
+
                 <li class="nav-item">
                     <a class="nav-link link text-danger display-4" href="#">
                         Social Media

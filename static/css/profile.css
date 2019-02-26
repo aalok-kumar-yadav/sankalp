@@ -47,7 +47,6 @@ body{
     cursor: pointer;
 }
 .proile-rating{
-    font-size: 12px;
     color: #818182;
     margin-top: 5%;
 }
@@ -100,4 +99,43 @@ body{
   height: 30px;
   background: linear-gradient(90deg, #62f5a7, #0eb5af);
   margin-bottom:4%;
+}
+
+.edit_user_input_class{
+outline: none;
+box-shadow:none !important;
+background-color:white;
+margin-bottom:1%;
+min-height: 2.5em;
+border:1px solid #24c1da8a !important;
+}
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.btn {
+  border: 2px solid gray;
+  color: gray;
+  background-color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+#profile_image_id{
+cursor: pointer;
+
+
 }
