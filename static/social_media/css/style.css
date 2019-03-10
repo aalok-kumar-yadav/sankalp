@@ -1544,7 +1544,7 @@ ul.online-users li span.online-dot{
   ==================================================*/
 
 .timeline-cover{
-  background: url("../images/covers/1.jpg") no-repeat;
+  background: url("../images/cover-1.jpg") no-repeat;
   background-position: center;
   background-size: cover;
   min-height: 360px;

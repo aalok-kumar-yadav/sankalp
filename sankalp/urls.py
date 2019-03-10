@@ -22,7 +22,7 @@ from contributor_app.views import EditContributorProfile
 
 urlpatterns = [
     url(r'^$', views.Index.as_view(), name='index'),
-    url(r'social_media', include(social_urls)),
+    url(r'^social_media/', include(social_urls)),
     url(r'^login$', views.Login.as_view(), name='login'),
     url(r'^register', views.Register.as_view(), name='register'),
     url(r'^ngos', views.all_ngo_view, name='all_ngo_view'),
