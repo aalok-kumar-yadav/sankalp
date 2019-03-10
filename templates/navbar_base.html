@@ -21,7 +21,7 @@
     <link href="{% static 'css/custom_style.css' %}" rel="stylesheet">
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+          rel="stylesheet">
 
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
@@ -36,15 +36,17 @@
 <!--- Start Of Block Body --->
 
 
- <section class="menu cid-qKSs6VLKjY navbar-section_class navbar_new_section_class" once="menu" id="menu1-h">
+<section class="menu cid-qKSs6VLKjY navbar-section_class navbar_new_section_class" once="menu" id="menu1-h">
 
     <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
         <div class="navbar-brand">
 
-            <span class="navbar-caption-wrap"><a class="navbar-caption text-black display-2" href="{% url 'index' %}">
-                    <b><i>Sankalp</i></b></a></span>
+                <span class="navbar-caption-wrap"><a class="navbar-caption text-black display-2"
+                                                     href="{% url 'index' %}">
+                        <b><i>Sankalp</i></b></a></span>
         </div>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <div class="hamburger">
                 <span></span>
                 <span></span>
@@ -52,61 +54,61 @@
                 <span></span>
             </div>
         </button>
-      <div class="container collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="container collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true">
                 <!-- Search form -->
 
 
                 <li class="nav-item">
-                    <a class="nav-link link text-danger display-4" href="#">
+                    <a class="nav-link link text-danger display-4" href="{% url 'social_media_news_feed' %}">
                         Social Media
                     </a>
                 </li>
-				<li>
-                 <a class="nav-link link text-danger display-4" href="{% url 'all_ngo_view' %}">
+                <li>
+                    <a class="nav-link link text-danger display-4" href="{% url 'all_ngo_view' %}">
                         NGO
                     </a>
                 </li>
-				<li>
-                 <a class="nav-link link text-danger display-4" href="#">
-                       About Us
+                <li>
+                    <a class="nav-link link text-danger display-4" href="#">
+                        About Us
                     </a>
                 </li>
                 {% if username %}
-				<li>
-                 <a class="nav-link link text-danger display-4" href="{% url 'profile' %}">
+                <li>
+                    <a class="nav-link link text-danger display-4" href="{% url 'profile' %}">
 
-                     {{username}} <i class="material-icons" style="font-size: 20px;color:#1dc9cb">person</i>
+                        {{username}} <i class="material-icons" style="font-size: 20px;color:#1dc9cb">person</i>
                     </a>
                 </li>
-				<li>
-                 <a class="nav-link link text-danger display-4" href="{% url 'logout' %}">
+                <li>
+                    <a class="nav-link link text-danger display-4" href="{% url 'logout' %}">
 
-                     Logout<i class="material-icons" style="font-size: 20px;color:#1dc9cb">power_settings_new</i>
+                        Logout<i class="material-icons" style="font-size: 20px;color:#1dc9cb">power_settings_new</i>
 
                     </a>
                 </li>
-				{% else %}
-				<li>
-                 <a class="nav-link link text-danger display-4" style="color:white" href="{% url 'register' %}">
+                {% else %}
+                <li>
+                    <a class="nav-link link text-danger display-4" style="color:white" href="{% url 'register' %}">
                         Register
                     </a>
-				</li>
+                </li>
 
-				<li>
-                 <a class="nav-link link text-danger display-4" href="{% url 'login' %}">
+                <li>
+                    <a class="nav-link link text-danger display-4" href="{% url 'login' %}">
 
-                     Login <i class="material-icons" style="font-size: 20px;color:#1dc9cb">person</i>
+                        Login <i class="material-icons" style="font-size: 20px;color:#1dc9cb">person</i>
                     </a>
                 </li>
 
-				{% endif %}
+                {% endif %}
 
             </ul>
 
-            </div>
+        </div>
 
-      </div>
+        </div>
     </nav>
 </section>
 

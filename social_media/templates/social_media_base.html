@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="This is social network website and part of sankalp foundation"/>
+    <meta name="keywords" content="Social Network, Social Media, Make Donation, Newsfeed, Profile Page, Ngo"/>
+
+    <!-- Base Stylesheets
+    ================================================= -->
+    {% load static %}
+    <link href="{% static 'social_media/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'social_media/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'social_media/css/ionicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'social_media/css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'social_media/css/emoji.css' %}" rel="stylesheet">
+
+    <!--Google Font-->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
+    <!-- Scripts
+================================================= -->
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTMXfmDn0VlqWIyoOxK8997L-amWbUPiQ&callback=initMap"></script>
+    <script src="{% static 'social_media/js/jquery-3.1.1.min.js' %}"></script>
+    <script src="{% static 'social_media/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'social_media/js/jquery.sticky-kit.min.js' %}"></script>
+    <script src="{% static 'social_media/js/jquery.scrollbar.min.js' %}"></script>
+    <script src="{% static 'social_media/js/script.js' %}"></script>
+    <!--Favicon-->
+    <link rel="shortcut icon" type="image/png" href="images/fav.png"/>
+    {% block head %}
+
+
+    {% endblock %}
+</head>
+<body>
+
+{% block body %}
+
+
+{% endblock %}
+
+</body>
+</html>
