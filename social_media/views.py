@@ -75,3 +75,7 @@ class Faq(View):
 
     def post(self, request):
         return render(request, 'faq.html')
+
+
+def error_404_view(request):
+    return render(request, '404.html')

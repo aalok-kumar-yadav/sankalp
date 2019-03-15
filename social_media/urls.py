@@ -1,5 +1,6 @@
 from django.conf.urls import url
 from social_media import views
+from django.conf.urls import handler404
 
 urlpatterns = [
     url(r'^$', views.social_media_news_feed, name='social_media_news_feed'),
@@ -12,3 +13,5 @@ urlpatterns = [
     url(r'^contact$', views.ContactUs.as_view(), name='contact_us'),
     url(r'^faq$', views.Faq.as_view(), name='faq')
 ]
+
+handler404 = 'social_media.views.error_404_view'
