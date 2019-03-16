@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="This is user authentication page and part of sankalp foundation"/>
+    <meta name="keywords" content="Social Network, Social Media, Make Donation, Newsfeed, Profile Page, Ngo"/>
+    <title>Sankalp | Authentication</title>
+    {% load static %}
+    <!-- Stylesheets
+    ================================================= -->
+    <link href="{% static 'social_media/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'social_media/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/custom_style.css' %}" rel="stylesheet">
+    <link href="{% static 'social_media/css/ionicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'social_media/css/font-awesome.min.css' %}" rel="stylesheet">
+
+    <script src="{% static 'social_media/js/jquery-3.1.1.min.js' %}"></script>
+    <script src="{% static 'social_media/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'social_media/js/jquery.sticky-kit.min.js' %}"></script>
+    <script src="{% static 'social_media/js/jquery.scrollbar.min.js' %}"></script>
+    <script src="{% static 'social_media/js/script.js' %}"></script>
+    <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="{% static 'js/date-time-picker.min.js' %}"></script>
+    <!--Favicon-->
+    <link rel="shortcut icon" type="image/png" href="{% static 'image/fav.png' %}"/>
+
+    <!--Google Font-->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
+
+</head>
+<body>
+
+{{message}}
+<!-- Header
+================================================= -->
+<header id="header-inverse">
+    <nav class="navbar navbar-default navbar-fixed-top menu">
+        <div class="container">
+
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{% url 'index' %}"><img style="width: 57%"
+                                                                      src="{% static 'social_media/images/logo.png' %}"
+                                                                      alt="logo"></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right main-menu">
+                    <li class="dropdown"><a href="{% url 'social_media_news_feed' %}">News Feed</a></li>
+                    <li class="dropdown"><a href="#">Message</a></li>
+                    <li class="dropdown"><a href="#">Notification</a></li>
+                    <li class="dropdown"><a href="{% url 'user_timeline' %}">Timeline</a></li>
+                    <li class="dropdown"><a href="{% url 'contact_us' %}">Contact</a></li>
+                    <li class="dropdown"><a href="{% url 'faq' %}">Faq</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container -->
+    </nav>
+</header>
+<!--Header End-->
+
+<!-- Landing Page Contents
+================================================= -->
+<div id="lp-register">
+    <div class="container wrapper">
+        <div class="row">
+            <div class="col-sm-5">
+                <div class="intro-texts">
+                    <h1 class="text-white">Make Others Happy !!!</h1>
+                    <p>Sankalp is online web platform for donation for someone who need the most, also social media
+                        for the better interaction between NGO & Contributor.</p>
+                    <button class="btn btn-primary">Learn More</button>
+                </div>
+            </div>
+            <div class="col-sm-6 col-sm-offset-1">
+                <div class="reg-form-container">
+
+                    <!-- Register/Login Tabs-->
+                    <div class="reg-options">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#register" data-toggle="tab">Register</a></li>
+                            <li><a id="login_toggle_id" href="#login" data-toggle="tab">Login</a></li>
+                        </ul><!--Tabs End-->
+                    </div>
+
+                    <!--Registration Form Contents-->
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="register">
+                            <h3>Register Now !!!</h3>
+                            <p>Be cool and join today. Meet millions</p>
+                            <!--Register Form-->
+                            <form name="registration_form" id='registration_form' class="form-inline" role="form"
+                                  method="post" action="{% url 'register' %}">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="form-group col-xs-6">
+                                        <select title="Select User Type" class="form-control" id="user_type"
+                                                name="user_type">
+                                            <option value="contributor">Contributor</option>
+                                            <option value="ngo">NGO</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+
+                                <div id="contributor" class="register_div_class">
+                                    <div class="row">
+                                        <div class="form-group col-xs-6">
+                                            <label for="first_name" class="sr-only">First Name</label>
+                                            <input id="first_name" class="form-control input-group-lg" type="text"
+                                                   name="first_name" title="Enter first name" placeholder="First name"/>
+                                        </div>
+                                        <div class="form-group col-xs-6">
+                                            <label for="last_name" class="sr-only">Last Name</label>
+                                            <input id="last_name" class="form-control input-group-lg" type="text"
+                                                   name="last_name" title="Enter last name" placeholder="Last name"/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-xs-12">
+                                            <label for="dob_date" class="sr-only">Date Of Birth</label>
+                                            <input id="dob_date" class="form-control input-group-lg" type="text"
+                                                   name="dob_date" title="Enter date of birth"
+                                                   placeholder="Date of birth"/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-xs-12">
+                                            <label for="user_email" class="sr-only">Email</label>
+                                            <input id="user_email" class="form-control input-group-lg" type="text"
+                                                   name="user_email" title="Enter Email" placeholder="Your Email"/>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-xs-12">
+                                            <label for="user_password" class="sr-only">Password</label>
+                                            <input id="user_password" class="form-control input-group-lg"
+                                                   type="password"
+                                                   name="user_password" title="Enter password" placeholder="Password"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group gender">
+                                        <label class="radio-inline">
+                                            <input type="radio" name="male" checked>Male
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="female">Female
+                                        </label>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-xs-6">
+                                            <label for="user_city" class="sr-only">City</label>
+                                            <input id="user_city" class="form-control input-group-lg reg_name" type="text"
+                                                   name="user_city" title="Enter city" placeholder="Your city"/>
+                                        </div>
+                                        <div class="form-group col-xs-6">
+                                            <label for="user_country" class="sr-only"></label>
+                                            <select class="form-control" id="user_country" name="user_country">
+                                                <option value="country" disabled selected>Country</option>
+                                                <option value="IND">India</option>
+                                                <option value="USA">United States</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!--- NGO Registration Form --->
+
+                                <div id="ngo" class="register_div_class">
+                                    <div class="row">
+                                        <div class="form-group col-xs-12">
+                                            <label for="ngo_name" class="sr-only">Ngo Name</label>
+                                            <input id="ngo_name" class="form-control input-group-lg" type="text"
+                                                   name="ngo_name" title="Enter organization name"
+                                                   placeholder="Organization Name"/>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-xs-12">
+                                            <label for="yof_date" class="sr-only">Year of foundation</label>
+                                            <input id="yof_date" class="form-control input-group-lg" type="text"
+                                                   name="yof_date" title="Enter date of foundation"
+                                                   placeholder="Year of foundation"/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-xs-12">
+                                            <label for="ngo_email" class="sr-only">Official Email</label>
+                                            <input id="ngo_email" class="form-control input-group-lg" type="text"
+                                                   name="ngo_email"
+                                                   title="Enter official email" placeholder="Official Email"/>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="form-group col-xs-12">
+                                            <label for="ngo_password" class="sr-only">Password</label>
+                                            <input id="ngo_password" class="form-control input-group-lg" type="password"
+                                                   name="ngo_password" title="Enter password" placeholder="Password"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group gender">
+                                        <label class="radio-inline">
+                                            <input type="radio" name="funded">Funded
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="non_funded">Non Funded
+                                        </label>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-xs-6">
+                                            <label for="ngo_city" class="sr-only">City</label>
+                                            <input id="ngo_city" class="form-control input-group-lg reg_name"
+                                                   type="text" name="ngo_city" title="Enter city" placeholder="Your city"/>
+
+                                        </div>
+                                        <div class="form-group col-xs-6">
+                                            <label for="ngo_country" class="sr-only"></label>
+                                            <select class="form-control" id="ngo_country" name="ngo_country">
+                                                <option value="country" disabled selected>Country</option>
+                                                <option value="IND">India</option>
+                                                <option value="USA">United States</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p><a href="#">Already have an account?</a></p>
+                                {% if message == 'invalid' %}
+                                <p style="color:red">User Exist Try Another Email </p>
+                                {% endif %}
+                                <button class="btn btn-primary" type="submit">Register Now</button>
+                            </form><!--Register Now Form Ends-->
+
+                        </div><!--Registration Form Contents Ends-->
+
+                        <!--Login-->
+                        <div class="tab-pane" id="login">
+                            <h3>Login</h3>
+                            <p class="text-muted">Log into your account</p>
+
+                            <!--Login Form-->
+
+                            <form name="Login_form" id='Login_form' method="post" action="{% url 'login' %}">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="form-group col-xs-12">
+                                        <label for="my-email" class="sr-only">Email</label>
+                                        <input id="my-email" class="form-control input-group-lg" type="text"
+                                               name="email" title="Enter Email" placeholder="Your Email"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-xs-12">
+                                        <label for="my-password" class="sr-only">Password</label>
+                                        <input id="my-password" class="form-control input-group-lg" type="password"
+                                               name="password" title="Enter password" placeholder="Password"/>
+                                    </div>
+                                </div>
+                                <p><a href="#">Forgot Password?</a></p>
+                                {% if message == 'invalid' %}
+                                <p style="color:red">Authentication Failed</p>
+                                {% endif %}
+                                <button class="btn btn-primary" type="submit">Login Now</button>
+                            </form><!--Login Form Ends-->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+
+<script>
+
+$(document).ready(function(){
+
+   if ( window.location.pathname== '/login'){
+   console.log("a");
+      $("#ngo").hide();
+      $('#login_toggle_id').click()
+   }
+
+   $("#dob_date").dateTimePicker();
+   $("#yof_date").dateTimePicker();
+
+    $("#ngo").hide();
+    $("#user_type").change(function(){
+    $(".register_div_class").hide();
+    $('#'+$(this).val()).show();
+  });
+
+});
+
+
+</script>
+
+</html>

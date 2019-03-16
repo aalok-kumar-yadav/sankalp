@@ -4,14 +4,16 @@ from django.contrib.auth.models import User
 
 class Contributor(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_pic = models.CharField(max_length=500, default=None)
-    profile_bio = models.CharField(max_length=1000, default=None)
-    phone_number = models.IntegerField(default=0)
+    profile_pic = models.CharField(max_length=500, default=None, null=True)
+    profile_bio = models.CharField(max_length=1000, default=None, null=True)
+    gender = models.CharField(max_length=50, default=None)
+    dob = models.DateField(default=None)
+    phone_number = models.IntegerField(default=0, null=True)
     city = models.CharField(max_length=300)
-    state = models.CharField(max_length=150)
+    state = models.CharField(max_length=150, null=True)
     country = models.CharField(max_length=100)
-    contribution_domain = models.CharField(max_length=100)
-    occupation = models.CharField(max_length=200)
+    contribution_domain = models.CharField(max_length=100, null=True)
+    occupation = models.CharField(max_length=200, null=True)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 

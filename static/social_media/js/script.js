@@ -1,15 +1,15 @@
 'use strict'
 
 //Preloader
-//var preloader = $('#spinner-wrapper');
-//$(window).on('load', function() {
-//    var preloaderFadeOutTime = 2;
-//
-//    function hidePreloader() {
-//        preloader.fadeOut(preloaderFadeOutTime);
-//    }
-//    hidePreloader();
-//});
+var preloader = $('#spinner-wrapper');
+$(window).on('load', function() {
+    var preloaderFadeOutTime = 0;
+
+    function hidePreloader() {
+        preloader.fadeOut(preloaderFadeOutTime);
+    }
+    hidePreloader();
+});
 
 jQuery(document).ready(function($) {
 

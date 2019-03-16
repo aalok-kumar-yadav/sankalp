@@ -6,6 +6,7 @@ from django.views.generic import TemplateView
 from django.db import IntegrityError
 from django.views import View
 from contributor_app.models import Contributor
+from ngo_app.models import NGO
 
 
 class Index(View):
@@ -30,9 +31,10 @@ class Login(View):
         return render(request, 'register_login.html', {'message': 'valid', 'type': 'login'})
 
     def post(self, request):
-        user_name = request.POST.get("username")
+        user_name = request.POST.get("email")
         password = request.POST.get("password")
-        auth_user = authenticate(username=user_name, password=password)
+        # import pdb;pdb.set_trace()
+        auth_user = authenticate(username=str(user_name).split('@')[0], password=password)
         if auth_user:
             request.session['username'] = user_name
             request.session['first_name'] = auth_user.first_name
@@ -41,19 +43,43 @@ class Login(View):
             return render(request, 'register_login.html', {'message': 'invalid', 'type': 'login'})
 
 
+# Register generic view for registering User/NGO
 class Register(View):
     def get(self, request):
-        return render(request, 'register_login.html', {'message': 'valid', 'type': 'register'})
+        return render(request, 'register_login.html', {'message': "valid", 'type': 'login'})
 
     def post(self, request):
-        try:
-            user_instance = User.objects.create_user(request.POST.get('username'), request.POST.get('email'),
-                                                     request.POST.get('password'))
-            user_instance.first_name = request.POST.get('first_name')
-            user_instance.last_name = request.POST.get('last_name')
-            user_instance.save()
-            return redirect('index')
+        user_type = request.POST.get("user_type")
 
+        try:
+            if user_type == 'contributor':
+                dob = request.POST.get("dob_date")
+                email = request.POST.get("user_email")
+                user_password = request.POST.get("user_password")
+                gender = "male" if request.POST.get("male") else "female"
+                city = request.POST.get("user_city")
+                country = request.POST.get("user_country")
+                user_instance = User.objects.create_user(str(email).split('@')[0], email, user_password)
+                user_instance.first_name = request.POST.get("first_name")
+                user_instance.last_name = request.POST.get('last_name')
+                user_instance.save()
+                contributor = Contributor(user=user_instance, dob=dob, gender=gender, city=city, country=country)
+                contributor.save()
+                return redirect('index')
+            else:
+                yof = request.POST.get("yof_date")
+                email = request.POST.get("ngo_email")
+                ngo_password = request.POST.get("ngo_password")
+                funding_status = "Funded" if request.POST.get("funded") else "Not funded"
+                city = request.POST.get("ngo_city")
+                country = request.POST.get("ngo_country")
+                user_instance = User.objects.create_user(str(email).split('@')[0], email, ngo_password)
+                user_instance.first_name = request.POST.get("ngo_name")
+                user_instance.save()
+                ngo_instance = NGO(user=user_instance, established_year=yof, funding_status=funding_status, city=city,
+                                   country=country)
+                ngo_instance.save()
+                return redirect('index')
         except IntegrityError:
             return render(request, 'register_login.html', {'message': 'invalid', 'type': 'register'})
 
@@ -70,4 +96,4 @@ def all_ngo_view(request):
 
 def profile(request):
     contributor_instance = Contributor.objects.get(user__username=request.session['username'])
-    return render(request, 'profile.html', {'username':request.session['first_name'], 'profile': contributor_instance})
+    return render(request, 'profile.html', {'username': request.session['first_name'], 'profile': contributor_instance})

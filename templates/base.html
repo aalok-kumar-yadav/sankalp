@@ -73,10 +73,18 @@
                     <li class="dropdown"><a class="navbar_item_class" href="{% url 'social_media_news_feed' %}">Social
                         Media</a></li>
                     <li class="dropdown"><a class="navbar_item_class" href="{% url 'all_ngo_view' %}">Ngo</a></li>
-                    <li class="dropdown"><a class="navbar_item_class" href="{% url 'register' %}">Register</a></li>
-                    <li class="dropdown"><a class="navbar_item_class" href="{% url 'login' %}">Login</a></li>
                     <li class="dropdown"><a href="{% url 'contact_us' %}">Contact</a></li>
                     <li class="dropdown"><a href="{% url 'faq' %}">Faq</a></li>
+                    {% if username %}
+                     <li class="dropdown"><a class="navbar_item_class" href="{% url 'user_timeline' %}">{{username}}</a> </li>
+
+                    <li class="dropdown"><a class="navbar_item_class" href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                     <li class="dropdown"><a class="navbar_item_class" href="{% url 'register' %}">Register</a></li>
+                    <li class="dropdown"><a class="navbar_item_class" href="{% url 'login' %}">Login</a></li>
+                    {% endif %}}
+
+
 
                 </ul>
             </div>

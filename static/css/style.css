@@ -818,7 +818,7 @@ textarea{
   ==================================================*/
 
 #lp-register{
-  background: linear-gradient(to right, rgba(0,0,0, 0.7) , rgba(0,0,0, 0.7)), url(../images/bg/bg-3.jpg) fixed no-repeat;
+  background: linear-gradient(to right, rgba(0,0,0, 0.7) , rgba(0,0,0, 0.7)), url(../image/bg-3.jpg) fixed no-repeat;
   background-size: cover;
   background-position: center;
   position: absolute;
@@ -828,7 +828,7 @@ textarea{
 }
 
 #lp-register .wrapper{
-  padding-top: 140px;
+  padding-top: 120px;
   padding-bottom: 140px;
 }
 
