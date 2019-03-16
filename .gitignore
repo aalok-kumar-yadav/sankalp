@@ -1,4 +1,7 @@
 .idea/
-.pyc
+*.pyc
 __pycache__
 sankalp/staticfiles/
+ngo_app/migrations/*
+contributor_app/migrations/
+media/*
