@@ -23,10 +23,10 @@ class NearByNgoPeople(View):
 class ConnectedNgoPeople(View):
 
     def get(self, request):
-        return render(request, 'connected_ngo_people.html')
+        return render(request, 'timeline.html', {'timeline_section': 'connected_people'})
 
     def post(self, request):
-        return render(request, 'connected_ngo_people.html')
+        return render(request, 'timeline.html', {'timeline_section': 'connected_people'})
 
 
 class SocialMediaMessage(View):
@@ -39,10 +39,10 @@ class SocialMediaMessage(View):
 
 class UserTimeline(View):
     def get(self, request):
-        return render(request, 'user_timeline.html')
+        return render(request, 'timeline.html', {'timeline_section': 'home'})
 
     def post(self, request):
-        return render(request, 'user_timeline.html')
+        return render(request, 'timeline.html', {'timeline_section': 'home'})
 
 
 class EditProfile(View):
@@ -79,3 +79,11 @@ class Faq(View):
 
 def error_404_view(request):
     return render(request, '404.html')
+
+
+class TimelineAbout(View):
+    def get(self, request):
+        return render(request, 'timeline.html', {'timeline_section': 'about'})
+
+    def post(self, request):
+        return render(request, 'timeline.html', {'timeline_section': 'about'})

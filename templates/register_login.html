@@ -296,14 +296,12 @@
 $(document).ready(function(){
 
    if ( window.location.pathname== '/login'){
-   console.log("a");
       $("#ngo").hide();
       $('#login_toggle_id').click()
    }
 
-   $("#dob_date").dateTimePicker();
-   $("#yof_date").dateTimePicker();
-
+    $("#dob_date").dateTimePicker();
+    $("#yof_date").dateTimePicker();
     $("#ngo").hide();
     $("#user_type").change(function(){
     $(".register_div_class").hide();

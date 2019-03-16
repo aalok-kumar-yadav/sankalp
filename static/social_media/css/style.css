@@ -2722,3 +2722,7 @@ ul.contact li i{
   top: 50%;
   transform: translateY(-50%);
 }
+
+.btn:focus {
+  outline: none;
+}
