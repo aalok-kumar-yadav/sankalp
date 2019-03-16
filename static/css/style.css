@@ -70,7 +70,7 @@ body{
     src: url("../fonts/agency-fb.ttf") /* TTF file for CSS3 browsers */
 }
 
-h1, h2, h3, h4, h5, h6{color: #27aae1;}
+
 
 h1.grey, h2.grey, h3.grey, h4.grey, h5.grey, h6.grey{
   color: #6d6e71;
@@ -125,7 +125,7 @@ section h2.sub-title{
   ==================================================*/
 
 .container{
-  max-width: 1050px;
+  max-width: 1140px;
 }
 
 section .wrapper{
@@ -407,7 +407,7 @@ textarea{
 .menu ul.main-menu li.dropdown a{
   color: #fff;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 460;
 }
 
 .menu ul.main-menu li.dropdown a:hover, .menu ul.main-menu li.dropdown a:active, .menu ul.main-menu li.dropdown a:focus{
@@ -2331,7 +2331,7 @@ ul.contact{
 
 ul.contact li{
   list-style: none;
-  padding: 10px 0;
+  padding: 11px 0;
   border-bottom: 1px solid #f1f2f2;
   font-size: 13px;
   font-weight: 600;

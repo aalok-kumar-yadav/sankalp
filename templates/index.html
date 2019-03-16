@@ -1,40 +1,16 @@
-{% include 'navbar_base.html' %}
+{% include 'base.html' %}
 
 {% load static %}
 <title>Sankalp</title>
 {% block body %}
 
 
-<body>
-
-<!-- Google Analytics -->
-<!-- Google Analytics -->
-<!-- Google Tag Manager -->
-<noscript>
-    <iframe src="//www.googletagmanager.com/ns.html?id=GTM-PFK425"
-            height="0" width="0" style="display:none;visibility:hidden"></iframe>
-</noscript>
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-PFK425');
-</script>
-<!-- End Google Tag Manager -->
-<!-- /Google Analytics -->
-
-<!-- /Google Analytics -->
-
-
 <body style="background-color:#f4f8fa">
-<section>
+<section style="margin-top:2%;">
     <!-- Another variation with a button -->
-    <div class="container input-group search_container_div_class">
-        <input type="text" class="form-control ngo_search_input_class" placeholder="Search relevant ngo">
-        <div class="input-group-append">
-
-            <i class="material-icons md-48 div_icon_cl" style="font-size: 48px;color:#1dc9cb">search</i>
-        </div>
+    <div class="row container search_container_div_class">
+        <div class="col-lg-8"><input title ="Search All Ngo" type="text" class="form-control ngo_search_input_class" placeholder="Search relevant ngo" ></div>
+       <div class="col-lg-1"> <i class="material-icons md-48 div_icon_cl" style="font-size: 48px;color:#1dc9cb">search</i></div>
     </div>
 </section>
 
@@ -42,12 +18,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <section class="features11 cid-qKSpeMafIm content_section_class" id="features11-d">
 
 
-    <div class="container">
+    <div class="container heading_container_div_class">
         <h2 class="mbr-section-title pb-3 mbr-fonts-style align-center display-2"
             data-appselector=".mbr-section-title ">You May Also Like</h2>
 
-
     </div>
+
 
     <div class="container">
         <div class="row justify-content-center pt-4">
@@ -138,4 +114,5 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </section>
 
 
+{% include 'social_media_footer.html' %}
 {% endblock %}

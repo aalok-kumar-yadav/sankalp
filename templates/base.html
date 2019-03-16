@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!--- Head Tag --->
-    {% load static %}
     <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="{% static 'css/bootstrap-grid.min.css' %}" rel="stylesheet">
-    <link href="{% static 'css/bootstrap-reboot.min.css' %}" rel="stylesheet">
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <meta name="description" content="This is social network website and part of sankalp foundation"/>
+    <meta name="keywords" content="Social Network, Social Media, Make Donation, Newsfeed, Profile Page, Ngo"/>
+
+    <!-- Base Stylesheets
+    ================================================= -->
+    {% load static %}
+    <link href="{% static 'social_media/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'social_media/css/ionicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'social_media/css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/custom_style.css' %}" rel="stylesheet">
+
 
     <link href="{% static 'css/mobirise/dropdown_style.css' %}" rel="stylesheet">
     <link href="{% static 'css/mobirise/jquery.formstyler.css' %}" rel="stylesheet">
@@ -21,24 +29,68 @@
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
+    <!-- Scripts
+================================================= -->
 
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/popper.min.js' %}"></script>
-
+    <script src="{% static 'social_media/js/jquery-3.1.1.min.js' %}"></script>
+    <script src="{% static 'social_media/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'social_media/js/jquery.sticky-kit.min.js' %}"></script>
+    <script src="{% static 'social_media/js/jquery.scrollbar.min.js' %}"></script>
+    <script src="{% static 'social_media/js/script.js' %}"></script>
+    <!--Favicon-->
+    <link rel="shortcut icon" type="image/png" href="{% static 'image/fav.png' %}"/>
     {% block head %}
+
 
     {% endblock %}
 </head>
-
 <body>
 
-<!--- Start Of Block Body --->
+<!-- Header
+================================================= -->
+<header id="header">
+    <nav class="navbar navbar-default navbar-fixed-top menu navigation_bar_class">
+        <div class="container">
+
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand logo_image_class" href="{% url 'index' %}"><img style="width: 57%"
+                                                                      src="{% static 'social_media/images/logo.png' %}"
+                                                                      alt="logo"></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right main-menu">
+
+                    <li class="dropdown"><a class="navbar_item_class" href="{% url 'social_media_news_feed' %}">Social
+                        Media</a></li>
+                    <li class="dropdown"><a class="navbar_item_class" href="{% url 'all_ngo_view' %}">Ngo</a></li>
+                    <li class="dropdown"><a class="navbar_item_class" href="{% url 'register' %}">Register</a></li>
+                    <li class="dropdown"><a class="navbar_item_class" href="{% url 'login' %}">Login</a></li>
+                    <li class="dropdown"><a href="{% url 'contact_us' %}">Contact</a></li>
+                    <li class="dropdown"><a href="{% url 'faq' %}">Faq</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!--Header End-->
 
 {% block body %}
+
 
 {% endblock %}
 
 </body>
 </html>
 
-<!--- End Of Html Tag --->

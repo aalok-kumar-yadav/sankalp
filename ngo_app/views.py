@@ -27,7 +27,7 @@ def logout(request):
 
 class Login(View):
     def get(self, request):
-        return render(request, 'login.html', {'message': 'valid', 'type': 'login'})
+        return render(request, 'register_login.html', {'message': 'valid', 'type': 'login'})
 
     def post(self, request):
         user_name = request.POST.get("username")
@@ -38,12 +38,12 @@ class Login(View):
             request.session['first_name'] = auth_user.first_name
             return redirect('index')
         else:
-            return render(request, 'login.html', {'message': 'invalid', 'type': 'login'})
+            return render(request, 'register_login.html', {'message': 'invalid', 'type': 'login'})
 
 
 class Register(View):
     def get(self, request):
-        return render(request, 'login.html', {'message': 'valid', 'type': 'register'})
+        return render(request, 'register_login.html', {'message': 'valid', 'type': 'register'})
 
     def post(self, request):
         try:
@@ -55,7 +55,7 @@ class Register(View):
             return redirect('index')
 
         except IntegrityError:
-            return render(request, 'login.html', {'message': 'invalid', 'type': 'register'})
+            return render(request, 'register_login.html', {'message': 'invalid', 'type': 'register'})
 
 
 def all_ngo_view(request):

@@ -52,10 +52,8 @@ height:220px;
 
 .search_container_div_class{
 padding:2%;
-width:65%;
 padding-bottom:0px !important;
-
-
+    margin-left: 10%;
 }
 
 .ngo_search_input_class{
@@ -65,8 +63,21 @@ padding-bottom:0px !important;
     margin-bottom: 1%;
     min-height: 2.5em;
     border: 1px solid #24c1da8a !important;
-
+    border-radius: 20px !important;
 }
 
+.navigation_bar_class{
+background-color:#0e4a43;
+}
 
+.navbar_item_class{
+font-size:15px !important;
+}
 
+.heading_container_div_class{
+margin-bottom:2%;
+}
+
+.logo_image_class{
+padding:2.6% !important;
+}
