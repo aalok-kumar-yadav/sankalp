@@ -5,12 +5,21 @@ from django.contrib.auth import authenticate
 from django.views.generic import TemplateView
 from django.db import IntegrityError
 from django.views import View
+from . import social_media_helpers as social_helper
 
 
-def social_media_news_feed(request):
-    return render(request, 'social_media_news_feed.html', {'data': "hello kumar"})
+# News Feed Generic View
+class NewsFeed(View):
+    def get(self, request, user_id):
+        context_data = {}
+        return render(request, 'news_feed.html', context_data)
+
+    def post(self, request):
+        context_data = {}
+        return render(request, 'news_feed.html', context_data)
 
 
+# NearByConnection Generic View
 class NearByNgoPeople(View):
 
     def get(self, request):
@@ -23,7 +32,11 @@ class NearByNgoPeople(View):
 class ConnectedNgoPeople(View):
 
     def get(self, request):
-        return render(request, 'timeline.html', {'timeline_section': 'connected_people'})
+        timeline_connected_context = {
+            'user_info': {'first_name': request.session['first_name'],  'followers': '204', 'gender_type': 'him'},
+            'timeline_section': 'connected_people', 'user_activity': 'Aalok Kumar liked monisha wamankar post'}
+
+        return render(request, 'timeline.html', timeline_connected_context)
 
     def post(self, request):
         return render(request, 'timeline.html', {'timeline_section': 'connected_people'})
@@ -38,8 +51,9 @@ class SocialMediaMessage(View):
 
 
 class UserTimeline(View):
-    def get(self, request):
-        return render(request, 'timeline.html', {'timeline_section': 'home'})
+    def get(self, request, user_id):
+        timeline_context = social_helper.get_timeline_context(request, user_id)
+        return render(request, 'timeline.html', timeline_context)
 
     def post(self, request):
         return render(request, 'timeline.html', {'timeline_section': 'home'})
@@ -47,10 +61,10 @@ class UserTimeline(View):
 
 class EditProfile(View):
     def get(self, request):
-        return render(request, 'edit_profile_basic.html')
+        return render(request, 'edit_profile.html')
 
     def post(self, request):
-        return render(request, 'edit_profile_basic.html')
+        return render(request, 'edit_profile.html')
 
 
 class TimelineConnection(View):
@@ -81,9 +95,11 @@ def error_404_view(request):
     return render(request, '404.html')
 
 
+# Timeline About Generic View
 class TimelineAbout(View):
-    def get(self, request):
-        return render(request, 'timeline.html', {'timeline_section': 'about'})
+    def get(self, request, user_id):
+        context_data = social_helper.get_timeline_about_context(request, user_id)
+        return render(request, 'timeline.html', context_data)
 
     def post(self, request):
         return render(request, 'timeline.html', {'timeline_section': 'about'})

@@ -19,23 +19,29 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="profile-info">
-                            <img src="{% static 'social_media/images/user-1.jpg' %}" alt=""
-                                 class="img-responsive profile-photo"/>
-                            <h3>Sarah Cruiz</h3>
-                            <p class="text-muted">Creative Director</p>
+                            <a href="{% url 'user_timeline' user_id=username %}"><img src="{% static 'social_media/images/user-1.jpg' %}" alt=""
+                                 class="img-responsive profile-photo"/></a>
+                            <h3>{{user_info.first_name}}</h3>
+                            <p class="text-muted">{{user_info.profession}}</p>
                         </div>
                     </div>
                     <div class="col-md-9">
                         <ul class="list-inline profile-menu">
-                            <li><a href="{% url 'user_timeline' %}" class="active">Timeline</a></li>
-                            <li><a href="{% url 'user_timeline_about' %}">About</a></li>
-                            <li><a href="{% url 'connected_ngo_people' %}">Friends</a></li>
+                            <li><a href="{% url 'user_timeline' user_id=username %}" class="active">Timeline</a></li>
+                            <li><a href="{% url 'user_timeline_about' user_id=username %}">About</a></li>
+                            <li><a href="{% url 'connected_ngo_people' user_id=username %}">Friends</a></li>
                         </ul>
                         <ul class="follow-me list-inline">
-                            <li>1,299 people following her</li>
-                            <li>
-                                <button class="btn-primary">Add Friend</button>
-                            </li>
+                            <li>{{user_info.followers}} people following {{user_info.gender_type}}</li>
+                            {% if con_status == 'edit' %}
+                               <li> <button class="btn-primary">Edit Profile</button></li>
+                            {% else %}
+
+                             <li><button class="btn-primary">Add Friend</button></li>
+
+                            {% endif %}
+
+
                         </ul>
                     </div>
                 </div>
@@ -65,7 +71,7 @@
             <div class="row">
                 <div class="col-md-3"></div>
                 <!--- including dynamic different content --->
-                
+
                 {% if timeline_section == 'home' %}
                 {% include 'timeline_post.html' %}
                 {% elif timeline_section == 'about' %}
@@ -76,28 +82,28 @@
 
                 <div class="col-md-2 static">
                     <div id="sticky-sidebar">
-                        <h4 class="grey">Sarah's activity</h4>
+                        <h4 class="grey">{{user_info.first_name}}'s activity</h4>
                         <div class="feed-item">
                             <div class="live-activity">
-                                <p><a href="#" class="profile-link">Sarah</a> Commended on a Photo</p>
+                                <p><a href="" class="profile-link">{{user_info.first_name}}</a> Commended on a Photo</p>
                                 <p class="text-muted">5 mins ago</p>
                             </div>
                         </div>
                         <div class="feed-item">
                             <div class="live-activity">
-                                <p><a href="#" class="profile-link">Sarah</a> Has posted a photo</p>
+                                <p><a href="" class="profile-link">{{user_info.first_name}}</a> Has posted a photo</p>
                                 <p class="text-muted">an hour ago</p>
                             </div>
                         </div>
                         <div class="feed-item">
                             <div class="live-activity">
-                                <p><a href="#" class="profile-link">Sarah</a> Liked her friend's post</p>
+                                <p><a href="" class="profile-link">{{user_info.first_name}}</a> Liked her friend's post</p>
                                 <p class="text-muted">4 hours ago</p>
                             </div>
                         </div>
                         <div class="feed-item">
                             <div class="live-activity">
-                                <p><a href="#" class="profile-link">Sarah</a> has shared an album</p>
+                                <p><a href="" class="profile-link">{{user_info.first_name}}</a> has shared an album</p>
                                 <p class="text-muted">a day ago</p>
                             </div>
                         </div>

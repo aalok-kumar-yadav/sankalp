@@ -12,9 +12,11 @@ from ngo_app.models import NGO
 class Index(View):
     def get(self, request):
         username = None
+        first_name = None
         if 'username' in request.session:
-            username = request.session['first_name']
-        return render(request, 'index.html', {'username': username})
+            first_name = request.session['first_name']
+            username = request.session['username']
+        return render(request, 'index.html', {'first_name': first_name, 'username': username})
 
     def post(self, request):
         # Code block for POST request
@@ -35,8 +37,9 @@ class Login(View):
         password = request.POST.get("password")
         # import pdb;pdb.set_trace()
         auth_user = authenticate(username=str(user_name).split('@')[0], password=password)
+
         if auth_user:
-            request.session['username'] = user_name
+            request.session['username'] = str(user_name).split('@')[0]
             request.session['first_name'] = auth_user.first_name
             return redirect('index')
         else:

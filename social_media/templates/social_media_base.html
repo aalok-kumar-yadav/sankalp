@@ -62,9 +62,15 @@
                     <li class="dropdown"><a href="{% url 'social_media_news_feed' %}">News Feed</a></li>
                     <li class="dropdown"><a href="#">Message</a></li>
                     <li class="dropdown"><a href="#">Notification</a></li>
-                    <li class="dropdown"><a href="{% url 'user_timeline' %}">Timeline</a></li>
-                    <li class="dropdown"><a href="{% url 'contact_us' %}">Contact</a></li>
-                    <li class="dropdown"><a href="{% url 'faq' %}">Faq</a></li>
+
+                     {% if username %}
+                     <li class="dropdown"><a href="{% url 'user_timeline' user_id=username %}">Timeline</a></li>
+
+                    <li class="dropdown"><a class="navbar_item_class" href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                     <li class="dropdown"><a class="navbar_item_class" href="{% url 'register' %}">Register</a></li>
+                    <li class="dropdown"><a class="navbar_item_class" href="{% url 'login' %}">Login</a></li>
+                    {% endif %}
                 </ul>
                 <form class="navbar-form navbar-right hidden-sm">
                     <div class="form-group">
