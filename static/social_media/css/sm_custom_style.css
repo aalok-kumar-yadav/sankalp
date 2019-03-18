@@ -1,0 +1,15 @@
+label {
+   cursor: pointer;
+   /* Style as you please, it will become the visible UI component. */
+}
+
+#edit_profile_id{
+   opacity: 0;
+   position: absolute;
+   z-index: -1;
+}
+
+.edit_profile_class{
+
+margin-top:10% !important;
+}

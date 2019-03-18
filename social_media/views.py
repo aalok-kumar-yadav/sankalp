@@ -10,8 +10,8 @@ from . import social_media_helpers as social_helper
 
 # News Feed Generic View
 class NewsFeed(View):
-    def get(self, request, user_id):
-        context_data = {}
+    def get(self, request):
+        context_data = social_helper.get_news_feed(request)
         return render(request, 'news_feed.html', context_data)
 
     def post(self, request):
@@ -31,12 +31,10 @@ class NearByNgoPeople(View):
 
 class ConnectedNgoPeople(View):
 
-    def get(self, request):
-        timeline_connected_context = {
-            'user_info': {'first_name': request.session['first_name'],  'followers': '204', 'gender_type': 'him'},
-            'timeline_section': 'connected_people', 'user_activity': 'Aalok Kumar liked monisha wamankar post'}
+    def get(self, request, user_id):
+        context_data = social_helper.get_connected_people(request, user_id)
 
-        return render(request, 'timeline.html', timeline_connected_context)
+        return render(request, 'timeline.html', context_data)
 
     def post(self, request):
         return render(request, 'timeline.html', {'timeline_section': 'connected_people'})

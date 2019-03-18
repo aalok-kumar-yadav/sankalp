@@ -19,13 +19,14 @@
                     <img src="{% static 'social_media/images//user-1.jpg' %}" alt="user" class="profile-photo"/>
                     <h5><a href="{% url 'user_timeline' user_id=username %}" class="text-white">Aalok Kumar</a></h5>
                     <a href="#" class="text-white"><i class="ion ion-android-person-add"></i> 1,299 followers</a>
+
                 </div><!--profile card ends-->
                 <ul class="nav-news-feed">
                     <li><i class="icon ion-ios-paper"></i>
-                        <div><a href="{% url 'social_media_news_feed'  %}">My Newsfeed</a></div>
+                        <div><a href="{% url 'news_feed'  %}">My Newsfeed</a></div>
                     </li>
                     <li><i class="icon ion-ios-people"></i>
-                        <div><a href="{% url 'nearby_ngo_people' user_id=username %}">People Nearby</a></div>
+                        <div><a href="{% url 'nearby_ngo_people' %}">People Nearby</a></div>
                     </li>
                     <li><i class="icon ion-ios-people-outline"></i>
                         <div><a href="{% url 'connected_ngo_people' user_id=username %}">Friends</a></div>
