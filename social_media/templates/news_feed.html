@@ -17,7 +17,7 @@
             <div class="col-md-3 static">
                 <div class="profile-card">
                     <img src="{% static 'social_media/images//user-1.jpg' %}" alt="user" class="profile-photo"/>
-                    <h5><a href="{% url 'user_timeline' user_id=username %}" class="text-white">Aalok Kumar</a></h5>
+                    <h5><a href="{% url 'user_timeline' user_id=username %}" class="text-white">{{user_info.first_name}}</a></h5>
                     <a href="#" class="text-white"><i class="ion ion-android-person-add"></i> 1,299 followers</a>
 
                 </div><!--profile card ends-->

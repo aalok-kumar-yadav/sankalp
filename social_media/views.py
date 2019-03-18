@@ -8,6 +8,7 @@ from django.views import View
 from . import social_media_helpers as social_helper
 
 
+
 # News Feed Generic View
 class NewsFeed(View):
     def get(self, request):

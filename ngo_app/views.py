@@ -11,6 +11,7 @@ from ngo_app.models import NGO
 
 class Index(View):
     def get(self, request):
+        # import pdb;pdb.set_trace()
         username = None
         first_name = None
         if 'username' in request.session:
