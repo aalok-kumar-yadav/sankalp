@@ -12,8 +12,14 @@
 
 
     <div class="row container search_container_div_class">
-        <div class="col-lg-8"><input title ="Search All Ngo" type="text" class="form-control ngo_search_input_class" placeholder="Search relevant ngo" ></div>
-       <div class="col-lg-1"> <i class="material-icons md-48 div_icon_cl" style="font-size: 48px;color:#1dc9cb">search</i></div>
+        <form method="post" action="">
+            {% csrf_token %}
+            <div class="col-sm-7 col-sm-offset-3"><input type="text" class="form-control ngo_search_input_class" placeholder="Search relevant ngo" ></div>
+       <div class="col-lg-1">
+           <button class="search_query_class"><i class="material-icons md-48 div_icon_cl" style="font-size: 48px;color:#1dc9cb">search</i></button></div>
+
+        </form>
+
     </div>
 </section>
 

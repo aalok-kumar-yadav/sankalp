@@ -18,7 +18,6 @@ from django.conf.urls import url, include
 from django.contrib import admin
 import social_media.urls as social_urls
 from ngo_app import views
-from contributor_app.views import EditContributorProfile
 
 urlpatterns = [
     url(r'^$', views.Index.as_view(), name='index'),
@@ -27,9 +26,6 @@ urlpatterns = [
     url(r'^accounts/login', views.Login.as_view(), name='login'),
     url(r'^register', views.Register.as_view(), name='register'),
     url(r'^ngos', views.all_ngo_view, name='all_ngo_view'),
-    url(r'^profile$', views.profile, name='profile'),
-    url(r'^edit_user_profile$', EditContributorProfile.as_view(), name='edit_user_profile'),
     url(r'^logout', views.logout, name='logout'),
     url(r'^admin/', admin.site.urls),
-
 ]

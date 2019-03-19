@@ -1,3 +1,10 @@
+"""
+    Social media helper is helper function for providing
+    all types of social media context data with json response
+
+"""
+
+
 from contributor_app.models import Contributor
 from django.contrib.auth.models import User
 

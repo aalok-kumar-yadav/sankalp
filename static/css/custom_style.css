@@ -1,38 +1,31 @@
 .custom_card_div_class{
-
-background-color:white;
-
+	background-color:white;
 }
 
 .navbar_new_section_class
 {
-  z-index: 1;
-padding-bottom:6%;
-background-color:white !important;
+  	z-index: 1;
+	padding-bottom:6%;
+	background-color:white !important;
 }
 
 .content_section_class{
-margin-top:2%;
-z-index: 1;
+	margin-top:2%;
+	z-index: 1;
 }
 
 .description_font_tag{
-font-size:14px;
-
+	font-size:14px;
 }
+
 .ngo_grid_view_image_class{
-height:220px;
-
+	height:220px;
 }
-
-/* Styles for wrapping the search box */
 
 .main {
     width: 50%;
     margin: 50px auto;
 }
-
-/* Bootstrap 4 text input with search icon */
 
 .has-search .form-control {
     padding-left: 2.375rem;
@@ -51,9 +44,9 @@ height:220px;
 }
 
 .search_container_div_class{
-padding:2%;
-padding-bottom:0px !important;
-    margin-left: 10%;
+    padding:2%;
+    padding-bottom:0px !important;
+
 }
 
 .ngo_search_input_class{
@@ -67,18 +60,23 @@ padding-bottom:0px !important;
 }
 
 .navigation_bar_class{
-background-color:#0e4a43;
+    background-color:#0e4a43;
 }
 
 .navbar_item_class{
-font-size:15px !important;
+    font-size:15px !important;
 }
 
 .heading_container_div_class{
-margin-bottom:2%;
+    margin-bottom:2%;
 }
 
 .logo_image_class{
-padding:2.6% !important;
+	padding:2.6% !important;
 }
 
+.search_query_class{
+background-color:transparent;
+border:0px;
+
+}

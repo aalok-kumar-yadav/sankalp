@@ -9,10 +9,10 @@ from contributor_app.models import Contributor
 from ngo_app.models import NGO
 
 
+# Index generic view for get & post request
 class Index(View):
+
     def get(self, request):
-        # import pdb;pdb.set_trace()
-        print("hello world")
         username = None
         first_name = None
         if 'username' in request.session:
@@ -21,15 +21,21 @@ class Index(View):
         return render(request, 'index.html', {'first_name': first_name, 'username': username})
 
     def post(self, request):
-        # Code block for POST request
-        return
+        username = None
+        first_name = None
+        if 'username' in request.session:
+            first_name = request.session['first_name']
+            username = request.session['username']
+        return render(request, 'index.html', {'first_name': first_name, 'username': username})
 
 
+# Logout view for flushing the session
 def logout(request):
     request.session.flush()
     return redirect('index')
 
 
+# Login generic view for user/NGO login
 class Login(View):
     def get(self, request):
         return render(request, 'register_login.html', {'message': 'valid', 'type': 'login'})
@@ -37,7 +43,6 @@ class Login(View):
     def post(self, request):
         user_name = request.POST.get("email")
         password = request.POST.get("password")
-        # import pdb;pdb.set_trace()
         auth_user = authenticate(username=str(user_name).split('@')[0], password=password)
 
         if auth_user:
@@ -89,6 +94,7 @@ class Register(View):
             return render(request, 'register_login.html', {'message': 'invalid', 'type': 'register'})
 
 
+# All ngo view for getting all NGO
 def all_ngo_view(request):
     first_name = None
     try:
@@ -98,7 +104,3 @@ def all_ngo_view(request):
 
     return render(request, 'all_ngo.html', {'username': first_name})
 
-
-def profile(request):
-    contributor_instance = Contributor.objects.get(user__username=request.session['username'])
-    return render(request, 'profile.html', {'username': request.session['first_name'], 'profile': contributor_instance})
