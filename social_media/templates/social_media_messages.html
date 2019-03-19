@@ -22,13 +22,13 @@
                 </div><!--profile card ends-->
                 <ul class="nav-news-feed">
                     <li><i class="icon ion-ios-paper"></i>
-                        <div><a href="{% url 'social_media_news_feed' %}">My Newsfeed</a></div>
+                        <div><a href="{% url 'news_feed' %}">My Newsfeed</a></div>
                     </li>
                     <li><i class="icon ion-ios-people"></i>
                         <div><a href="{% url 'nearby_ngo_people' %}">People Nearby</a></div>
                     </li>
                     <li><i class="icon ion-ios-people-outline"></i>
-                        <div><a href="{% url 'connected_ngo_people' %}">Friends</a></div>
+                        <div><a href="{% url 'connected_ngo_people' user_id=username  %}">Friends</a></div>
                     </li>
                     <li><i class="icon ion-chatboxes"></i>
                         <div><a href="newsfeed-messages.html">Messages</a></div>

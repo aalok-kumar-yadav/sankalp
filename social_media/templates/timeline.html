@@ -19,9 +19,9 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="profile-info">
-                            <a href="{% url 'user_timeline' user_id=username %}"><img id="profile_pic_id"
-                                    src="{% static 'social_media/images/user-1.jpg' %}" alt=""
-                                    class="img-responsive profile-photo"/></a>
+                            <a href="{% url 'user_timeline' user_id=username %}">
+                                <img id="profile_pic_id" src="{% static 'social_media/images/user-1.jpg' %}" alt=""
+                                                                                      class="img-responsive profile-photo"/></a>
 
 
                         </div>
@@ -29,11 +29,6 @@
                     <div class="col-md-9">
 
                         <ul class="list-inline profile-menu">
-
-                            <li><input type="file" name="profile" id="edit_profile_id"/>
-                                <label for="edit_profile_id"><i class="material-icons edit_profile_class"> camera_alt</i>
-
-                                </label></li>
                             <li><a href="{% url 'user_timeline' user_id=username %}" class="active">Timeline</a></li>
                             <li><a href="{% url 'user_timeline_about' user_id=username %}">About</a></li>
                             <li><a href="{% url 'connected_ngo_people' user_id=username %}">Friends</a></li>
@@ -42,7 +37,8 @@
                             <li>{{user_info.followers}} people following {{user_info.gender_type}}</li>
                             {% if con_status == 'edit' %}
                             <li>
-                                <button class="btn-primary">Edit Profile</button>
+                                <a class="btn btn-primary" href="{% url 'edit_profile' %}">Edit Profile</a>
+                                <!--<button onclick="{% url 'edit_profile' %}">Edit Profile</button>-->
                             </li>
                             {% else %}
 
@@ -132,17 +128,5 @@
 <!--<div class="spinner"></div>-->
 <!--</div>-->
 
-<script>
-
-$(document).ready(function(){
-
- $(".edit_profile_class").css({"color":"white"});
-  $("input[type=file]").on("change", function() {
-  $("[for=file]").html(this.files[0].name);
-  $("#profile_pic_id").attr("src", URL.createObjectURL(this.files[0]));
-})
-});
-
-</script>
 
 {% endblock %}

@@ -289,7 +289,7 @@ textarea{
 }
 
 .form-control{
-  background: #fff;
+  background: #fff !important;
   border: 1px solid #f1f2f2;
   box-shadow: none;
   border-radius: 4px;

@@ -1,4 +1,5 @@
 from contributor_app.models import Contributor
+from django.contrib.auth.models import User
 
 
 # Function for getting timeline context
@@ -50,4 +51,11 @@ def get_connected_people(request, user_id):
                                   'gender_type': "him"}, 'timeline_section': 'connected_people', 'con_status': "edit",
                     'user_activity': 'Aalok Kumar liked monisha wamankar post'}
 
+    return context_data
+
+
+# Function for getting user/NGO Information
+def get_session_user_info(request):
+    user_instance = Contributor.objects.get(user__username=request.session['username'])
+    context_data = {'user_info': user_instance}
     return context_data

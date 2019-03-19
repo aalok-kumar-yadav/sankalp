@@ -43,7 +43,7 @@ class ConnectedNgoPeople(View):
 
 class SocialMediaMessage(View):
     def get(self, request):
-        return render(request, 'social_media_messages.html')
+        return render(request, 'social_media_messages.html', {'username':request.session['username']})
 
     def post(self, request):
         return render(request, 'social_media_messages.html')
@@ -60,7 +60,8 @@ class UserTimeline(View):
 
 class EditProfile(View):
     def get(self, request):
-        return render(request, 'edit_profile.html')
+        context_data = social_helper.get_session_user_info(request)
+        return render(request, 'edit_profile.html', context_data)
 
     def post(self, request):
         return render(request, 'edit_profile.html')
