@@ -78,5 +78,8 @@
 .search_query_class{
 background-color:transparent;
 border:0px;
+}
 
+.search_query_class:focus {
+  outline: none;
 }

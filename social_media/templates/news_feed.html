@@ -16,7 +16,7 @@
             ================================================= -->
             <div class="col-md-3 static">
                 <div class="profile-card">
-                    <img src="{% static 'social_media/images//user-1.jpg' %}" alt="user" class="profile-photo"/>
+                    <img src="{{ user_data.profile_image}}" alt="user" class="profile-photo"/>
                     <h5><a href="{% url 'user_timeline' user_id=username %}" class="text-white">{{user_info.first_name}}</a></h5>
                     <a href="#" class="text-white"><i class="ion ion-android-person-add"></i> 1,299 followers</a>
 
@@ -35,10 +35,10 @@
                         <div><a href="{% url 'social_media_messages' %}">Messages</a></div>
                     </li>
                     <li><i class="icon ion-images"></i>
-                        <div><a href="newsfeed-images.html">Images</a></div>
+                        <div><a href="">Images</a></div>
                     </li>
                     <li><i class="icon ion-ios-videocam"></i>
-                        <div><a href="newsfeed-videos.html">Videos</a></div>
+                        <div><a href="">Videos</a></div>
                     </li>
                 </ul><!--news-feed links ends-->
                 <div id="chat-block">
@@ -82,7 +82,7 @@
                     <div class="row">
                         <div class="col-md-7 col-sm-7">
                             <div class="form-group">
-                                <img src="{% static 'social_media/images//user-1.jpg' %}" alt=""
+                                <img src="{{ user_data.profile_image}}" alt=""
                                      class="profile-photo-md"/>
                                 <textarea name="texts" id="exampleTextarea" cols="30" rows="1" class="form-control"
                                           placeholder="Write what you wish"></textarea>
@@ -147,7 +147,7 @@
                                     magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
                             </div>
                             <div class="post-comment">
-                                <img src="{% static 'social_media/images/user-1.jpg' %}" alt=""
+                                <img src="{{ user_data.profile_image}}" alt=""
                                      class="profile-photo-sm"/>
                                 <input type="text" class="form-control" placeholder="Post a comment">
                             </div>
@@ -209,7 +209,7 @@
                                     nisi ut aliquip ex ea commodo consequat.</p>
                             </div>
                             <div class="post-comment">
-                                <img src="{% static 'social_media/images/user-1.jpg' %}" alt=""
+                                <img src="{{ user_data.profile_image}}" alt=""
                                      class="profile-photo-sm"/>
                                 <input type="text" class="form-control" placeholder="Post a comment">
                             </div>
@@ -257,7 +257,7 @@
                                     magna aliqua. Ut enim ad minim veniam <i class="em em-muscle"></i></p>
                             </div>
                             <div class="post-comment">
-                                <img src="{% static 'social_media/images/user-1.jpg' %}" alt=""
+                                <img src="{{ user_data.profile_image}}" alt=""
                                      class="profile-photo-sm"/>
                                 <input type="text" class="form-control" placeholder="Post a comment">
                             </div>
@@ -308,7 +308,7 @@
                                     magna aliqua. </p>
                             </div>
                             <div class="post-comment">
-                                <img src="{% static 'social_media/images/user-1.jpg' %}" alt=""
+                                <img src="{{ user_data.profile_image}}" alt=""
                                      class="profile-photo-sm"/>
                                 <input type="text" class="form-control" placeholder="Post a comment">
                             </div>
@@ -355,7 +355,7 @@
                                 </p>
                             </div>
                             <div class="post-comment">
-                                <img src="{% static 'social_media/images/user-1.jpg' %}" alt=""
+                                <img src="{{ user_data.profile_image}}" alt=""
                                      class="profile-photo-sm"/>
                                 <input type="text" class="form-control" placeholder="Post a comment">
                             </div>
@@ -398,7 +398,7 @@
                                     laborum et dolorum fuga.</p>
                             </div>
                             <div class="post-comment">
-                                <img src="{% static 'social_media/images/user-1.jpg' %}" alt=""
+                                <img src="{{ user_data.profile_image}}" alt=""
                                      class="profile-photo-sm"/>
                                 <input type="text" class="form-control" placeholder="Post a comment">
                             </div>

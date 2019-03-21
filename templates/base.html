@@ -74,7 +74,8 @@
                     <li class="dropdown"><a class="navbar_item_class" href="{% url 'news_feed' %}">Social
                         Media</a></li>
                     <li class="dropdown"><a class="navbar_item_class" href="{% url 'all_ngo_view' %}">Ngo</a></li>
-                    <li class="dropdown"><a href="{% url 'contact_us' %}">Contact</a></li>
+                    <li class="dropdown"><a class="navbar_item_class" href="">About Us</a></li>
+                    <li class="dropdown"><a href="{% url 'contact_us' %}">Contact Us</a></li>
                     <li class="dropdown"><a href="{% url 'faq' %}">Faq</a></li>
                     {% if username %}
                      <li class="dropdown"><a class="navbar_item_class" href="{% url 'user_timeline' user_id=username %}">{{first_name}}</a> </li>

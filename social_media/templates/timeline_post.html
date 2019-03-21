@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-md-7 col-sm-7">
                 <div class="form-group">
-                    <img src="{% static 'social_media/images/user-1.jpg' %}" alt=""
+                    <img src="{{ user_data.profile_image}}" alt=""
                          class="profile-photo-md"/>
                     <textarea name="texts" id="exampleTextarea" cols="30" rows="1" class="form-control"
                               placeholder="Write what you wish"></textarea>
@@ -40,7 +40,7 @@
         <img src="{% static 'social_media/images/post-1.jpg' %}" alt="post-image"
              class="img-responsive post-image"/>
         <div class="post-container">
-            <img src="{% static 'social_media/images/user-1.jpg' %}" alt="user"
+            <img src="{{ user_data.profile_image}}" alt="user"
                  class="profile-photo-md pull-left"/>
             <div class="post-detail">
                 <div class="user-info">
@@ -65,7 +65,7 @@
                 </div>
                 <div class="line-divider"></div>
                 <div class="post-comment">
-                    <img src="{% static 'social_media/images/user-11.jpg' %}" alt=""
+                    <img src="{{ user_data.profile_image}}" alt=""
                          class="profile-photo-sm"/>
                     <p><a href="timeline.html" class="profile-link">Diana </a><i
                             class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur
@@ -80,7 +80,7 @@
                         dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
                 </div>
                 <div class="post-comment">
-                    <img src="{% static 'social_media/images/user-1.jpg' %}" alt=""
+                    <img src="{{ user_data.profile_image}}" alt=""
                          class="profile-photo-sm"/>
                     <input type="text" class="form-control" placeholder="Post a comment">
                 </div>
@@ -101,7 +101,7 @@
         <img src="{% static 'social_media/images/post-2.jpg' %}" alt="post-image"
              class="img-responsive post-image"/>
         <div class="post-container">
-            <img src="{% static 'social_media/images/user-1.jpg' %}" alt="user"
+            <img src="{{ user_data.profile_image}}" alt="user"
                  class="profile-photo-md pull-left"/>
             <div class="post-detail">
                 <div class="user-info">
@@ -141,7 +141,7 @@
                         dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
                 </div>
                 <div class="post-comment">
-                    <img src="{% static 'social_media/images/user-1.jpg' %}" alt=""
+                    <img src="{{ user_data.profile_image}}" alt=""
                          class="profile-photo-sm"/>
                     <input type="text" class="form-control" placeholder="Post a comment">
                 </div>
@@ -160,7 +160,7 @@
         </div><!--Post Date End-->
 
         <div class="post-container">
-            <img src="{% static 'social_media/images/user-1.jpg' %}" alt="user"
+            <img src="{{ user_data.profile_image}}" alt="user"
                  class="profile-photo-md pull-left"/>
             <div class="post-detail">
                 <div class="user-info">
@@ -185,7 +185,7 @@
                 </div>
                 <div class="line-divider"></div>
                 <div class="post-comment">
-                    <img src="{% static 'social_media/images/user-11.jpg' %}" alt=""
+                    <img src="{{ user_data.profile_image}}" alt=""
                          class="profile-photo-sm"/>
                     <p><a href="timeline.html" class="profile-link">Diana </a><i
                             class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur
@@ -200,7 +200,7 @@
                         dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
                 </div>
                 <div class="post-comment">
-                    <img src="{% static 'social_media/images/user-1.jpg' %}" alt=""
+                    <img src="{{ user_data.profile_image}}" alt=""
                          class="profile-photo-sm"/>
                     <input type="text" class="form-control" placeholder="Post a comment">
                 </div>

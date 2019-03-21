@@ -20,7 +20,7 @@
                     <div class="col-md-3">
                         <div class="profile-info">
                             <a href="{% url 'user_timeline' user_id=username %}">
-                                <img id="profile_pic_id" src="{% static 'social_media/images/user-1.jpg' %}" alt=""
+                                <img id="profile_pic_id" src="{{ user_data.profile_image}}" alt=""
                                                                                       class="img-responsive profile-photo"/></a>
 
 
@@ -57,7 +57,7 @@
             <!--Timeline Menu for Small Screens-->
             <div class="navbar-mobile hidden-lg hidden-md">
                 <div class="profile-info">
-                    <img src="{% static 'social_media/images/user-1.jpg' %}" alt=""
+                    <img src="{{ user_data.profile_image}}" alt=""
                          class="img-responsive profile-photo"/>
                     <h4>Sarah Cruiz</h4>
                     <p class="text-muted">Creative Director</p>

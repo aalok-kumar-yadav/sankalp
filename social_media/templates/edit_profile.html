@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block head %}
-<title>Edit Profile</title>
+<title>Edit Profile Info</title>
 <script type="text/javascript" src="{% static 'js/date-time-picker.min.js' %}"></script>
 {% endblock %}
 
@@ -14,15 +14,21 @@
     ================================================= -->
     <div class="timeline">
         <div class="timeline-cover">
-
+            <form id="edit_profile_form" method="post" action="{% url 'edit_profile' %}" enctype="multipart/form-data">
+                {% csrf_token %}
             <!--Timeline Menu for Large Screens-->
             <div class="timeline-nav-bar hidden-sm hidden-xs">
                 <div class="row">
                     <div class="col-md-3">
                         <div class="profile-info">
-                            <img src="images/users/user-1.jpg" alt="" class="img-responsive profile-photo"/>
-                            <h3>{{user_info.user.first_name}}</h3>
-                            <p class="text-muted">{{user_info.profile_bio}}</p>
+                            <label for="profile_pic_id">
+                         <img id="profile_image_id" title="Click image to edit" src="{{ user_info_edit.profile_image }}" alt="" class="img-responsive profile-photo"/>
+                        </label>
+
+                        <input id="profile_pic_id" name="profile_pic" style="display:none" type="file" value="{{ user_info_edit.profile_image }}" />
+
+                            <h3>{{user_info_edit.user.first_name}}</h3>
+                            <p class="text-muted">{{user_info_edit.profile_bio}}</p>
                         </div>
                     </div>
                     <div class="col-md-9">
@@ -41,6 +47,7 @@
 
             <!--Timeline Menu for Small Screens-->
             <div class="navbar-mobile hidden-lg hidden-md">
+
                 <div class="profile-info">
                     <img src="images/users/user-1.jpg" alt="" class="img-responsive profile-photo"/>
                     <h4>Sarah Cruiz</h4>
@@ -60,6 +67,9 @@
         </div>
         <div id="page-contents">
             <div class="row">
+
+
+
                 <div class="col-md-3">
 
                     <!--Edit Profile Menu-->
@@ -91,21 +101,21 @@
                             <div class="line"></div>
                         </div>
                         <div class="edit-block">
-                            <form name="basic-info" id="basic-info" class="form-inline">
+
                                 <div id="basic_info_edit_div">
 
                                     <div class="row">
                                         <div class="form-group col-xs-6">
-                                            <label for="firstname">First name</label>
-                                            <input id="firstname" class="form-control input-group-lg" type="text"
-                                                   name="firstname" title="Enter first name" placeholder="First name"
-                                                   value="{{user_info.user.first_name}}"/>
+                                            <label for="first_name">First name</label>
+                                            <input id="first_name" class="form-control input-group-lg" type="text"
+                                                   name="first_name" title="Enter first name" placeholder="First name"
+                                                   value="{{user_info_edit.user.first_name}}"/>
                                         </div>
                                         <div class="form-group col-xs-6">
-                                            <label for="lastname" class="">Last name</label>
-                                            <input id="lastname" class="form-control input-group-lg" type="text"
-                                                   name="lastname" title="Enter last name" placeholder="Last name"
-                                                   value="{{user_info.user.last_name}}"/>
+                                            <label for="last_name" class="">Last name</label>
+                                            <input id="last_name" class="form-control input-group-lg" type="text"
+                                                   name="last_name" title="Enter last name" placeholder="Last name"
+                                                   value="{{user_info_edit.user.last_name}}"/>
                                         </div>
                                     </div>
 
@@ -114,7 +124,7 @@
                                             <label for="dob_date" class="sr-only">Date Of Birth</label>
                                             <input id="dob_date" class="form-control input-group-lg" type="text"
                                                    name="dob_date" title="Enter date of birth"
-                                                   placeholder="Date of birth" value="{{user_info.dob}}"/>
+                                                   placeholder="Date of birth" value='{{user_info_edit.dob |date:"Y-m-d" }}'/>
                                         </div>
                                     </div>
 
@@ -123,8 +133,8 @@
                                             <label for="email">My email</label>
                                             <input id="email" class="form-control input-group-lg" type="text"
                                                    name="Email"
-                                                   title="Enter Email" placeholder="My Email"
-                                                   value="{{user_info.user.email}}"/>
+                                                   title="Email will not changed" placeholder="My Email"
+                                                   value="{{user_info_edit.user.email}}" readonly/>
                                         </div>
                                     </div>
 
@@ -132,10 +142,10 @@
                                     <div class="form-group gender">
                                         <span class="custom-label"><strong>I am a: </strong></span>
                                         <label class="radio-inline">
-                                            <input type="radio" name="optradio" checked>Male
+                                            <input type="radio" name="gender" {% if user_info_edit.gender == "male" %} checked {% endif %}>Male
                                         </label>
                                         <label class="radio-inline">
-                                            <input type="radio" name="optradio">Female
+                                            <input type="radio" name="gender" {% if user_info_edit.gender == "female" %} checked {% endif %}>Female
                                         </label>
                                     </div>
                                     <div class="row">
@@ -143,12 +153,19 @@
                                             <label for="city"> My city</label>
                                             <input id="city" class="form-control input-group-lg" type="text" name="city"
                                                    title="Enter city" placeholder="Your city"
-                                                   value="{{user_info.city}}"/>
+                                                   value="{{user_info_edit.city}}"/>
                                         </div>
                                         <div class="form-group col-xs-6">
                                             <label for="country">My country</label>
-                                            <select class="form-control" id="country">
-                                                <option value="USA" selected>{{user_info.country}}</option>
+                                            <select class="form-control" id="country" name="country">
+                                                {% if country == 'India' %}
+                                                <option value="India" selected>India</option>
+                                                <option value="United States">United States</option>
+                                                {% else %}
+                                                <option value="United States" selected>United States</option>
+                                                <option value="India">India</option>
+                                                {% endif %}
+
                                             </select>
                                         </div>
                                     </div>
@@ -156,7 +173,7 @@
                                         <div class="form-group col-xs-12">
                                             <label for="my-info">About me</label>
                                             <textarea id="my-info" name="information" class="form-control"
-                                                      placeholder="Some texts about me" rows="4" cols="400"> Sankalp is online web platform for donation for someone who need the most, also social media for the better interaction between NGO & Contributor.
+                                                      placeholder="Some texts about me" rows="4" cols="400"> {{user_info_edit.profile_bio}}
                         </textarea>
                                         </div>
                                     </div>
@@ -271,40 +288,41 @@
 
 
                                 </div>
-                                <button class="btn btn-primary">Save Changes</button>
-                            </form>
+                                <button class="btn btn-primary" type="submit">Save Changes</button>
+
                         </div>
                     </div>
                 </div>
+                </form>
                 <div class="col-md-2 static">
 
                     <!--Sticky Timeline Activity Sidebar-->
                     <div id="sticky-sidebar">
-                        <h4 class="grey">{{user_info.user.first_name}}'s activity</h4>
+                        <h4 class="grey">{{user_info_edit.user.first_name}}'s activity</h4>
                         <div class="feed-item">
                             <div class="live-activity">
-                                <p><a href="#" class="profile-link">{{user_info.user.first_name}}</a> Commended on a
+                                <p><a href="#" class="profile-link">{{user_info_edit.user.first_name}}</a> Commended on a
                                     Photo</p>
                                 <p class="text-muted">5 mins ago</p>
                             </div>
                         </div>
                         <div class="feed-item">
                             <div class="live-activity">
-                                <p><a href="#" class="profile-link">{{user_info.user.first_name}}</a> Has posted a photo
+                                <p><a href="#" class="profile-link">{{user_info_edit.user.first_name}}</a> Has posted a photo
                                 </p>
                                 <p class="text-muted">an hour ago</p>
                             </div>
                         </div>
                         <div class="feed-item">
                             <div class="live-activity">
-                                <p><a href="#" class="profile-link">{{user_info.user.first_name}}</a> Liked her friend's
+                                <p><a href="#" class="profile-link">{{user_info_edit.user.first_name}}</a> Liked her friend's
                                     post</p>
                                 <p class="text-muted">4 hours ago</p>
                             </div>
                         </div>
                         <div class="feed-item">
                             <div class="live-activity">
-                                <p><a href="#" class="profile-link">{{user_info.user.first_name}}</a> has shared an
+                                <p><a href="#" class="profile-link">{{user_info_edit.user.first_name}}</a> has shared an
                                     album</p>
                                 <p class="text-muted">a day ago</p>
                             </div>
@@ -321,17 +339,31 @@
 <script>
 
     $(document).ready(function(){
-
-     $("#dob_date").dateTimePicker();
-    $("#yof_date").dateTimePicker();
+        $("#dob_date").dateTimePicker();
+        $("#yof_date").dateTimePicker();
     });
 
      $(document).on('click', '#account_id', function(){
          $("#basic_info_edit_div").hide();
-          $("#account_setting_edit_div").show();
+         $("#account_setting_edit_div").show();
     });
 
+function readURL(input) {
 
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+      $('#profile_image_id').attr('src', e.target.result);
+    }
+
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+$("#profile_pic_id").change(function() {
+  readURL(this);
+});
 
 </script>
 
