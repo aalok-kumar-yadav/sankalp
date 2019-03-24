@@ -123,7 +123,7 @@
                                         <div class="form-group col-xs-6">
                                             <label for="dob_date" class="sr-only">Date Of Birth</label>
                                             <input id="dob_date" class="form-control input-group-lg" type="text"
-                                                   name="dob_date" title="Enter date of birth"
+                                                   name="dob_date" title="Update date of birth"
                                                    placeholder="Date of birth" value='{{user_info_edit.dob |date:"Y-m-d" }}'/>
                                         </div>
                                     </div>
@@ -142,23 +142,23 @@
                                     <div class="form-group gender">
                                         <span class="custom-label"><strong>I am a: </strong></span>
                                         <label class="radio-inline">
-                                            <input type="radio" name="gender" {% if user_info_edit.gender == "male" %} checked {% endif %}>Male
+                                            <input type="radio" name="gender" value="male" {% if user_info_edit.gender == "male" %} checked {% endif %}>Male
                                         </label>
                                         <label class="radio-inline">
-                                            <input type="radio" name="gender" {% if user_info_edit.gender == "female" %} checked {% endif %}>Female
+                                            <input type="radio" name="gender" value="female" {% if user_info_edit.gender == "female" %} checked {% endif %}>Female
                                         </label>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-xs-6">
                                             <label for="city"> My city</label>
                                             <input id="city" class="form-control input-group-lg" type="text" name="city"
-                                                   title="Enter city" placeholder="Your city"
+                                                   title="Update city" placeholder="Your city"
                                                    value="{{user_info_edit.city}}"/>
                                         </div>
                                         <div class="form-group col-xs-6">
                                             <label for="country">My country</label>
                                             <select class="form-control" id="country" name="country">
-                                                {% if country == 'India' %}
+                                                {% if user_info_edit.country == 'India' %}
                                                 <option value="India" selected>India</option>
                                                 <option value="United States">United States</option>
                                                 {% else %}
@@ -172,7 +172,7 @@
                                     <div class="row">
                                         <div class="form-group col-xs-12">
                                             <label for="my-info">About me</label>
-                                            <textarea id="my-info" name="information" class="form-control"
+                                            <textarea id="my-info" name="information" class="form-control" title="Enter profile bio"
                                                       placeholder="Some texts about me" rows="4" cols="400"> {{user_info_edit.profile_bio}}
                         </textarea>
                                         </div>

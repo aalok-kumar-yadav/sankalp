@@ -91,7 +91,7 @@ class EditProfile(View):
             image_path = Contributor.objects.get(user__username=user_name).profile_image
         try:
             User.objects.filter(username=user_name).update(first_name=first_name, last_name=last_name)
-            Contributor.objects.filter(user__username=user_name).update(dob=dob_date, gender="male", city=city, profile_image=image_path, country=country, profile_bio=profile_bio)
+            Contributor.objects.filter(user__username=user_name).update(dob=dob_date, gender=gender, city=city, profile_image=image_path, country=country, profile_bio=profile_bio)
             request.session['first_name'] = first_name
         except Exception as e:
             print(e)
