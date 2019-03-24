@@ -33,10 +33,20 @@ class NewsFeed(View):
 class NearByNgoPeople(View):
 
     def get(self, request):
-        return render(request, 'nearby_ngo_people.html')
+        session_user = request.session['username']
+        session_user_data = Contributor.objects.get(user__username=session_user)
+        connected_list = Contributor.objects.all()
+
+        context_data = {'username': session_user, 'user_info': {'first_name': request.session['first_name']},
+                        'user_data': session_user_data, 'connected_people': connected_list[1:10],
+                        'nearby_people': connected_list[3:], 'recommended_people':connected_list[10:], 'page_type': 'nearby'}
+
+        return render(request, 'news_feed.html', context_data)
 
     def post(self, request):
-        return render(request, 'nearby_ngo_people.html')
+        people_list = Contributor.objects.all()[4:]
+        context_data = {'people_list': people_list, 'page_type': 'nearby'}
+        return render(request, 'news_feed.html', context_data)
 
 
 # Generic view for getting connected people

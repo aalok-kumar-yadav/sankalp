@@ -1,48 +1,4 @@
-/*==================================================
-  Template Name: Friend Finder
-  Description: A Social Network Template
-  Author: thunder-team
-  Version: 2.1
-==================================================*/
 
-/*==================================================
-  [Table of Contents]
-  --------------------------------------------------
-  - body
-    - Typography
-    - Common classes
-    - Header
-    - Homepage
-      - Top Banner
-      - Signup Form
-      - Features
-      - App Download
-      - Image Divider
-      - Site Facts
-      - Live Feed
-    - Landing Page | Register
-    - Newsfeed
-      - Left Sidebar
-      - Right Sidebar
-      - Create Post Box
-      - Post Contents
-      - Nearby People
-      - Friend List
-      - Chat Room
-      - Media: image and video
-    - Timeline
-      - Timeline Sidebar
-      - Post Date
-      - About Profile
-      - Profile Album
-    - Edit Profile
-    - Contact Us
-    - Footer
-    - Media Queries
-    - Slide Animations
-    - Scroll Down Arrow
-    - Preloader
-==================================================*/
 
 html, body {
   height: 100%;
@@ -385,7 +341,6 @@ textarea{
   position: absolute;
   left: 15px;
   top: 3px;
-  color: #fff;
 }
 
 .menu form .form-group input.form-control{

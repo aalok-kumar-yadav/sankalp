@@ -44,36 +44,19 @@
                 <div id="chat-block">
                     <div class="title">Chat online</div>
                     <ul class="online-users list-inline">
-                        <li><a href="newsfeed-messages.html" title="Linda Lohan"><img
-                                src="{% static 'social_media/images/user-2.jpg' %}" alt="user"
+
+                        {% for con_user in connected_people %}
+                             <li><a href="{% url 'user_timeline' user_id=con_user.user.username %}" title="{{con_user.user.first_name}} {{con_user.user.last_name}}"><img
+                                src="{{con_user.profile_image}}" alt="user"
                                 class="img-responsive profile-photo"/><span class="online-dot"></span></a></li>
-                        <li><a href="newsfeed-messages.html" title="Sophia Lee"><img
-                                src="{% static 'social_media/images/user-3.jpg' %}" alt="user"
-                                class="img-responsive profile-photo"/><span class="online-dot"></span></a></li>
-                        <li><a href="newsfeed-messages.html" title="John Doe"><img
-                                src="{% static 'social_media/images/user-4.jpg' %}" alt="user"
-                                class="img-responsive profile-photo"/><span class="online-dot"></span></a></li>
-                        <li><a href="newsfeed-messages.html" title="Alexis Clark"><img
-                                src="{% static 'social_media/images/user-5.jpg' %}" alt="user"
-                                class="img-responsive profile-photo"/><span class="online-dot"></span></a></li>
-                        <li><a href="newsfeed-messages.html" title="James Carter"><img
-                                src="{% static 'social_media/images/user-6.jpg' %}" alt="user"
-                                class="img-responsive profile-photo"/><span class="online-dot"></span></a></li>
-                        <li><a href="newsfeed-messages.html" title="Robert Cook"><img
-                                src="{% static 'social_media/images/user-7.jpg' %}" alt="user"
-                                class="img-responsive profile-photo"/><span class="online-dot"></span></a></li>
-                        <li><a href="newsfeed-messages.html" title="Richard Bell"><img
-                                src="{% static 'social_media/images/user-8.jpg' %}" alt="user"
-                                class="img-responsive profile-photo"/><span class="online-dot"></span></a></li>
-                        <li><a href="newsfeed-messages.html" title="Anna Young"><img
-                                src="{% static 'social_media/images/user-9.jpg' %}" alt="user"
-                                class="img-responsive profile-photo"/><span class="online-dot"></span></a></li>
-                        <li><a href="newsfeed-messages.html" title="Julia Cox"><img
-                                src="{% static 'social_media/images/user-7.jpg' %}" alt="user"
-                                class="img-responsive profile-photo"/><span class="online-dot"></span></a></li>
+
+                        {% endfor %}
                     </ul>
                 </div><!--chat block ends-->
             </div>
+
+
+            {% ifequal page_type 'news_feed' %}
             <div class="col-md-7">
 
                 <!-- Post Create Box
@@ -94,7 +77,7 @@
                                     <li><a href="#"><i class="ion-compose"></i></a></li>
                                     <li><a href="#"><i class="ion-images"></i></a></li>
                                     <li><a href="#"><i class="ion-ios-videocam"></i></a></li>
-                                    <li><a href="#"><i class="ion-map"></i></a></li>
+                                    <li><a href="#"><i class="ion-ios-location"></i></a></li>
                                 </ul>
                                 <button class="btn btn-primary pull-right">Publish</button>
                             </div>
@@ -407,51 +390,90 @@
                 </div>
             </div>
 
+            {% else %}
+
+            <div class="col-md-7">
+
+            <!-- Post Create Box
+                ================================================= -->
+                <div class="create-post">
+                    <div class="row">
+                        <div class="col-md-7 col-sm-7">
+                            <div class="form-group">
+                                <img src="{{ user_data.profile_image}}" alt=""
+                                     class="profile-photo-md"/>
+                                <textarea name="texts" id="exampleTextarea" cols="30" rows="1" class="form-control"
+                                          placeholder="Write what you wish"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-5 col-sm-5">
+                            <div class="tools">
+                                <ul class="publishing-tools list-inline">
+                                    <li><a href="#"><i class="ion-compose"></i></a></li>
+                                    <li><a href="#"><i class="ion-images"></i></a></li>
+                                    <li><a href="#"><i class="ion-ios-videocam"></i></a></li>
+                                    <li><a href="#"><i class="ion-map"></i></a></li>
+                                </ul>
+                                <button class="btn btn-primary pull-right">Publish</button>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- Post Create Box End-->
+
+                <!-- Nearby People List
+                ================================================= -->
+                <div class="people-nearby">
+                    <!--<div class="google-maps">-->
+                    <!--<div id="map" class="map"></div>-->
+                    <!--</div>-->
+
+
+
+                    {% for near_user in nearby_people %}
+
+                     <div class="nearby-user">
+                        <div class="row">
+                            <div class="col-md-2 col-sm-2">
+                                <img src="{{near_user.profile_image}}" alt="user"
+                                     class="profile-photo-lg"/>
+                            </div>
+                            <div class="col-md-7 col-sm-7">
+                                <h5><a href="{{near_user.user.username}}" class="profile-link">{{near_user.user.first_name}} {{near_user.user.last_name}}</a></h5>
+                                <p>{{near_user.profile_bio}}</p>
+                                <p class="text-muted">500m away</p>
+                            </div>
+                            <div class="col-md-3 col-sm-3">
+                                <button class="btn btn-primary pull-right">Add Friend</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    {% endfor %}
+
+                </div>
+            </div>
+            {% endifequal %}
+
             <!-- Newsfeed Common Side Bar Right
             ================================================= -->
             <div class="col-md-2 static">
                 <div class="suggestions" id="sticky-sidebar">
-                    <h4 class="grey">Who to Follow</h4>
-                    <div class="follow-user">
-                        <img src="{% static 'social_media/images/user-3.jpg' %}" alt=""
+                    <h4 class="grey">You May Connect</h4>
+                    {% for rec_user in recommended_people %}
+
+                     <div class="follow-user">
+                        <img title="{{rec_user.user.first_name}} {{rec_user.user.last_name}}" src="{{rec_user.profile_image}}" alt=""
                              class="profile-photo-sm pull-left"/>
                         <div>
-                            <h5><a href="timeline.html">Diana Amber</a></h5>
+                            <h5><a href="{% url 'user_timeline' user_id=rec_user.user.username %}">{{rec_user.user.first_name}}</a></h5>
                             <a href="#" class="text-green">Add friend</a>
                         </div>
                     </div>
-                    <div class="follow-user">
-                        <img src="{% static 'social_media/images/user-4.jpg' %}" alt=""
-                             class="profile-photo-sm pull-left"/>
-                        <div>
-                            <h5><a href="timeline.html">Cris Haris</a></h5>
-                            <a href="#" class="text-green">Add friend</a>
-                        </div>
-                    </div>
-                    <div class="follow-user">
-                        <img src="{% static 'social_media/images/user-5.jpg' %}" alt=""
-                             class="profile-photo-sm pull-left"/>
-                        <div>
-                            <h5><a href="timeline.html">Brian Walton</a></h5>
-                            <a href="#" class="text-green">Add friend</a>
-                        </div>
-                    </div>
-                    <div class="follow-user">
-                        <img src="{% static 'social_media/images/user-6.jpg' %}" alt=""
-                             class="profile-photo-sm pull-left"/>
-                        <div>
-                            <h5><a href="timeline.html">Olivia Steward</a></h5>
-                            <a href="#" class="text-green">Add friend</a>
-                        </div>
-                    </div>
-                    <div class="follow-user">
-                        <img src="{% static 'social_media/images/user-7.jpg' %}" alt=""
-                             class="profile-photo-sm pull-left"/>
-                        <div>
-                            <h5><a href="timeline.html">Sophia Page</a></h5>
-                            <a href="#" class="text-green">Add friend</a>
-                        </div>
-                    </div>
+
+                    {% endfor %}
+
+
                 </div>
             </div>
         </div>

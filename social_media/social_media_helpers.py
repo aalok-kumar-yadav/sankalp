@@ -50,16 +50,21 @@ def get_timeline_about_context(request, user_id):
 def get_news_feed(request):
     session_user = request.session['username']
     session_user_data = Contributor.objects.get(user__username=session_user)
-    context_data = {'username': session_user, 'user_info': {'first_name': request.session['first_name']}, 'user_data': session_user_data}
+    connected_list = Contributor.objects.all()
+    recommended_people_list = connected_list[10:]
+    print(recommended_people_list)
+    context_data = {'username': session_user, 'user_info': {'first_name': request.session['first_name']}, 'user_data': session_user_data, 'connected_people': connected_list[1:10], 'recommended_people': recommended_people_list, 'page_type':'news_feed'}
     return context_data
 
 
 # Helper function for getting Connected people
 def get_connected_people(request, user_id):
+    connected_people = Contributor.objects.all()[:8]
+    user_data= Contributor.objects.get(user__username=user_id)
     context_data = {'username': request.session['username'],
                     'user_info': {'first_name': request.session['first_name'], 'followers': '204',
                                   'gender_type': "him"}, 'timeline_section': 'connected_people', 'con_status': "edit",
-                    'user_activity': 'Aalok Kumar liked monisha wamankar post'}
+                    'user_activity': [], 'connected_people': connected_people, 'user_data':user_data}
 
     return context_data
 

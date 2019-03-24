@@ -74,20 +74,19 @@
 
                     <!--Edit Profile Menu-->
                     <ul class="edit-menu">
-                        <li class="active"><i class="icon ion-ios-information-outline"></i><a
-                                href="edit-profile-basic.html">Basic Information</a></li>
-                        <li><i class="icon ion-ios-briefcase-outline"></i><a id="basic_info_id" href="">Education
-                            and Work</a></li>
-                        <li><i class="icon ion-ios-heart-outline"></i><a id ="interest_id" href="">My
+                        <li id="basic_info" class="active li_class_edit" onclick="change_edit_div(this.id)"><i class="icon ion-ios-information-outline"></i><a
+                                class="edit_section_class" >Basic Information</a></li>
+                        <li id="my_interest" class="li_class_edit" onclick="change_edit_div(this.id)"><i class="icon ion-ios-heart-outline"></i><a class="edit_section_class">My
                             Interests</a></li>
-                        <li><i class="icon ion-ios-settings"></i><a id = "account_id">Account
+                        <li id="account_setting" class="li_class_edit" onclick="change_edit_div(this.id)"><i class="icon ion-ios-settings"></i><a class="edit_section_class">Account
                             Settings</a></li>
-                        <li><i class="icon ion-ios-locked-outline"></i><a href="edit-profile-password.html">Change
+                        <li id="change_password" class="li_class_edit" onclick="change_edit_div(this.id)"><i class="icon ion-ios-locked-outline"></i><a class="edit_section_class">Change
                             Password</a></li>
                     </ul>
                 </div>
-                <div class="col-md-7">
 
+                    <div id="basic_info_edit_div">
+                        <div class="col-md-7">
                     <!-- Basic Information
                     ================================================= -->
                     <div class="edit-profile-container">
@@ -102,7 +101,7 @@
                         </div>
                         <div class="edit-block">
 
-                                <div id="basic_info_edit_div">
+
 
                                     <div class="row">
                                         <div class="form-group col-xs-6">
@@ -177,15 +176,58 @@
                         </textarea>
                                         </div>
                                     </div>
+<button class="btn btn-primary" type="submit">Save Changes</button>
+                                </div>
 
+
+
+                        </div>
+                    </div>
+                    </div>
+                            <div id ="my_interest_edit_div" style="display:none">
+                                    <div class="col-md-7">
+
+              <!-- Edit Interests
+              ================================================= -->
+              <div class="edit-profile-container">
+                <div class="block-title">
+                  <h4 class="grey"><i class="icon ion-ios-heart-outline"></i>My Interests</h4>
+                  <div class="line"></div>
+                  <p>Sankalp is online web platform for donation for someone who need the most, also social media for the better interaction between NGO & Contributor.</p>
+                  <div class="line"></div>
+                </div>
+                <div class="edit-block">
+                  <ul class="list-inline interests">
+                  	<li><a href="#"><i class="icon ion-android-bicycle"></i> Bycicle</a></li>
+                  	<li><a href="#"><i class="icon ion-ios-camera"></i> Photgraphy</a></li>
+                  	<li><a href="#"><i class="icon ion-android-cart"></i> Shopping</a></li>
+                  	<li><a href="#"><i class="icon ion-android-plane"></i> Traveling</a></li>
+                  	<li><a href="#"><i class="icon ion-android-restaurant"></i> Eating</a></li>
+                  </ul>
+                  <div class="line"></div>
+                  <div class="row">
+                    <p class="custom-label"><strong>Add interests</strong></p>
+                    <div class="form-group col-sm-8">
+                      <input id="add-interest" class="form-control input-group-lg" type="text" name="interest" title="Choose Interest" placeholder="Interests. For example, photography"/>
+                    </div>
+                    <div class="form-group col-sm-4">
+                      <button class="btn btn-primary">Add</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
                                 </div>
                                 <div id="account_setting_edit_div" style="display:none">
+                                <div class="col-md-7">
 
-                                    <div class="edit-profile-container">
+              <!-- Profile Settings
+              ================================================= -->
+              <div class="edit-profile-container">
                 <div class="block-title">
                   <h4 class="grey"><i class="icon ion-ios-settings"></i>Account Settings</h4>
                   <div class="line"></div>
-                  <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate</p>
+                  <p>Sankalp is online web platform for donation for someone who need the most, also social media for the better interaction between NGO & Contributor.</p>
                   <div class="line"></div>
                 </div>
                 <div class="edit-block">
@@ -285,14 +327,47 @@
                   </div>
                 </div>
               </div>
+            </div>
 
 
                                 </div>
-                                <button class="btn btn-primary" type="submit">Save Changes</button>
+                                <div id="change_password_edit_div" style="display:none">
+                                    <div class="col-md-7">
 
-                        </div>
-                    </div>
+              <!-- Change Password
+              ================================================= -->
+              <div class="edit-profile-container">
+                <div class="block-title">
+                  <h4 class="grey"><i class="icon ion-ios-locked-outline"></i>Change Password</h4>
+                  <div class="line"></div>
+                  <p>Sankalp is online web platform for donation for someone who need the most, also social media for the better interaction between NGO & Contributor.</p>
+                  <div class="line"></div>
                 </div>
+                <div class="edit-block">
+                  <form name="update-pass" id="education" class="form-inline">
+                    <div class="row">
+                      <div class="form-group col-xs-12">
+                        <label for="my-password">Old password</label>
+                        <input id="my-password" class="form-control input-group-lg" type="password" name="password" title="Enter password" placeholder="Old password"/>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="form-group col-xs-6">
+                        <label>New password</label>
+                        <input class="form-control input-group-lg" type="password" name="password" title="Enter password" placeholder="New password"/>
+                      </div>
+                      <div class="form-group col-xs-6">
+                        <label>Confirm password</label>
+                        <input class="form-control input-group-lg" type="password" name="password" title="Enter password" placeholder="Confirm password"/>
+                      </div>
+                    </div>
+                    <p><a href="#">Forgot Password?</a></p>
+                    <button class="btn btn-primary">Update Password</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+                                </div>
                 </form>
                 <div class="col-md-2 static">
 
@@ -343,10 +418,23 @@
         $("#yof_date").dateTimePicker();
     });
 
-     $(document).on('click', '#account_id', function(){
+    function change_edit_div(id_arg){
          $("#basic_info_edit_div").hide();
-         $("#account_setting_edit_div").show();
-    });
+         $("#my_interest_edit_div").hide();
+         $("#change_password_edit_div").hide();
+         $("#account_setting_edit_div").hide();
+        var target_id = '#'+id_arg+"_edit_div";
+        console.log(target_id);
+        $('.li_class_edit').removeClass("active");
+        $('#'+id_arg).addClass("active");
+        $(target_id).show();
+
+    }
+
+
+
+
+
 
 function readURL(input) {
 

@@ -12,15 +12,14 @@
     {% load static %}
     <link href="{% static 'social_media/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'social_media/css/style.css' %}" rel="stylesheet">
-    <link href="{% static 'social_media/css/ionicons.min.css' %}" rel="stylesheet">
+
     <link href="{% static 'social_media/css/font-awesome.min.css' %}" rel="stylesheet">
     <link href="{% static 'social_media/css/emoji.css' %}" rel="stylesheet">
     <link href="{% static 'social_media/css/sm_custom_style.css' %}" rel="stylesheet">
 
     <!--Google Font-->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-          rel="stylesheet">
+    <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
     <!-- Scripts
 ================================================= -->
     <script async defer
@@ -63,13 +62,13 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right main-menu">
                     <li class="dropdown"><a href="{% url 'news_feed' %}">News Feed</a></li>
-                    <li class="dropdown"><a href="#">Message</a></li>
-                    <li class="dropdown"><a href="#">Notification</a></li>
+                    <li class="dropdown"><a href="#">Message &nbsp;<i class="ion-chatboxes"></i></a></li>
+                    <li class="dropdown"><a href="#">Notification &nbsp;<i class="ion-android-notifications"></i></a></li>
 
                      {% if username %}
-                        <li class="dropdown"><a href="{% url 'user_timeline' user_id=username %}">{{user_info.first_name}}</a></li>
+                        <li class="dropdown"><a href="{% url 'user_timeline' user_id=username %}">{{user_info.first_name}}&nbsp; <i class="ion-person"></i></a></li>
 
-                    <li class="dropdown"><a class="navbar_item_class" href="{% url 'logout' %}">Logout</a></li>
+                    <li class="dropdown"><a class="navbar_item_class" href="{% url 'logout' %}">Logout &nbsp;<i class="ion-log-out"></i></a></li>
                     {% else %}
                      <li class="dropdown"><a class="navbar_item_class" href="{% url 'register' %}">Register</a></li>
                     <li class="dropdown"><a class="navbar_item_class" href="{% url 'login' %}">Login</a></li>
@@ -78,7 +77,7 @@
                 <form class="navbar-form navbar-right hidden-sm">
                     <div class="form-group">
                         <i class="icon ion-android-search"></i>
-                        <input type="text" class="form-control" placeholder="Search friends, photos, videos">
+                        <input type="text" class="form-control" placeholder="Search NGO, contributor">
                     </div>
                 </form>
             </div><!-- /.navbar-collapse -->
