@@ -56,7 +56,7 @@ class Login(View):
 # Register generic view for registering User/NGO
 class Register(View):
     def get(self, request):
-        return render(request, 'register_login.html', {'message': "valid", 'type': 'login'})
+        return render(request, 'register_login.html', {'message': "valid", 'type': 'register'})
 
     def post(self, request):
         user_type = request.POST.get("user_type")
@@ -66,7 +66,7 @@ class Register(View):
                 dob = request.POST.get("dob_date")
                 email = request.POST.get("user_email")
                 user_password = request.POST.get("user_password")
-                gender = "male" if request.POST.get("male") else "female"
+                gender = request.POST.get("gender")
                 city = request.POST.get("user_city")
                 country = request.POST.get("user_country")
                 user_instance = User.objects.create_user(str(email).split('@')[0], email, user_password)
@@ -80,7 +80,7 @@ class Register(View):
                 yof = request.POST.get("yof_date")
                 email = request.POST.get("ngo_email")
                 ngo_password = request.POST.get("ngo_password")
-                funding_status = "Funded" if request.POST.get("funded") else "Not funded"
+                funding_status = request.POST.get("funding_status")
                 city = request.POST.get("ngo_city")
                 country = request.POST.get("ngo_country")
                 user_instance = User.objects.create_user(str(email).split('@')[0], email, ngo_password)
@@ -104,3 +104,7 @@ def all_ngo_view(request):
 
     return render(request, 'all_ngo.html', {'username': first_name})
 
+
+# function view for standard custom 404 error
+def handler404(request):
+    return render(request, '404.html')

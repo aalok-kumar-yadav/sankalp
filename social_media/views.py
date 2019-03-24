@@ -6,7 +6,7 @@
 """
 
 from django.shortcuts import render
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render_to_response
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.views.generic import TemplateView
@@ -124,11 +124,6 @@ class Faq(View):
 
     def post(self, request):
         return render(request, 'faq.html')
-
-
-# function view for standard custom 404 error
-def error_404_view(request):
-    return render(request, '404.html')
 
 
 # Timeline About Generic View

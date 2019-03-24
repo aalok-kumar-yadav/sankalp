@@ -83,3 +83,7 @@ border:0px;
 .search_query_class:focus {
   outline: none;
 }
+
+#already_account_id{
+cursor:pointer;
+}
