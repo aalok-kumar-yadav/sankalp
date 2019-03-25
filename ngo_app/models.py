@@ -29,21 +29,10 @@ class NGO(models.Model):
     IFSC_code = models.CharField(max_length=50, default=None, null=True)
     branch_name = models.CharField(max_length=100, default=None, null=True)
     verified = models.CharField(max_length=50, default="not verified", null=True)
+    created = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
     def __str__(self):
         return "%s %s" % (self.user, self.city)
-
-
-class Event(models.Model):
-    event_id = models.CharField(unique=True, max_length=400)
-    event_name = models.CharField(max_length=300)
-    organized_by = models.ForeignKey(NGO, null=True, default=None, on_delete=models.CASCADE)
-    event_theme = models.CharField(max_length=300)
-    event_url = models.CharField(default=None, max_length=300)
-    event_place = models.CharField(default=None, max_length=3000)
-    event_timing = models.DateTimeField(default=None)
-
-    def __str__(self):
-        return self.event_id
 
 
