@@ -1,0 +1,91 @@
+{% include 'base.html' %}
+
+<div class="container">
+    <div class="cover_image_class">
+        <img class="ngo_desc_cover_image_class" src="{{ngo_info.cover_image}}">
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h4><b>{{ngo_info.user.first_name}}</b></h4>
+        </div>
+
+    </div>
+    <div class="container row">
+        <div class="col-lg-3">
+            <h4> {{ngo_info.work_domain | title}}</h4>
+        </div>
+                      <div class="col-lg-6 col-md-4 col-sm-4">
+
+                           <div class="col-lg-1 col-md-4 col-sm-4">
+                            <i class="material-icons" style="font-size: 20px;color:#1dc9cb">location_on</i>
+                        </div>
+                           <div class="col-lg-6 col-md-4 col-sm-4">
+                            <h4>{{ngo_info.state.state_name}}</h4>
+                        </div>
+                        </div>
+
+        <div class="col-lg-3">
+            <h4>Volunteer Status Null</h4>
+        </div>
+
+    </div>
+    <div class="container row">
+        <button id="donate_button" class="btn btn-info" ><i class="material-icons" style="font-size: 20px;color:white">favorite</i> &emsp; Donate</button>
+    </div>
+    <div class="container ngo_desc_class">
+        <div><h4>NGO Description</h4></div>
+        <p class="desc_para">
+            {{ngo_info.ngo_description}}
+        </p>
+
+    </div>
+
+    <div class="container row">
+        <div class="col-lg-6">
+            <h5 class="desc_para">{{ngo_info.address}}</h5>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="row">
+                <div class="col-lg-4">
+                    <i class="material-icons md-48 div_icon_cl" style="font-size: 20px;color:#1dc9cb">phone_android</i>
+                    {{ngo_info.phone_number}}
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-7">
+                    <i class="material-icons md-48 div_icon_cl" style="font-size: 20px;color:#1dc9cb">email</i>
+                    {{ngo_info.user.email}}
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+
+        <div class="modal-body">
+          <p>This is a small modal.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+
+    $(document).ready(function() {
+    $("#donate_button").click(function(){
+           swal("Donate!", "Payment gateway is under development!!");
+    });
+});
+</script>
+
+{% include 'social_media_footer.html' %}

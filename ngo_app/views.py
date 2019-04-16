@@ -6,7 +6,7 @@ from django.views.generic import TemplateView
 from django.db import IntegrityError
 from django.views import View
 from contributor_app.models import Contributor
-from ngo_app.models import NGO
+from ngo_app.models import NGO, State
 
 
 # Index generic view for get & post request
@@ -18,7 +18,17 @@ class Index(View):
         if 'username' in request.session:
             first_name = request.session['first_name']
             username = request.session['username']
-        return render(request, 'index.html', {'first_name': first_name, 'username': username})
+
+        state_instance = State.objects.all()
+        ngo_instance = NGO.objects.all()
+        search_suggestion = []
+
+        for item in state_instance:
+            search_suggestion.append({'id': 1, 'name': item.state_name})
+        for item in ngo_instance:
+            search_suggestion.append({'id': 1, 'name': item.user.first_name})
+        # import pdb;pdb.set_trace()
+        return render(request, 'index.html', {'first_name': first_name, 'username': username, 'search_suggestion': search_suggestion})
 
     def post(self, request):
         username = None
@@ -101,9 +111,19 @@ def all_ngo_view(request):
         first_name = request.session['first_name']
     except Exception as e:
         print(e)
+    ngo_queryset = NGO.objects.all()[:6]
+    return render(request, 'all_ngo.html', {'username': first_name, 'ngo_list':ngo_queryset})
 
-    return render(request, 'all_ngo.html', {'username': first_name})
 
+# Ngo description view
+def ngo_description(request, ngo_id):
+    first_name = None
+    try:
+        first_name = request.session['first_name']
+    except Exception as e:
+        print(e)
+    ngo_instance = NGO.objects.get(user__username=ngo_id)
+    return render(request, 'ngo_description.html', {'username': first_name, 'ngo_info': ngo_instance})
 
 # function view for standard custom 404 error
 def handler404(request):

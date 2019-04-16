@@ -1,5 +1,6 @@
 .custom_card_div_class{
 	background-color:white;
+	margin-bottom:3%;
 }
 
 .navbar_new_section_class
@@ -20,6 +21,7 @@
 
 .ngo_grid_view_image_class{
 	height:220px;
+	border-radius:5px;
 }
 
 .main {
@@ -56,7 +58,7 @@
     margin-bottom: 1%;
     min-height: 2.5em;
     border: 1px solid #24c1da8a !important;
-    border-radius: 20px !important;
+    border-radius: 5px !important;
 }
 
 .navigation_bar_class{
@@ -86,4 +88,19 @@ border:0px;
 
 #already_account_id{
 cursor:pointer;
+}
+
+.index_section_title{
+color:#0c9496;
+
+}
+
+.ngo_desc_cover_image_class{
+height: 400px;
+    width: 100%;
+
+}
+
+.desc_para{
+    line-height: 1.8em;
 }

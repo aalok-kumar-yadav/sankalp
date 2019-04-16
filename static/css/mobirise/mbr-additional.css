@@ -18,7 +18,7 @@ body {
 }
 .mbr-text {
   font-style: normal;
-  line-height: 1.6;
+  line-height: 1.8;
 }
 .display-1 {
   font-family: 'Montserrat', sans-serif;
@@ -211,8 +211,6 @@ body {
 .btn-info,
 .btn-info:active,
 .btn-info.active {
-  background-color: #188ef4 !important;
-  border-color: #188ef4 !important;
   transition: all .5s;
   color: #ffffff !important;
 }
@@ -724,9 +722,8 @@ a:hover {
   box-shadow: none;
   color: #565656;
   font-family: 'Montserrat', sans-serif;
-  font-size: 1rem;
+  font-size: 1.3rem;
   line-height: 1.43;
-  min-height: 3.5em;
   padding: 1.07em .5em;
 }
 .form-control > .mbr-iconfont {

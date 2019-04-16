@@ -14,9 +14,9 @@
     <div class="row container search_container_div_class">
         <form method="post" action="">
             {% csrf_token %}
-            <div class="col-sm-7 col-sm-offset-3"><input type="text" class="form-control ngo_search_input_class" placeholder="Search relevant ngo" ></div>
-       <div class="col-lg-1">
-           <button class="search_query_class"><i class="material-icons md-48 div_icon_cl" style="font-size: 48px;color:#1dc9cb">search</i></button></div>
+            <div class="col-sm-8 col-sm-offset-3"><input id="search_query_id" type="text" class="form-control ngo_search_input_class" placeholder="Seach NGO, State"></div>
+<!--       <div class="col-lg-1">-->
+<!--           <button class="search_query_class"><i class="material-icons md-48 div_icon_cl" style="font-size: 48px;color:#1dc9cb">search</i></button></div>-->
 
         </form>
 
@@ -28,8 +28,8 @@
 
 
     <div class="container heading_container_div_class">
-        <h2 class="mbr-section-title pb-3 mbr-fonts-style align-center display-2"
-            data-appselector=".mbr-section-title ">You May Also Like</h2>
+        <h3 class="mbr-section-title index_section_title pb-3 mbr-fonts-style align-center display-2"
+            data-appselector=".mbr-section-title ">Featured Contribution Category</h3>
 
     </div>
 
@@ -62,11 +62,11 @@
             <div class="col-md-6 col-lg-3 row-item">
                 <div class="wrapper">
                     <div class="card-img pb-3 align-center div_icon_cl">
-                        <center><i class="material-icons md-48 div_icon_cl" style="font-size: 48px;color:#1dc9cb">important_devices</i>
+                        <center><i class="material-icons md-48 div_icon_cl" style="font-size: 48px;color:#1dc9cb">pregnant_woman</i>
                         </center>
                     </div>
-                    <center><h4 class="mbr-fonts-style mbr-card-title align-center display-7">Technology
-                        Contribution</h4></center>
+                    <center><h4 class="mbr-fonts-style mbr-card-title align-center display-7">Women
+                        Empowerment</h4></center>
                 </div>
             </div>
 
@@ -92,10 +92,10 @@
             <div class="col-md-6 col-lg-3 row-item">
                 <div class="wrapper">
                     <div class="card-img pb-3 align-center">
-                        <center><i class="material-icons md-48 div_icon_cl" style="font-size: 48px;color:#1dc9cb">all_inclusive</i>
+                        <center><i class="material-icons md-48 div_icon_cl" style="font-size: 48px;color:#1dc9cb">nature_people</i>
                         </center>
                     </div>
-                    <center><h4 class="mbr-fonts-style mbr-card-title align-center display-7">Infinite Group</h4>
+                    <center><h4 class="mbr-fonts-style mbr-card-title align-center display-7">Environment Protection</h4>
                     </center>
                 </div>
             </div>
@@ -111,10 +111,10 @@
             <div class="col-md-6 col-lg-3 row-item">
                 <div class="wrapper">
                     <div class="card-img pb-3 align-center">
-                        <center><i class="material-icons md-48 div_icon_cl" style="font-size: 48px;color:#1dc9cb">favorite_border</i>
+                        <center><i class="material-icons md-48 div_icon_cl" style="font-size: 48px;color:#1dc9cb">child_care</i>
                         </center>
                     </div>
-                    <center><h4 class="mbr-fonts-style mbr-card-title align-center display-7">Heart Help</h4></center>
+                    <center><h4 class="mbr-fonts-style mbr-card-title align-center display-7">Children Protection</h4></center>
                 </div>
             </div>
         </div>
@@ -124,4 +124,11 @@
 
 
 {% include 'social_media_footer.html' %}
+<script>
+$(document).ready(function(){
+    $('#search_query_id').typeahead({
+  source: {{search_suggestion | safe}}
+});
+});
+</script>
 {% endblock %}

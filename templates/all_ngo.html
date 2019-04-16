@@ -5,103 +5,60 @@
 
 
 <section>
-    <div class="container">
-        <center><h3>Newly Added</h3></center>
+    <div class="container" style="margin-bottom:1%;">
+        <div class="container" style="margin:1%;"><center><h3>All Featured NGO</h3></center></div>
         <div class="row row-content justify-content-center ngo_grid_view_container_div">
 
-            <div class="card p-3 col-12 col-md-6 col-lg-4 custom_card_div_class">
+            {% for ngo_item in ngo_list %}
+
+            <div class="card p-3 col-12 col-md-4 col-lg-4 col-sm-6 custom_card_div_class">
 
                 <div class="card-wrapper">
                     <div class="card-img">
-                        <img class="ngo_grid_view_image_class" src="{% static 'image/ngo_view1.jpg' %}" title="" alt="">
+                        <a href="{% url 'ngo_description' ngo_id=ngo_item.user.username %}">
+                            <img title="{{ngo_item.user.first_name}}" class="ngo_grid_view_image_class" src="{{ngo_item.cover_image}}" title="" alt="">
+
+                        </a>
                         <div class="card-box">
                         </div>
                     </div>
 
-                    <div class="text-box row" style="padding:4%;">
-                        <div class="col-lg-2 col-md-12 col-sm-12">
-                            <i class="material-icons" style="font-size: 30px;color:#1dc9cb">location_on</i>
-                        </div>
-                        <div class="col-lg-5 col-md-12 col-sm-12"><b>Gandhinagar</b>
-                        </div>
-                        <div class="col-lg-5 col-md-12 col-sm-12">
-                            <b>Gujarat</b>
+                                    <div class="text-box row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <h5><b>{{ngo_item.user.first_name |slice:":40" }}</b></h5>
                         </div>
                     </div>
 
-                    <div class="p-box" style="padding:1%:">
-                        <p class="mbr-text mbr-fonts-style phone mbr-normal description_font_tag">The children Sneha
-                            Balgruha's doors are always open to needy children from all over the country.
-                            is program to support poor children a childhood they deserve.
+                    <div class="text-box row">
+
+                        <div class="col-lg-6 col-md-4 col-sm-4">
+                            <b>{{ngo_item.work_domain | title}}</b>
+                        </div>
+                        <div class="col-lg-1 col-md-4 col-sm-4">
+                            <i class="material-icons" style="font-size: 25px;color:#1dc9cb">location_on</i>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            <b>{{ngo_item.state.state_name}}</b>
+                        </div>
+                    </div>
+
+
+
+                    <div class="p-box">
+                        <p class="mbr-text mbr-fonts-style phone mbr-normal description_font_tag">
+                            {{ngo_item.ngo_description | slice:":140"}}....
                         </p>
-                        <a href="">Read more.....</a>
+                        <a href="{% url 'ngo_description' ngo_id=ngo_item.user.username %}">Read more.....</a>
                     </div>
                 </div>
             </div>
 
-
-            <div class="card p-3 col-12 col-md-6 col-lg-4 custom_card_div_class">
-                <div class="card-wrapper">
-                    <div class="card-img">
-                        <img class="ngo_grid_view_image_class" src="{% static 'image/ngo_view2.jpg' %}" title="" alt="">
-                        <div class="card-box">
-                        </div>
-                    </div>
-
-                    <div class="text-box row" style="padding:4%;">
-                        <div class="col-lg-2 col-md-12 col-sm-12">
-                            <i class="material-icons" style="font-size: 30px;color:#1dc9cb">location_on</i>
-                        </div>
-                        <div class="col-lg-5 col-md-12 col-sm-12"><b>Chennai</b>
-                        </div>
-                        <div class="col-lg-5 col-md-12 col-sm-12">
-                            <b>Tamilnadu</b>
-                        </div>
-                    </div>
-
-                    <div class="p-box" style="padding:1%:">
-                        <p class="mbr-text mbr-fonts-style phone mbr-normal description_font_tag">The children Sneha
-                            Balgruha's doors are always open to needy children from all over the country.
-                            is program to support poor children a childhood they deserve.
-                        </p>
-                        <a href="">Read more.....</a>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="card p-3 col-12 col-md-6 col-lg-4 custom_card_div_class">
-
-                <div class="card-wrapper">
-                    <div class="card-img">
-                        <img class="ngo_grid_view_image_class" src="{% static 'image/ngo_view3.jpg' %}" title="" alt="">
-                        <div class="card-box">
-                        </div>
-                    </div>
-
-                    <div class="text-box row" style="padding:4%;">
-                        <div class="col-lg-2 col-md-12 col-sm-12">
-                            <i class="material-icons" style="font-size: 30px;color:#1dc9cb">location_on</i>
-                        </div>
-                        <div class="col-lg-5 col-md-12 col-sm-12"><b>Kolkata</b>
-                        </div>
-                        <div class="col-lg-5 col-md-12 col-sm-12">
-                            <b>West Bangal</b>
-                        </div>
-                    </div>
-
-                    <div class="p-box" style="padding:1%:">
-                        <p class="mbr-text mbr-fonts-style phone mbr-normal description_font_tag">The children Sneha
-                            Balgruha's doors are always open to needy children from all over the country.
-                            is program to support poor children a childhood they deserve.
-                        </p>
-                        <a href="">Read more.....</a>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
 
         </div>
+        <center><button class="btn btn-info">Load More</button></center>
     </div>
+
 </section>
 
 </body>
