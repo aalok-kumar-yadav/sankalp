@@ -15,7 +15,9 @@ from django.views import View
 from . import social_media_helpers as social_helper
 from contributor_app.models import Contributor
 from social_media.file_helper import *
-
+import uuid
+from social_media.models import Post, Event
+from social_media.file_helper import upload_file
 
 # News Feed Generic View
 class NewsFeed(View):
@@ -96,7 +98,7 @@ class EditProfile(View):
         user_name = request.session['username']
         profile_bio = request.POST.get("information")
         if request.FILES.get('profile_pic'):
-            image_path = "/"+upload_profile_image(request)
+            image_path = "/"+upload_file(request)
         else:
             image_path = Contributor.objects.get(user__username=user_name).profile_image
         try:
@@ -144,3 +146,27 @@ class TimelineAbout(View):
 
     def post(self, request):
         return render(request, 'timeline.html', {'timeline_section': 'about'})
+
+
+# simple view for creating post
+def create_post(request):
+    post_desc = request.POST.get("post_description")
+    post_image = request.POST.get("add_post_image")
+    post_video = request.POST.get("add_post_video")
+    post_file = request.POST.get("add_post_file")
+    username = request.session['username']
+    post_id = uuid.uuid4().hex
+    user_ins = User.objects.get(username=username)
+
+    file_contrib = {}
+
+    for file_item in [post_image, post_video, post_file]:
+        file_contrib[file_item] = "/"+upload_file(request, 'post', file_item)
+
+    try:
+        post_instance = Post(posted_by=user_ins, post_id=post_id, post_description=post_desc, post_image=file_contrib[post_image],
+                             post_video=file_contrib[post_video], post_other_file=file_contrib[post_file])
+        post_instance.save()
+    except Exception as e:
+        print(e)
+    return redirect('news_feed')

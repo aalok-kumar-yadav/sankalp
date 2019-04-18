@@ -13,6 +13,9 @@ class AccountSetting(models.Model):
     can_tag = models.BooleanField(default=True, null=True)
     enable_sound = models.BooleanField(default=True, null=True)
 
+    def __str__(self):
+        return "%s %s %s" % (self.account, self.enable_sound, self.can_connect)
+
 
 # Model class for user/NGO post
 class Post(models.Model):

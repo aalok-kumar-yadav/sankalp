@@ -10,11 +10,11 @@
 
     <!-- Another variation with a button -->
 
-
     <div class="row container search_container_div_class">
-        <form method="post" action="">
+        <form name="search_form" id='search_form' role="form" method="post" action="{% url 'search_ngo' %}">
+
             {% csrf_token %}
-            <div class="col-sm-8 col-sm-offset-3"><input id="search_query_id" type="text" class="form-control ngo_search_input_class" placeholder="Seach NGO, State"></div>
+            <div class="col-sm-8 col-sm-offset-3"><input id="search_query_id" name="search_ngo" type="text" class="form-control ngo_search_input_class" placeholder="Seach NGO, State"></div>
 <!--       <div class="col-lg-1">-->
 <!--           <button class="search_query_class"><i class="material-icons md-48 div_icon_cl" style="font-size: 48px;color:#1dc9cb">search</i></button></div>-->
 

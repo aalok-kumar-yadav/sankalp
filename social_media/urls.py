@@ -11,5 +11,6 @@ urlpatterns = [
     url(r'^edit_profile$', views.EditProfile.as_view(), name='edit_profile'),
     url(r'^timeline_connection$', views.TimelineConnection.as_view(), name='timeline_connection'),
     url(r'^contact$', views.ContactUs.as_view(), name='contact_us'),
+    url(r'^create_post', views.create_post, name='create_post'),
     url(r'^faq$', views.Faq.as_view(), name='faq')
 ]

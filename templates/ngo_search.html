@@ -1,0 +1,83 @@
+{% include 'base.html' %}
+
+{% block body %}
+<body>
+<section style="margin-top:2%;">
+
+    <!-- Another variation with a button -->
+
+    <div class="row container search_container_div_class">
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="col-sm-8 col-sm-offset-3"><input class="form-control ngo_search_input_class"
+                                                         id="search_query_id" name="search_ngo"
+                                                         placeholder="Seach NGO, State"
+                                                         type="text" value="{{search_keyword}}">
+            </div>
+
+        </form>
+
+    </div>
+</section>
+
+
+<div class="container" style="margin-bottom:2%">
+    <center><h4>Top search result for "<font color="red">{{search_keyword}}</font>" </h4></center>
+</div>
+<section>
+    <div class="container" >
+        {% for ngo_item in ngo_search_result %}
+
+        <div class="thumbnail row conatiner main_search_div_con">
+            <div class="col-md-4 col-sm-6 col-lg-3 ngo_search_image_div">
+                <img class="ngo_search_res_image_class" src="{{ngo_item.cover_image}}">
+            </div>
+            <div class="col-md-4 col-sm-6 col-lg-3 ngo_search_ngo_info_div">
+                <div class="row info_row">
+                    <h5>{{ngo_item.user.first_name}}</h5>
+                </div>
+                                <div class="row info_row">
+
+                    {{ngo_item.work_domain}}
+                </div>
+                <div class="row ">
+
+                    {{ngo_item.state.state_name}}
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-lg-4 ngo_search_description_div">
+                <p>
+                    {{ngo_item.ngo_description | slice:"130"}}....
+                </p>
+                <a class="search_read_more">Read More...</a>
+            </div>
+            <div class="col-md-4 col-sm-6 col-lg-2 ngo_search_donate_div">
+                <button class="btn btn-info" id="donate_button"
+                        onclick="window.open('https://rzp.io/l/zisX4BQ', '_blank')"><i class="material-icons"
+                                                                                        style="font-size: 20px;color:white">favorite</i>
+                    &emsp; Donate
+                </button>
+            </div>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+
+</section>
+
+{% include 'social_media_footer.html' %}
+
+<script>
+$(document).ready(function(){
+    $('#search_query_id').typeahead({
+  source: {{search_suggestion | safe}}
+});
+});
+
+
+</script>
+</body>
+
+{% endblock %}

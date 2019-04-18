@@ -5,15 +5,16 @@
 """
 
 import os
+import uuid
 
 
 # Function for uploading profile image
-def upload_profile_image(request, file_name='profile_pic'):
+def upload_file(request, directory='profile', file_name='profile_pic'):
     upload_flag = False
-    upload_dir = 'media/profile/'
+    upload_dir = 'media/' + directory + '/'
     file_path = None
     if request.method == "POST":
-        target_file_name = str(request.session['username'])+str("_profile_")+str(request.FILES.get(file_name))
+        target_file_name = str(request.session['username'])+str("_" + directory + "_")+str(uuid.uuid4().hex)[:10]
         file_path = os.path.join(upload_dir, target_file_name)
         if not os.path.isdir(upload_dir):
             os.makedirs(upload_dir)
@@ -27,3 +28,4 @@ def upload_profile_image(request, file_name='profile_pic'):
     if not upload_flag:
         file_path = None
     return file_path
+

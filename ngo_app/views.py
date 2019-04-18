@@ -28,7 +28,8 @@ class Index(View):
         for item in ngo_instance:
             search_suggestion.append({'id': 1, 'name': item.user.first_name})
         # import pdb;pdb.set_trace()
-        return render(request, 'index.html', {'first_name': first_name, 'username': username, 'search_suggestion': search_suggestion})
+        return render(request, 'index.html',
+                      {'first_name': first_name, 'username': username, 'search_suggestion': search_suggestion})
 
     def post(self, request):
         username = None
@@ -112,7 +113,7 @@ def all_ngo_view(request):
     except Exception as e:
         print(e)
     ngo_queryset = NGO.objects.all()[:6]
-    return render(request, 'all_ngo.html', {'username': first_name, 'ngo_list':ngo_queryset})
+    return render(request, 'all_ngo.html', {'username': first_name, 'ngo_list': ngo_queryset})
 
 
 # Ngo description view
@@ -125,6 +126,45 @@ def ngo_description(request, ngo_id):
     ngo_instance = NGO.objects.get(user__username=ngo_id)
     return render(request, 'ngo_description.html', {'username': first_name, 'ngo_info': ngo_instance})
 
+
 # function view for standard custom 404 error
 def handler404(request):
     return render(request, '404.html')
+
+
+# Class based view for searching user query about ngo
+class SearchNgo(View):
+
+    def get(self, request):
+        first_name = None
+        try:
+            first_name = request.session['first_name']
+        except Exception as e:
+            print(e)
+        return render(request, 'ngo_search', {'username': first_name})
+
+    def post(self, request):
+        # import pdb;pdb.set_trace()
+        first_name = None
+        try:
+            first_name = request.session['first_name']
+        except Exception as e:
+            print(e)
+        search_keyword = request.POST.get("search_ngo")
+        search_filter_list = State.objects.filter(state_name=search_keyword)
+        if not search_filter_list:
+            search_filter_list = NGO.objects.filter(user__first_name__contains=search_keyword)
+        else:
+            search_filter_list = NGO.objects.filter(state__state_name__contains=search_keyword)
+        state_instance = State.objects.all()
+        ngo_instance = NGO.objects.all()
+        search_suggestion = []
+
+        for item in state_instance:
+            search_suggestion.append({'id': 1, 'name': item.state_name})
+        for item in ngo_instance:
+            search_suggestion.append({'id': 1, 'name': item.user.first_name})
+
+        return render(request, 'ngo_search.html', {'username': first_name, 'search_keyword': search_keyword,
+                                              'ngo_search_result': search_filter_list,
+                                              'search_suggestion': search_suggestion})

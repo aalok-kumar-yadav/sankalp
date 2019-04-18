@@ -104,3 +104,32 @@ height: 400px;
 .desc_para{
     line-height: 1.8em;
 }
+
+.ngo_search_res_image_class{
+
+}
+
+.main_search_div_con{
+
+margin-bottom:1.4%;
+}
+
+.ngo_search_res_image_class{
+width:90%;
+}
+
+.info_row{
+margin-bottom:1.6%;
+}
+
+ .thumbnail {
+   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+   transition: 0.3s;
+   border-radius: 5px;
+ }
+
+
+.main_search_div_con{
+padding:1.6%;
+}
+
