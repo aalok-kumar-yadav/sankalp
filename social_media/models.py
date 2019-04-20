@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from ngo_app.models import NGO
+from contributor_app.models import Contributor
 
 
 # Model class for account setting
@@ -20,7 +21,7 @@ class AccountSetting(models.Model):
 # Model class for user/NGO post
 class Post(models.Model):
     post_id = models.CharField(unique=True, null=False, max_length=500)
-    posted_by = models.ForeignKey(User, null=False,  on_delete=models.CASCADE)
+    posted_by = models.ForeignKey(Contributor or NGO, default=None, null=False,  on_delete=models.CASCADE)
     post_title = models.CharField(max_length=300, null=True)
     post_description = models.CharField(max_length=1000, null=True)
     post_image = models.ImageField(default=None, null=True)
@@ -36,7 +37,7 @@ class Post(models.Model):
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
     def __str__(self):
-        return "%s %s %s" % (self.post_id, self.post_description, self.posted_by)
+        return "%s %s %s" % (self.post_id, self.post_description, self.post_title)
 
 
 #  Model class for NGO event

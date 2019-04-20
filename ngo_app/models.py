@@ -11,7 +11,7 @@ class State(models.Model):
 
 class NGO(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_pic = models.CharField(max_length=500, default=None, null=True)
+    profile_image = models.ImageField(default='/media/profile/default.jpg', null=True)
     cover_image = models.ImageField(default='/ngo/default.jpg', null=True)
     profile_bio = models.CharField(max_length=1000, default=None, null=True)
     registration_id = models.CharField(max_length=200)

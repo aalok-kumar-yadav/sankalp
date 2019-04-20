@@ -6,7 +6,7 @@
 
 <section>
     <div class="container" style="margin-bottom:1%;">
-        <div class="container" style="margin:1%;"><center><h3>All Featured NGO</h3></center></div>
+        <div class="container" style="margin:1%;"><center><h3 class="index_section_title">All Featured NGO</h3></center></div>
         <div class="row row-content justify-content-center ngo_grid_view_container_div">
 
             {% for ngo_item in ngo_list %}
@@ -31,13 +31,13 @@
 
                     <div class="text-box row">
 
-                        <div class="col-lg-6 col-md-4 col-sm-4">
+                        <div class="col-lg-5 col-md-4 col-sm-4">
                             <b>{{ngo_item.work_domain | title}}</b>
                         </div>
                         <div class="col-lg-1 col-md-4 col-sm-4">
                             <i class="material-icons" style="font-size: 25px;color:#1dc9cb">location_on</i>
                         </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4">
+                        <div class="col-lg-6 col-md-4 col-sm-4">
                             <b>{{ngo_item.state.state_name}}</b>
                         </div>
                     </div>
@@ -46,7 +46,7 @@
 
                     <div class="p-box">
                         <p class="mbr-text mbr-fonts-style phone mbr-normal description_font_tag">
-                            {{ngo_item.ngo_description | slice:":140"}}....
+                            {{ngo_item.ngo_description | slice:":120"}}....
                         </p>
                         <a href="{% url 'ngo_description' ngo_id=ngo_item.user.username %}">Read more.....</a>
                     </div>

@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^ngos$', views.all_ngo_view, name='all_ngo_view'),
     url(r'^search_ngo', views.SearchNgo.as_view(), name='search_ngo'),
     url(r'^ngos/description/(?P<ngo_id>.+)$', views.ngo_description, name='ngo_description'),
+    url(r'^featured_ngo/(?P<category_name>.+)$', views.featured_ngo_category, name='featured_ngo'),
     url(r'^logout', views.logout, name='logout'),
     url(r'^admin/', admin.site.urls),
 ]

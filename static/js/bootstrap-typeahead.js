@@ -237,7 +237,7 @@
                 }
                 //Bhanu added a custom message- Result not Found when no result is found
                 if (items.length == 0) {
-                    items[0] = {'id': -21, 'name': "No search Suggestion"}
+//                    items[0] = {'id': -21, 'name': "No search Suggestion"}
                 }
                 return that.render(items.slice(0, that.options.items)).show();
             }

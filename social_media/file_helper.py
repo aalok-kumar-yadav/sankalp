@@ -14,7 +14,7 @@ def upload_file(request, directory='profile', file_name='profile_pic'):
     upload_dir = 'media/' + directory + '/'
     file_path = None
     if request.method == "POST":
-        target_file_name = str(request.session['username'])+str("_" + directory + "_")+str(uuid.uuid4().hex)[:10]
+        target_file_name = str(request.session['username'])+str("_" + directory + "_")+str(uuid.uuid4().hex)[:5]+"_"+str(request.FILES.get(file_name))
         file_path = os.path.join(upload_dir, target_file_name)
         if not os.path.isdir(upload_dir):
             os.makedirs(upload_dir)

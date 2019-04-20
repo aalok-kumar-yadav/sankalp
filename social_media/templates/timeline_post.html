@@ -1,4 +1,5 @@
 {% load static %}
+{% load humanize %}
 <div class="col-md-7">
 
     <!-- Post Create Box
@@ -27,185 +28,64 @@
         </div>
     </div><!-- Post Create Box End-->
 
-    <!-- Post Content
-    ================================================= -->
-    <div class="post-content">
+    {% for user_post in user_post_list %}
 
-        <!--Post Date-->
+                <!-- Post Content
+               ================================================= -->
+                <div class="post-content">
+
+                            <!--Post Date-->
         <div class="post-date hidden-xs hidden-sm">
             <h5>{{user_info.first_name}}</h5>
-            <p class="text-grey">Sometimes ago</p>
+            <p class="text-grey">{{user_post.updated | naturaltime}}</p>
         </div><!--Post Date End-->
 
-        <img src="{% static 'social_media/images/post-1.jpg' %}" alt="post-image"
-             class="img-responsive post-image"/>
-        <div class="post-container">
-            <img src="{{ user_data.profile_image}}" alt="user"
-                 class="profile-photo-md pull-left"/>
-            <div class="post-detail">
-                <div class="user-info">
-                    <h5><a href="timeline.html" class="profile-link">{{user_info.first_name}} </a> <span
-                            class="following">following</span></h5>
-                    <p class="text-muted">Published a photo about 15 mins ago</p>
+                    {% if user_post.post_image %}
+                    <img src="{{ user_post.post_image}}" alt="post-image"
+                         class="img-responsive post-image"/>
+
+                    {% endif %}
+
+                    {% if user_post.post_video %}
+                    <div class="video-wrapper">
+                        <video class="post-video" controls="">
+                            <source src="{{user_post.post_video}}" type="video/mp4">
+                        </video>
+                    </div>
+
+                    {% endif %}
+
+                    <div class="post-container">
+                        <img src="{{user_post.posted_by.profile_image}}" alt="user"
+                             class="profile-photo-md pull-left"/>
+                        <div class="post-detail">
+                            <div class="user-info">
+                                <h5><a href="timeline.html"
+                                       class="profile-link">{{user_post.posted_by.user.first_name}}</a></h5>
+                                <p class="text-muted">{{user_post.updated | naturaltime}}</p>
+                            </div>
+                            <div class="reaction">
+                                <a class="btn text-blue"><i class="fa fa-share"></i>
+                                    {{user_post.dislike_count}}</a>
+                                <a class="btn text-green"><i class="icon ion-thumbsup"></i>{{user_post.like_count}} </a>
+                                <a class="btn text-red"><i class="fa fa-thumbs-down"></i>
+                                    {{user_post.dislike_count}}</a>
+                            </div>
+                            <div class="line-divider"></div>
+                            <div class="post-text">
+                                <p>{{user_post.post_description}}</p>
+                            </div>
+                            <div class="line-divider"></div>
+                            <div class="post-comment">
+                                <img src="{{ user_data.profile_image}}" alt=""
+                                     class="profile-photo-sm"/>
+                                <input type="text" class="form-control" placeholder="Post a comment">
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-                <div class="reaction">
-                    <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>
-                    <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
-                </div>
-                <div class="line-divider"></div>
-                <div class="post-text">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                        culpa qui officia deserunt mollit anim id est laborum. <i
-                                class="em em-anguished"></i> <i class="em em-anguished"></i> <i
-                                class="em em-anguished"></i></p>
-                </div>
-                <div class="line-divider"></div>
-                <div class="post-comment">
-                    <img src="{{ user_data.profile_image}}" alt=""
-                         class="profile-photo-sm"/>
-                    <p><a href="timeline.html" class="profile-link">Diana </a><i
-                            class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur
-                        adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                        aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                </div>
-                <div class="post-comment">
-                    <img src="{% static 'social_media/images/user-14.jpg' %}" alt=""
-                         class="profile-photo-sm"/>
-                    <p><a href="timeline.html" class="profile-link">John</a> Lorem ipsum dolor sit amet,
-                        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                </div>
-                <div class="post-comment">
-                    <img src="{{ user_data.profile_image}}" alt=""
-                         class="profile-photo-sm"/>
-                    <input type="text" class="form-control" placeholder="Post a comment">
-                </div>
-            </div>
-        </div>
+
+                {% endfor %}
+
     </div>
-
-    <!-- Post Content
-    ================================================= -->
-    <div class="post-content">
-
-        <!--Post Date-->
-        <div class="post-date hidden-xs hidden-sm">
-            <h5>{{user_info.first_name}}</h5>
-            <p class="text-grey">10/22/2016</p>
-        </div><!--Post Date End-->
-
-        <img src="{% static 'social_media/images/post-2.jpg' %}" alt="post-image"
-             class="img-responsive post-image"/>
-        <div class="post-container">
-            <img src="{{ user_data.profile_image}}" alt="user"
-                 class="profile-photo-md pull-left"/>
-            <div class="post-detail">
-                <div class="user-info">
-                    <h5><a href="timeline.html" class="profile-link">{{user_info.first_name}}</a> <span
-                            class="following">following</span></h5>
-                    <p class="text-muted">Yesterday</p>
-                </div>
-                <div class="reaction">
-                    <a class="btn text-green"><i class="icon ion-thumbsup"></i> 49</a>
-                    <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
-                </div>
-                <div class="line-divider"></div>
-                <div class="post-text">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                        culpa qui officia deserunt mollit anim id est laborum. <i
-                                class="em em-anguished"></i> <i class="em em-anguished"></i> <i
-                                class="em em-anguished"></i></p>
-                </div>
-                <div class="line-divider"></div>
-                <div class="post-comment">
-                    <img src="{% static 'social_media/images/user-14.jpg' %}" alt=""
-                         class="profile-photo-sm"/>
-                    <p><a href="timeline.html" class="profile-link">Diana </a><i
-                            class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur
-                        adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                        aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                </div>
-                <div class="post-comment">
-                    <img src="{% static 'social_media/images/user-11.jpg' %}" alt=""
-                         class="profile-photo-sm"/>
-                    <p><a href="timeline.html" class="profile-link">John</a> Lorem ipsum dolor sit amet,
-                        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                </div>
-                <div class="post-comment">
-                    <img src="{{ user_data.profile_image}}" alt=""
-                         class="profile-photo-sm"/>
-                    <input type="text" class="form-control" placeholder="Post a comment">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Post Content
-    ================================================= -->
-    <div class="post-content">
-
-        <!--Post Date-->
-        <div class="post-date hidden-xs hidden-sm">
-            <h5>{{user_info.first_name}}</h5>
-            <p class="text-grey">10/21/2016</p>
-        </div><!--Post Date End-->
-
-        <div class="post-container">
-            <img src="{{ user_data.profile_image}}" alt="user"
-                 class="profile-photo-md pull-left"/>
-            <div class="post-detail">
-                <div class="user-info">
-                    <h5><a href="timeline.html" class="profile-link">{{user_info.first_name}}</a> <span
-                            class="following">following</span></h5>
-                    <p class="text-muted">2 days ago</p>
-                </div>
-                <div class="reaction">
-                    <a class="btn text-green"><i class="icon ion-thumbsup"></i> 49</a>
-                    <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
-                </div>
-                <div class="line-divider"></div>
-                <div class="post-text">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                        culpa qui officia deserunt mollit anim id est laborum. <i
-                                class="em em-anguished"></i> <i class="em em-anguished"></i> <i
-                                class="em em-anguished"></i></p>
-                </div>
-                <div class="line-divider"></div>
-                <div class="post-comment">
-                    <img src="{{ user_data.profile_image}}" alt=""
-                         class="profile-photo-sm"/>
-                    <p><a href="timeline.html" class="profile-link">Diana </a><i
-                            class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur
-                        adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                        aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                </div>
-                <div class="post-comment">
-                    <img src="{% static 'social_media/images/user-5.jpg' %}" alt=""
-                         class="profile-photo-sm"/>
-                    <p><a href="timeline.html" class="profile-link">John</a> Lorem ipsum dolor sit amet,
-                        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                </div>
-                <div class="post-comment">
-                    <img src="{{ user_data.profile_image}}" alt=""
-                         class="profile-photo-sm"/>
-                    <input type="text" class="form-control" placeholder="Post a comment">
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>

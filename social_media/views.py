@@ -18,6 +18,8 @@ from social_media.file_helper import *
 import uuid
 from social_media.models import Post, Event
 from social_media.file_helper import upload_file
+from ngo_app.models import NGO
+
 
 # News Feed Generic View
 class NewsFeed(View):
@@ -132,10 +134,10 @@ class ContactUs(View):
 # Faq for getting Frequently asked question
 class Faq(View):
     def get(self, request):
-        return render(request, 'faq.html')
+        return render(request, 'faq.html', {'user_info': {'first_name': request.session['first_name']}, 'username': request.session['username']})
 
     def post(self, request):
-        return render(request, 'faq.html')
+        return render(request, 'faq.html', {'user_info': {'first_name': request.session['first_name']}, 'username': request.session['username']})
 
 
 # Timeline About Generic View
@@ -150,22 +152,33 @@ class TimelineAbout(View):
 
 # simple view for creating post
 def create_post(request):
+    # import pdb;pdb.set_trace()
+
     post_desc = request.POST.get("post_description")
-    post_image = request.POST.get("add_post_image")
-    post_video = request.POST.get("add_post_video")
-    post_file = request.POST.get("add_post_file")
-    username = request.session['username']
     post_id = uuid.uuid4().hex
-    user_ins = User.objects.get(username=username)
 
-    file_contrib = {}
+    post_image = None
+    post_video = None
+    post_file = None
+    # import pdb;pdb.set_trace()
+    if request.FILES.get('add_post_image'):
+        post_image = "/"+upload_file(request, 'post', 'add_post_image')
+    if request.FILES.get('add_post_video'):
+        post_video = "/"+upload_file(request, 'post', 'add_post_video')
+    if request.FILES.get('add_post_file'):
+        post_file = "/"+upload_file(request, 'post', 'add_post_file')
 
-    for file_item in [post_image, post_video, post_file]:
-        file_contrib[file_item] = "/"+upload_file(request, 'post', file_item)
+    posted_by = None
+    if request.session['user_type'] == 'contributor':
+        posted_by = Contributor.objects.get(user__username=request.session['username'])
+
+    else:
+        posted_by = NGO.objects.get(user__username=request.session['username'])
 
     try:
-        post_instance = Post(posted_by=user_ins, post_id=post_id, post_description=post_desc, post_image=file_contrib[post_image],
-                             post_video=file_contrib[post_video], post_other_file=file_contrib[post_file])
+        # import pdb;pdb.set_trace()
+        post_instance = Post(posted_by=posted_by, post_id=post_id, post_description=post_desc, post_image=post_image, post_video=post_video, post_other_file=post_file)
+
         post_instance.save()
     except Exception as e:
         print(e)

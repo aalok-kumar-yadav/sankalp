@@ -3,6 +3,7 @@
 {% block body %}
 <body>
 <section style="margin-top:2%;">
+{% if ngo_display == 'ngo_search' %}
 
     <!-- Another variation with a button -->
 
@@ -18,12 +19,24 @@
         </form>
 
     </div>
-</section>
 
+{% endif %}
+</section>
+{{ngo_search}}
+{% if ngo_display == 'ngo_search' %}
 
 <div class="container" style="margin-bottom:2%">
     <center><h4>Top search result for "<font color="red">{{search_keyword}}</font>" </h4></center>
 </div>
+
+{% else %}
+
+<div class="container" style="margin-bottom:2%">
+    <center><h4>{{ ngo_search_result|length }} Featured Category  Ngo  For "<font color="red">{{search_keyword | title}}</font>" </h4></center>
+</div>
+
+{% endif %}
+
 <section>
     <div class="container" >
         {% for ngo_item in ngo_search_result %}
@@ -49,7 +62,7 @@
                 <p>
                     {{ngo_item.ngo_description | slice:"130"}}....
                 </p>
-                <a class="search_read_more">Read More...</a>
+                <a href="{% url 'ngo_description' ngo_id=ngo_item.user.username %}" class="search_read_more">Read More...</a>
             </div>
             <div class="col-md-4 col-sm-6 col-lg-2 ngo_search_donate_div">
                 <button class="btn btn-info" id="donate_button"

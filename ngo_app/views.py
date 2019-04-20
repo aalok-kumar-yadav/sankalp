@@ -7,6 +7,7 @@ from django.db import IntegrityError
 from django.views import View
 from contributor_app.models import Contributor
 from ngo_app.models import NGO, State
+import random
 
 
 # Index generic view for get & post request
@@ -59,6 +60,11 @@ class Login(View):
         if auth_user:
             request.session['username'] = str(user_name).split('@')[0]
             request.session['first_name'] = auth_user.first_name
+            try:
+                NGO.objects.get(user__username=user_name)
+                request.session['user_type'] = 'ngo'
+            except:
+                request.session['user_type'] = 'contributor'
             return redirect('index')
         else:
             return render(request, 'register_login.html', {'message': 'invalid', 'type': 'login'})
@@ -73,7 +79,7 @@ class Register(View):
         user_type = request.POST.get("user_type")
 
         try:
-            if user_type == 'contributor':
+            if user_type == 'contributor':  # If condition for contributor registration
                 dob = request.POST.get("dob_date")
                 email = request.POST.get("user_email")
                 user_password = request.POST.get("user_password")
@@ -87,7 +93,7 @@ class Register(View):
                 contributor = Contributor(user=user_instance, dob=dob, gender=gender, city=city, country=country)
                 contributor.save()
                 return redirect('index')
-            else:
+            else:  # Else condition for registering ngo profile
                 yof = request.POST.get("yof_date")
                 email = request.POST.get("ngo_email")
                 ngo_password = request.POST.get("ngo_password")
@@ -112,8 +118,18 @@ def all_ngo_view(request):
         first_name = request.session['first_name']
     except Exception as e:
         print(e)
-    ngo_queryset = NGO.objects.all()[:6]
-    return render(request, 'all_ngo.html', {'username': first_name, 'ngo_list': ngo_queryset})
+    ngo_queryset = list(NGO.objects.all())
+    random.shuffle(ngo_queryset)
+    return render(request, 'all_ngo.html',
+                  {'first_name': first_name, 'username': request.session['username'], 'ngo_list': ngo_queryset})
+
+
+# Function based view for featured ngo category
+def featured_ngo_category(request, category_name):
+    featured_ngo_list = NGO.objects.filter(work_domain__contains=category_name)
+    return render(request, 'ngo_search.html',
+                  {'first_name': request.session['first_name'], 'username': request.session['username'],
+                   'ngo_display': 'featured', 'search_keyword': category_name, 'ngo_search_result': featured_ngo_list})
 
 
 # Ngo description view
@@ -124,7 +140,8 @@ def ngo_description(request, ngo_id):
     except Exception as e:
         print(e)
     ngo_instance = NGO.objects.get(user__username=ngo_id)
-    return render(request, 'ngo_description.html', {'username': first_name, 'ngo_info': ngo_instance})
+    return render(request, 'ngo_description.html',
+                  {'first_name': first_name,  'username': request.session['username'], 'ngo_info': ngo_instance})
 
 
 # function view for standard custom 404 error
@@ -141,7 +158,8 @@ class SearchNgo(View):
             first_name = request.session['first_name']
         except Exception as e:
             print(e)
-        return render(request, 'ngo_search', {'username': first_name})
+        return render(request, 'ngo_search',
+                      {'first_name': first_name, 'username': request.session['username'], 'ngo_display': 'ngo_search'})
 
     def post(self, request):
         # import pdb;pdb.set_trace()
@@ -165,6 +183,7 @@ class SearchNgo(View):
         for item in ngo_instance:
             search_suggestion.append({'id': 1, 'name': item.user.first_name})
 
-        return render(request, 'ngo_search.html', {'username': first_name, 'search_keyword': search_keyword,
-                                              'ngo_search_result': search_filter_list,
-                                              'search_suggestion': search_suggestion})
+        return render(request, 'ngo_search.html', {'first_name': first_name, 'username': request.session['username'],
+                                                   'search_keyword': search_keyword,
+                                                   'ngo_search_result': search_filter_list,
+                                                   'search_suggestion': search_suggestion, 'ngo_display': 'ngo_search'})

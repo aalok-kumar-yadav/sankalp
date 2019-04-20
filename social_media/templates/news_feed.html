@@ -1,5 +1,6 @@
 {% include 'social_media_base.html' %}
 {% load static %}
+{% load humanize %}
 
 {% block head %}
 <title>News Feed | News Activity</title>
@@ -17,7 +18,8 @@
             <div class="col-md-3 static">
                 <div class="profile-card">
                     <img src="{{ user_data.profile_image}}" alt="user" class="profile-photo"/>
-                    <h5><a href="{% url 'user_timeline' user_id=username %}" class="text-white">{{user_info.first_name}}</a></h5>
+                    <h5><a href="{% url 'user_timeline' user_id=username %}"
+                           class="text-white">{{user_info.first_name}}</a></h5>
                     <a href="#" class="text-white"><i class="ion ion-android-person-add"></i> 1,299 followers</a>
 
                 </div><!--profile card ends-->
@@ -46,7 +48,8 @@
                     <ul class="online-users list-inline">
 
                         {% for con_user in connected_people %}
-                             <li><a href="{% url 'user_timeline' user_id=con_user.user.username %}" title="{{con_user.user.first_name}} {{con_user.user.last_name}}"><img
+                        <li><a href="{% url 'user_timeline' user_id=con_user.user.username %}"
+                               title="{{con_user.user.first_name}} {{con_user.user.last_name}}"><img
                                 src="{{con_user.profile_image}}" alt="user"
                                 class="img-responsive profile-photo"/><span class="online-dot"></span></a></li>
 
@@ -64,36 +67,101 @@
                 ================================================= -->
                 <div class="create-post">
                     <div class="row">
-                        <form name="create_post" id='create_post' role="form" method="post" action="{% url 'create_post' %}">
-                             <div class="col-md-7 col-sm-7">
-                            <div class="form-group">
-                                <img src="{{ user_data.profile_image}}" alt=""
-                                     class="profile-photo-md"/>
-                                <textarea name="texts" id="post_description_id" name="post_description" cols="30" rows="3" class="form-control"
-                                          placeholder="Write what you wish"></textarea>
+                        <form name="create_post" id='create_post' role="form" method="post"
+                              action="{% url 'create_post' %}" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="col-md-7 col-sm-7">
+                                <div class="form-group">
+                                    <img src="{{ user_data.profile_image}}" alt=""
+                                         class="profile-photo-md"/>
+                                    <textarea id="post_description_id" name="post_description" cols="30" rows="3"
+                                              class="form-control"
+                                              placeholder="Write what you wish"></textarea>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-5 col-sm-5">
-                            <div class="tools">
-                                <ul class="publishing-tools list-inline">
-                                    <li><label for="add_post_file_id"><i title="Add File" class="ion-compose post_icon"></i></label></li>
-                                    <li><label for="add_post_image_id"><i title="Add Picture" class="ion-images post_icon"> </i></label></li>
-                                    <li><label for="add_post_video_id"><i title="Add Video" class="ion-ios-videocam post_icon"></i></label></li>
-                                    <li><a href="#" title="Location"><i class="ion-ios-location"></i></a></li>
+                            <div class="col-md-5 col-sm-5">
+                                <div class="tools">
+                                    <ul class="publishing-tools list-inline">
+                                        <li><label for="add_post_file_id"><i title="Add File"
+                                                                             class="ion-compose post_icon"></i></label>
+                                        </li>
+                                        <li><label for="add_post_image_id"><i title="Add Picture"
+                                                                              class="ion-images post_icon"> </i></label>
+                                        </li>
+                                        <li><label for="add_post_video_id"><i title="Add Video"
+                                                                              class="ion-ios-videocam post_icon"></i></label>
+                                        </li>
+                                        <li><a href="#" title="Location"><i class="ion-ios-location"></i></a></li>
 
-                                     <input id="add_post_image_id" name="add_post_image" style="display:none" type="file" accept="image/*" />
-                                     <input id="add_post_video_id" name="add_post_video" style="display:none" type="file" accept="video/mp4,video/mkv,video/*" />
-                                    <input id="add_post_file_id" name="add_post_file" style="display:none" type="file" accept="application/pdf" />
-                                </ul>
-                                <button type="submit" class="btn btn-primary pull-right">Publish</button>
+                                    </ul>
+                                    <input id="add_post_image_id" name="add_post_image" style="display:none"
+                                           type="file"/>
+                                    <input id="add_post_video_id" name="add_post_video" style="display:none" e
+                                           type="file" accept="video/mp4,video/mkv,video/*"/>
+                                    <input id="add_post_file_id" name="add_post_file" style="display:none" type="file"
+                                           accept="application/pdf"/>
+                                    <button type="submit" class="btn btn-primary pull-right">Publish</button>
+                                </div>
                             </div>
-                        </div>
 
                         </form>
 
                     </div>
                 </div><!-- Post Create Box End-->
 
+                {% for user_post in user_post_list %}
+
+                <!-- Post Content
+               ================================================= -->
+                <div class="post-content">
+                    {% if user_post.post_image %}
+                    <img src="{{ user_post.post_image}}" alt="post-image"
+                         class="img-responsive post-image"/>
+
+                    {% endif %}
+
+                    {% if user_post.post_video %}
+                    <div class="video-wrapper">
+                        <video class="post-video" controls="">
+                            <source src="{{user_post.post_video}}" type="video/mp4">
+                        </video>
+                    </div>
+
+                    {% endif %}
+
+                    <div class="post-container">
+<a href="{% url 'user_timeline' user_id=user_post.posted_by.user.username %}">                        <img src="{{user_post.posted_by.profile_image}}" alt="user"
+                             class="profile-photo-md pull-left"/></a>
+                        <div class="post-detail">
+                            <div class="user-info">
+                                <h5><a href="{% url 'user_timeline' user_id=user_post.posted_by.user.username %}"
+                                       class="profile-link">{{user_post.posted_by.user.first_name}} {{user_post.posted_by.user.last_name}}</a></h5>
+                                <p title="{{user_post.updated}}" class="text-muted">{{user_post.updated | naturaltime}}</p>
+                            </div>
+                            <div class="reaction">
+                                <a title="Share" class="btn text-blue"><i  class="fa fa-share"></i>
+                                    {{user_post.dislike_count}}</a>
+                                <a title="I like this" class="btn text-green"><i  class="icon ion-thumbsup"></i>{{user_post.like_count}} </a>
+                                <a title="i dislike this" class="btn text-red"><i  class="fa fa-thumbs-down"></i>
+                                    {{user_post.dislike_count}}</a>
+                            </div>
+                            <div class="line-divider"></div>
+                            <div class="post-text">
+                                <p>{{user_post.post_description}}</p>
+                            </div>
+                            <div class="line-divider"></div>
+
+                            <div class="post-comment">
+                                <img src="{{ user_data.profile_image}}" alt=""
+                                     class="profile-photo-sm"/>
+                                <input type="text" class="form-control" placeholder="Post a comment">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                {% endfor %}
 
 
             </div>
@@ -102,8 +170,8 @@
 
             <div class="col-md-7">
 
-            <!-- Post Create Box
-                ================================================= -->
+                <!-- Post Create Box
+                    ================================================= -->
                 <div class="create-post">
                     <div class="row">
                         <div class="col-md-7 col-sm-7">
@@ -136,17 +204,17 @@
                     <!--</div>-->
 
 
-
                     {% for near_user in nearby_people %}
 
-                     <div class="nearby-user">
+                    <div class="nearby-user">
                         <div class="row">
                             <div class="col-md-2 col-sm-2">
                                 <img src="{{near_user.profile_image}}" alt="user"
                                      class="profile-photo-lg"/>
                             </div>
                             <div class="col-md-7 col-sm-7">
-                                <h5><a href="{{near_user.user.username}}" class="profile-link">{{near_user.user.first_name}} {{near_user.user.last_name}}</a></h5>
+                                <h5><a href="{{near_user.user.username}}" class="profile-link">{{near_user.user.first_name}}
+                                    {{near_user.user.last_name}}</a></h5>
                                 <p>{{near_user.profile_bio}}</p>
                                 <p class="text-muted">500m away</p>
                             </div>
@@ -170,11 +238,13 @@
                     <h4 class="grey">You May Connect</h4>
                     {% for rec_user in recommended_people %}
 
-                     <div class="follow-user">
-                        <img title="{{rec_user.user.first_name}} {{rec_user.user.last_name}}" src="{{rec_user.profile_image}}" alt=""
+                    <div class="follow-user">
+                        <img title="{{rec_user.user.first_name}} {{rec_user.user.last_name}}"
+                             src="{{rec_user.profile_image}}" alt=""
                              class="profile-photo-sm pull-left"/>
                         <div>
-                            <h5><a href="{% url 'user_timeline' user_id=rec_user.user.username %}">{{rec_user.user.first_name}}</a></h5>
+                            <h5><a href="{% url 'user_timeline' user_id=rec_user.user.username %}">{{rec_user.user.first_name}}</a>
+                            </h5>
                             <a href="#" class="text-green">Add friend</a>
                         </div>
                     </div>
@@ -189,7 +259,7 @@
 </div>
 
 {% include 'social_media_footer.html' %}
-<!--&lt;!&ndash;preloader&ndash;&gt;-->
+<!--preloader-->
 <!--<div id="spinner-wrapper">-->
 <!--<div class="spinner"></div>-->
 <!--</div>-->
