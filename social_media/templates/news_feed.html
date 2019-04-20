@@ -138,8 +138,8 @@
                                 <h5><a href="{% url 'user_timeline' user_id=user_post.posted_by.user.username %}"
                                        class="profile-link">{{user_post.posted_by.user.first_name}}
                                     {{user_post.posted_by.user.last_name}}</a></h5>
-                                <p title="{{user_post.updated}}" class="text-muted">{{user_post.updated |
-                                    naturaltime}}</p>
+                                <p title="{{user_post.updated}}" class="text-muted">{{user_post.updated | naturaltime}}
+                                    </p>
                             </div>
                             <div class="reaction">
                                 <a title="Share" class="btn text-blue"><i class="fa fa-share"></i>
@@ -239,7 +239,7 @@
             ================================================= -->
             <div class="col-md-2 static">
                 <div class="suggestions" id="sticky-sidebar">
-                    <h4 class="grey">You May Connect</h4>
+                    <h4 class="grey">You May Know</h4>
                     {% for rec_user in recommended_people %}
 
                     <div class="follow-user">
@@ -247,9 +247,13 @@
                              src="{{rec_user.profile_image}}" alt=""
                              class="profile-photo-sm pull-left"/>
                         <div>
-                            <h5><a href="{% url 'user_timeline' user_id=rec_user.user.username %}">{{rec_user.user.first_name}}</a>
+                            <h5><a href="{% url 'user_timeline' user_id=rec_user.user.username %}">{{rec_user.user.first_name}} {{rec_user.user.last_name}}</a>
                             </h5>
-                            <a href="#" class="text-green">Add friend</a>
+                            {% if  rec_user.city %}
+                            <a href="#" class="text-green">{{rec_user.city}}</a>
+                            {% else %}
+                            <a href="#" class="text-green">{{rec_user.state.state_name}}</a>
+                            {% endif %}
                         </div>
                     </div>
 

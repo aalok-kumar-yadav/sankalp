@@ -5,8 +5,10 @@
 """
 
 from contributor_app.models import Contributor
-from django.contrib.auth.models import User
 from social_media.models import Post
+from ngo_app.models import NGO
+import random
+from django.db.models import Q
 
 
 # Function for getting timeline context data
@@ -53,13 +55,15 @@ def get_timeline_about_context(request, user_id):
 def get_news_feed(request):
     session_user = request.session['username']
     session_user_data = Contributor.objects.get(user__username=session_user)
-    connected_list = Contributor.objects.all()
-    recommended_people_list = connected_list[10:]
-    print(recommended_people_list)
+    connected_people = Contributor.objects.filter(~Q(user__username=session_user))
+    all_ngo_list = list(NGO.objects.all())
+    random.shuffle(all_ngo_list)
+    recommended_people_list = list(Contributor.objects.filter(~Q(user__username=session_user))) + all_ngo_list[:10]
+    random.shuffle(recommended_people_list)
     user_post_list = Post.objects.all().order_by('-updated')
     context_data = {'username': session_user, 'user_info': {'first_name': request.session['first_name']},
-                    'user_data': session_user_data, 'connected_people': connected_list[1:10],
-                    'recommended_people': recommended_people_list, 'page_type': 'news_feed',
+                    'user_data': session_user_data, 'connected_people': connected_people[0:9],
+                    'recommended_people': recommended_people_list[:5], 'page_type': 'news_feed',
                     'user_post_list': user_post_list}
     return context_data
 
