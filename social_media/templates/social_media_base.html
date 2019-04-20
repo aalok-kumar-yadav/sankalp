@@ -63,14 +63,17 @@
                 <ul class="nav navbar-nav navbar-right main-menu">
                     <li class="dropdown"><a href="{% url 'news_feed' %}">News Feed</a></li>
                     <li class="dropdown"><a href="#">Message &nbsp;<i class="ion-chatboxes"></i></a></li>
-                    <li class="dropdown"><a href="#">Notification &nbsp;<i class="ion-android-notifications"></i></a></li>
+                    <li class="dropdown"><a href="#">Notification &nbsp;<i class="ion-android-notifications"></i></a>
+                    </li>
 
-                     {% if username %}
-                        <li class="dropdown"><a href="{% url 'user_timeline' user_id=username %}">{{user_info.first_name}}&nbsp; <i class="ion-person"></i></a></li>
+                    {% if username %}
+                    <li class="dropdown"><a href="{% url 'user_timeline' user_id=username %}">{{user_info.first_name}}&nbsp;
+                        <i class="ion-person"></i></a></li>
 
-                    <li class="dropdown"><a class="navbar_item_class" href="{% url 'logout' %}">Logout &nbsp;<i class="ion-log-out"></i></a></li>
+                    <li class="dropdown"><a class="navbar_item_class" href="{% url 'logout' %}">Logout &nbsp;<i
+                            class="ion-log-out"></i></a></li>
                     {% else %}
-                     <li class="dropdown"><a class="navbar_item_class" href="{% url 'register' %}">Register</a></li>
+                    <li class="dropdown"><a class="navbar_item_class" href="{% url 'register' %}">Register</a></li>
                     <li class="dropdown"><a class="navbar_item_class" href="{% url 'login' %}">Login</a></li>
                     {% endif %}
                 </ul>

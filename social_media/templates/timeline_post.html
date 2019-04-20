@@ -30,62 +30,62 @@
 
     {% for user_post in user_post_list %}
 
-                <!-- Post Content
-               ================================================= -->
-                <div class="post-content">
+    <!-- Post Content
+   ================================================= -->
+    <div class="post-content">
 
-                            <!--Post Date-->
+        <!--Post Date-->
         <div class="post-date hidden-xs hidden-sm">
             <h5>{{user_info.first_name}}</h5>
             <p class="text-grey">{{user_post.updated | naturaltime}}</p>
         </div><!--Post Date End-->
 
-                    {% if user_post.post_image %}
-                    <img src="{{ user_post.post_image}}" alt="post-image"
-                         class="img-responsive post-image"/>
+        {% if user_post.post_image %}
+        <img src="{{ user_post.post_image}}" alt="post-image"
+             class="img-responsive post-image"/>
 
-                    {% endif %}
+        {% endif %}
 
-                    {% if user_post.post_video %}
-                    <div class="video-wrapper">
-                        <video class="post-video" controls="">
-                            <source src="{{user_post.post_video}}" type="video/mp4">
-                        </video>
-                    </div>
+        {% if user_post.post_video %}
+        <div class="video-wrapper">
+            <video class="post-video" controls="">
+                <source src="{{user_post.post_video}}" type="video/mp4">
+            </video>
+        </div>
 
-                    {% endif %}
+        {% endif %}
 
-                    <div class="post-container">
-                        <img src="{{user_post.posted_by.profile_image}}" alt="user"
-                             class="profile-photo-md pull-left"/>
-                        <div class="post-detail">
-                            <div class="user-info">
-                                <h5><a href="timeline.html"
-                                       class="profile-link">{{user_post.posted_by.user.first_name}}</a></h5>
-                                <p class="text-muted">{{user_post.updated | naturaltime}}</p>
-                            </div>
-                            <div class="reaction">
-                                <a class="btn text-blue"><i class="fa fa-share"></i>
-                                    {{user_post.dislike_count}}</a>
-                                <a class="btn text-green"><i class="icon ion-thumbsup"></i>{{user_post.like_count}} </a>
-                                <a class="btn text-red"><i class="fa fa-thumbs-down"></i>
-                                    {{user_post.dislike_count}}</a>
-                            </div>
-                            <div class="line-divider"></div>
-                            <div class="post-text">
-                                <p>{{user_post.post_description}}</p>
-                            </div>
-                            <div class="line-divider"></div>
-                            <div class="post-comment">
-                                <img src="{{ user_data.profile_image}}" alt=""
-                                     class="profile-photo-sm"/>
-                                <input type="text" class="form-control" placeholder="Post a comment">
-                            </div>
-
-                        </div>
-                    </div>
+        <div class="post-container">
+            <img src="{{user_post.posted_by.profile_image}}" alt="user"
+                 class="profile-photo-md pull-left"/>
+            <div class="post-detail">
+                <div class="user-info">
+                    <h5><a href="timeline.html"
+                           class="profile-link">{{user_post.posted_by.user.first_name}}</a></h5>
+                    <p class="text-muted">{{user_post.updated | naturaltime}}</p>
+                </div>
+                <div class="reaction">
+                    <a class="btn text-blue"><i class="fa fa-share"></i>
+                        {{user_post.dislike_count}}</a>
+                    <a class="btn text-green"><i class="icon ion-thumbsup"></i>{{user_post.like_count}} </a>
+                    <a class="btn text-red"><i class="fa fa-thumbs-down"></i>
+                        {{user_post.dislike_count}}</a>
+                </div>
+                <div class="line-divider"></div>
+                <div class="post-text">
+                    <p>{{user_post.post_description}}</p>
+                </div>
+                <div class="line-divider"></div>
+                <div class="post-comment">
+                    <img src="{{ user_data.profile_image}}" alt=""
+                         class="profile-photo-sm"/>
+                    <input type="text" class="form-control" placeholder="Post a comment">
                 </div>
 
-                {% endfor %}
-
+            </div>
+        </div>
     </div>
+
+    {% endfor %}
+
+</div>

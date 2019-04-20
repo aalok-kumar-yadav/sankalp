@@ -141,7 +141,7 @@ def ngo_description(request, ngo_id):
         print(e)
     ngo_instance = NGO.objects.get(user__username=ngo_id)
     return render(request, 'ngo_description.html',
-                  {'first_name': first_name,  'username': request.session['username'], 'ngo_info': ngo_instance})
+                  {'first_name': first_name, 'username': request.session['username'], 'ngo_info': ngo_instance})
 
 
 # function view for standard custom 404 error

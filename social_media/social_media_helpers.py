@@ -23,7 +23,7 @@ def get_timeline_context(request, user_id):
     user_post_list = Post.objects.filter(posted_by__user__username=user_id).order_by('-updated')
     timeline_context = {
         'username': user_id, 'user_info': {'first_name': request.session['first_name'], 'followers': '204',
-                                             'gender_type': gender_type}, 'timeline_section': 'home',
+                                           'gender_type': gender_type}, 'timeline_section': 'home',
         'con_status': con_status, 'user_activity': 'Aalok Kumar liked monisha wamankar post',
         'user_data': session_instance, 'user_post_list': user_post_list}
 
@@ -59,7 +59,8 @@ def get_news_feed(request):
     user_post_list = Post.objects.all().order_by('-updated')
     context_data = {'username': session_user, 'user_info': {'first_name': request.session['first_name']},
                     'user_data': session_user_data, 'connected_people': connected_list[1:10],
-                    'recommended_people': recommended_people_list, 'page_type': 'news_feed', 'user_post_list':user_post_list }
+                    'recommended_people': recommended_people_list, 'page_type': 'news_feed',
+                    'user_post_list': user_post_list}
     return context_data
 
 

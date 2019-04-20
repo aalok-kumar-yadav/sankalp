@@ -45,7 +45,7 @@
                 <a class="navbar-brand" href="{% url 'index' %}"><img style="width: 42%"
                                                                       src="{% static 'social_media/images/logo.png' %}"
                                                                       alt="logo"></a>
-                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                         data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
@@ -57,10 +57,10 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right main-menu">
-                     <li class="dropdown"><a href="#">News Feed</a></li>
+                    <li class="dropdown"><a href="#">News Feed</a></li>
                     <li class="dropdown"><a href="#">Message</a></li>
                     <li class="dropdown"><a href="#">Notification</a></li>
-                     <li class="dropdown"><a href="#">Timeline</a></li>
+                    <li class="dropdown"><a href="#">Timeline</a></li>
                     <li class="dropdown"><a href="{% url 'contact_us' %}">Contact</a></li>
                     <li class="dropdown"><a href="{% url 'faq' %}">Faq</a></li>
                 </ul>
@@ -118,19 +118,24 @@
                                     <div class="row">
                                         <div class="form-group col-xs-6">
                                             <label for="first_name" class="sr-only">First Name</label>
-                                            <input id="first_name" class="form-control input-group-lg con_input" type="text"
-                                                   name="first_name" title="Enter first name" placeholder="First name" required/>
+                                            <input id="first_name" class="form-control input-group-lg con_input"
+                                                   type="text"
+                                                   name="first_name" title="Enter first name" placeholder="First name"
+                                                   required/>
                                         </div>
                                         <div class="form-group col-xs-6">
                                             <label for="last_name" class="sr-only">Last Name</label>
-                                            <input id="last_name" class="form-control input-group-lg con_input" type="text"
-                                                   name="last_name" title="Enter last name" placeholder="Last name" required/>
+                                            <input id="last_name" class="form-control input-group-lg con_input"
+                                                   type="text"
+                                                   name="last_name" title="Enter last name" placeholder="Last name"
+                                                   required/>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-xs-12">
                                             <label for="dob_date" class="sr-only">Date Of Birth</label>
-                                            <input id="dob_date" class="form-control input-group-lg con_input" type="text"
+                                            <input id="dob_date" class="form-control input-group-lg con_input"
+                                                   type="text"
                                                    name="dob_date" title="Enter date of birth"
                                                    placeholder="Date of birth" required/>
                                         </div>
@@ -138,8 +143,10 @@
                                     <div class="row">
                                         <div class="form-group col-xs-12">
                                             <label for="user_email" class="sr-only">Email</label>
-                                            <input id="user_email" class="form-control input-group-lg con_input" type="email"
-                                                   name="user_email" title="Enter Email" placeholder="Your Email" required/>
+                                            <input id="user_email" class="form-control input-group-lg con_input"
+                                                   type="email"
+                                                   name="user_email" title="Enter Email" placeholder="Your Email"
+                                                   required/>
 
                                         </div>
                                     </div>
@@ -149,7 +156,8 @@
                                             <label for="user_password" class="sr-only">Password</label>
                                             <input id="user_password" class="form-control input-group-lg con_input"
                                                    type="password"
-                                                   name="user_password" title="Enter password" placeholder="Password" required />
+                                                   name="user_password" title="Enter password" placeholder="Password"
+                                                   required/>
                                         </div>
                                     </div>
 
@@ -164,7 +172,8 @@
                                     <div class="row">
                                         <div class="form-group col-xs-6">
                                             <label for="user_city" class="sr-only">City</label>
-                                            <input id="user_city" class="form-control input-group-lg reg_name con_input" type="text"
+                                            <input id="user_city" class="form-control input-group-lg reg_name con_input"
+                                                   type="text"
                                                    name="user_city" title="Enter city" placeholder="Your city"/>
                                         </div>
                                         <div class="form-group col-xs-6">
@@ -185,7 +194,8 @@
                                     <div class="row">
                                         <div class="form-group col-xs-12">
                                             <label for="ngo_name" class="sr-only">Ngo Name</label>
-                                            <input id="ngo_name" class="form-control input-group-lg ngo_input" type="text"
+                                            <input id="ngo_name" class="form-control input-group-lg ngo_input"
+                                                   type="text"
                                                    name="ngo_name" title="Enter organization name"
                                                    placeholder="Organization Name"/>
                                         </div>
@@ -194,7 +204,8 @@
                                     <div class="row">
                                         <div class="form-group col-xs-12">
                                             <label for="yof_date" class="sr-only">Year of foundation</label>
-                                            <input id="yof_date" class="form-control input-group-lg ngo_input" type="text"
+                                            <input id="yof_date" class="form-control input-group-lg ngo_input"
+                                                   type="text"
                                                    name="yof_date" title="Enter date of foundation"
                                                    placeholder="Year of foundation"/>
                                         </div>
@@ -202,7 +213,8 @@
                                     <div class="row">
                                         <div class="form-group col-xs-12">
                                             <label for="ngo_email" class="sr-only">Official Email</label>
-                                            <input id="ngo_email" class="form-control input-group-lg ngo_input" type="text"
+                                            <input id="ngo_email" class="form-control input-group-lg ngo_input"
+                                                   type="text"
                                                    name="ngo_email"
                                                    title="Enter official email" placeholder="Official Email"/>
                                         </div>
@@ -212,7 +224,8 @@
                                     <div class="row">
                                         <div class="form-group col-xs-12">
                                             <label for="ngo_password" class="sr-only">Password</label>
-                                            <input id="ngo_password" class="form-control input-group-lg ngo_input" type="password"
+                                            <input id="ngo_password" class="form-control input-group-lg ngo_input"
+                                                   type="password"
                                                    name="ngo_password" title="Enter password" placeholder="Password"/>
                                         </div>
                                     </div>
@@ -229,7 +242,8 @@
                                         <div class="form-group col-xs-6">
                                             <label for="ngo_city" class="sr-only">City</label>
                                             <input id="ngo_city" class="form-control input-group-lg reg_name ngo_input"
-                                                   type="text" name="ngo_city" title="Enter city" placeholder="Your city"/>
+                                                   type="text" name="ngo_city" title="Enter city"
+                                                   placeholder="Your city"/>
 
                                         </div>
                                         <div class="form-group col-xs-6">
@@ -260,13 +274,14 @@
 
                             <!--Login Form-->
 
-                            <form name="Login_form" id='Login_form' method="post" action="{% url 'login' %}" >
+                            <form name="Login_form" id='Login_form' method="post" action="{% url 'login' %}">
                                 {% csrf_token %}
                                 <div class="row">
                                     <div class="form-group col-xs-12">
                                         <label for="my-email" class="sr-only">Email</label>
                                         <input id="my-email" class="form-control input-group-lg" type="email"
-                                               name="email" title="Enter Email" autocomplete="on"  placeholder="Your Email" required/>
+                                               name="email" title="Enter Email" autocomplete="on"
+                                               placeholder="Your Email" required/>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -328,6 +343,7 @@ $(document).ready(function(){
     $('#'+$(this).val()).show();
   });
 });
+
 
 
 </script>

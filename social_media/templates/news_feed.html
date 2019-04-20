@@ -130,19 +130,23 @@
                     {% endif %}
 
                     <div class="post-container">
-<a href="{% url 'user_timeline' user_id=user_post.posted_by.user.username %}">                        <img src="{{user_post.posted_by.profile_image}}" alt="user"
-                             class="profile-photo-md pull-left"/></a>
+                        <a href="{% url 'user_timeline' user_id=user_post.posted_by.user.username %}"> <img
+                                src="{{user_post.posted_by.profile_image}}" alt="user"
+                                class="profile-photo-md pull-left"/></a>
                         <div class="post-detail">
                             <div class="user-info">
                                 <h5><a href="{% url 'user_timeline' user_id=user_post.posted_by.user.username %}"
-                                       class="profile-link">{{user_post.posted_by.user.first_name}} {{user_post.posted_by.user.last_name}}</a></h5>
-                                <p title="{{user_post.updated}}" class="text-muted">{{user_post.updated | naturaltime}}</p>
+                                       class="profile-link">{{user_post.posted_by.user.first_name}}
+                                    {{user_post.posted_by.user.last_name}}</a></h5>
+                                <p title="{{user_post.updated}}" class="text-muted">{{user_post.updated |
+                                    naturaltime}}</p>
                             </div>
                             <div class="reaction">
-                                <a title="Share" class="btn text-blue"><i  class="fa fa-share"></i>
+                                <a title="Share" class="btn text-blue"><i class="fa fa-share"></i>
                                     {{user_post.dislike_count}}</a>
-                                <a title="I like this" class="btn text-green"><i  class="icon ion-thumbsup"></i>{{user_post.like_count}} </a>
-                                <a title="i dislike this" class="btn text-red"><i  class="fa fa-thumbs-down"></i>
+                                <a title="I like this" class="btn text-green"><i class="icon ion-thumbsup"></i>{{user_post.like_count}}
+                                </a>
+                                <a title="i dislike this" class="btn text-red"><i class="fa fa-thumbs-down"></i>
                                     {{user_post.dislike_count}}</a>
                             </div>
                             <div class="line-divider"></div>

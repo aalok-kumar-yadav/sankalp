@@ -43,7 +43,8 @@ class NearByNgoPeople(View):
 
         context_data = {'username': session_user, 'user_info': {'first_name': request.session['first_name']},
                         'user_data': session_user_data, 'connected_people': connected_list[1:10],
-                        'nearby_people': connected_list[3:], 'recommended_people':connected_list[10:], 'page_type': 'nearby'}
+                        'nearby_people': connected_list[3:], 'recommended_people': connected_list[10:],
+                        'page_type': 'nearby'}
 
         return render(request, 'news_feed.html', context_data)
 
@@ -100,12 +101,14 @@ class EditProfile(View):
         user_name = request.session['username']
         profile_bio = request.POST.get("information")
         if request.FILES.get('profile_pic'):
-            image_path = "/"+upload_file(request)
+            image_path = "/" + upload_file(request)
         else:
             image_path = Contributor.objects.get(user__username=user_name).profile_image
         try:
             User.objects.filter(username=user_name).update(first_name=first_name, last_name=last_name)
-            Contributor.objects.filter(user__username=user_name).update(dob=dob_date, gender=gender, city=city, profile_image=image_path, country=country, profile_bio=profile_bio)
+            Contributor.objects.filter(user__username=user_name).update(dob=dob_date, gender=gender, city=city,
+                                                                        profile_image=image_path, country=country,
+                                                                        profile_bio=profile_bio)
             request.session['first_name'] = first_name
         except Exception as e:
             print(e)
@@ -134,10 +137,12 @@ class ContactUs(View):
 # Faq for getting Frequently asked question
 class Faq(View):
     def get(self, request):
-        return render(request, 'faq.html', {'user_info': {'first_name': request.session['first_name']}, 'username': request.session['username']})
+        return render(request, 'faq.html', {'user_info': {'first_name': request.session['first_name']},
+                                            'username': request.session['username']})
 
     def post(self, request):
-        return render(request, 'faq.html', {'user_info': {'first_name': request.session['first_name']}, 'username': request.session['username']})
+        return render(request, 'faq.html', {'user_info': {'first_name': request.session['first_name']},
+                                            'username': request.session['username']})
 
 
 # Timeline About Generic View
@@ -162,11 +167,11 @@ def create_post(request):
     post_file = None
     # import pdb;pdb.set_trace()
     if request.FILES.get('add_post_image'):
-        post_image = "/"+upload_file(request, 'post', 'add_post_image')
+        post_image = "/" + upload_file(request, 'post', 'add_post_image')
     if request.FILES.get('add_post_video'):
-        post_video = "/"+upload_file(request, 'post', 'add_post_video')
+        post_video = "/" + upload_file(request, 'post', 'add_post_video')
     if request.FILES.get('add_post_file'):
-        post_file = "/"+upload_file(request, 'post', 'add_post_file')
+        post_file = "/" + upload_file(request, 'post', 'add_post_file')
 
     posted_by = None
     if request.session['user_type'] == 'contributor':
@@ -177,7 +182,8 @@ def create_post(request):
 
     try:
         # import pdb;pdb.set_trace()
-        post_instance = Post(posted_by=posted_by, post_id=post_id, post_description=post_desc, post_image=post_image, post_video=post_video, post_other_file=post_file)
+        post_instance = Post(posted_by=posted_by, post_id=post_id, post_description=post_desc, post_image=post_image,
+                             post_video=post_video, post_other_file=post_file)
 
         post_instance.save()
     except Exception as e:

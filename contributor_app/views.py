@@ -24,3 +24,9 @@ class EditContributorProfile(View):
         Contributor.objects.filter(user__username=request.session['username']).update(phone_number=phone_number, profile_bio=profile_bio)
         request.session['first_name'] = first_name
         return redirect('profile')
+
+
+# About us view for developer info
+def about_us(request):
+
+    return render(request, 'about_us.html')

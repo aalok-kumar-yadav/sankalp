@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#999999" />
+    <meta name="theme-color" content="#999999"/>
     <meta name="description" content="This is social network website and part of sankalp foundation"/>
     <meta name="keywords" content="Social Network, Social Media, Make Donation, Newsfeed, Profile Page, Ngo"/>
 
@@ -65,8 +65,8 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand logo_image_class" href="{% url 'index' %}"><img style="width: 47%"
-                                                                      src="{% static 'social_media/images/logo.png' %}"
-                                                                      alt="logo"></a>
+                                                                                       src="{% static 'social_media/images/logo.png' %}"
+                                                                                       alt="logo"></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -76,18 +76,18 @@
                     <li class="dropdown"><a class="navbar_item_class" href="{% url 'news_feed' %}">Social
                         Media</a></li>
                     <li class="dropdown"><a class="navbar_item_class" href="{% url 'all_ngo_view' %}">Ngo</a></li>
-                    <li class="dropdown"><a class="navbar_item_class" href="">About Us</a></li>
+                    <li class="dropdown"><a class="navbar_item_class" href="{% url 'about_us' %}">About Us</a></li>
                     <li class="dropdown"><a href="{% url 'contact_us' %}">Contact Us</a></li>
                     <li class="dropdown"><a href="{% url 'faq' %}">Faq</a></li>
                     {% if username %}
-                     <li class="dropdown"><a class="navbar_item_class" href="{% url 'user_timeline' user_id=username %}">{{first_name}}</a> </li>
+                    <li class="dropdown"><a class="navbar_item_class" href="{% url 'user_timeline' user_id=username %}">{{first_name}}</a>
+                    </li>
 
                     <li class="dropdown"><a class="navbar_item_class" href="{% url 'logout' %}">Logout</a></li>
                     {% else %}
-                     <li class="dropdown"><a class="navbar_item_class" href="{% url 'register' %}">Register</a></li>
+                    <li class="dropdown"><a class="navbar_item_class" href="{% url 'register' %}">Register</a></li>
                     <li class="dropdown"><a class="navbar_item_class" href="{% url 'login' %}">Login</a></li>
                     {% endif %}
-
 
 
                 </ul>

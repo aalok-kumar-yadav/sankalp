@@ -1126,7 +1126,8 @@ def insert_ngo_data():
     #     u_name = str(ngo['email']).split('@')[0]
     #     user_instance = User.objects.filter(username__startswith=u_name)
     #     user_instance.delete()
-    import pdb;pdb.set_trace()
+    import pdb;
+    pdb.set_trace()
     for ngo in ngo_data_list:
         u_name = str(ngo['email']).split('@')[0]
         if u_name.startswith('Click'):
@@ -1153,9 +1154,9 @@ def insert_cover_image():
     for i in range(1, 206):
         domain = NGO.objects.get(pk=i).work_domain
         if domain == 'education':
-            img_url = '/media/ngo/'+domain+str(edu_count%10)+'.jpg'
+            img_url = '/media/ngo/' + domain + str(edu_count % 10) + '.jpg'
             edu_count += 1
         else:
-            img_url = '/media/ngo/' + domain +'.jpg'
+            img_url = '/media/ngo/' + domain + '.jpg'
         NGO.objects.filter(pk=i).update(cover_image=img_url)
     print("cover image inserted sucessfully ")

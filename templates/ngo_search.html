@@ -3,7 +3,7 @@
 {% block body %}
 <body>
 <section style="margin-top:2%;">
-{% if ngo_display == 'ngo_search' %}
+    {% if ngo_display == 'ngo_search' %}
 
     <!-- Another variation with a button -->
 
@@ -20,7 +20,7 @@
 
     </div>
 
-{% endif %}
+    {% endif %}
 </section>
 {{ngo_search}}
 {% if ngo_display == 'ngo_search' %}
@@ -32,24 +32,29 @@
 {% else %}
 
 <div class="container" style="margin-bottom:2%">
-    <center><h4>{{ ngo_search_result|length }} Featured Category  Ngo  For "<font color="red">{{search_keyword | title}}</font>" </h4></center>
+    <center><h4>{{ ngo_search_result|length }} Featured Category Ngo For "<font color="red">{{search_keyword |
+        title}}</font>" </h4></center>
 </div>
 
 {% endif %}
 
 <section>
-    <div class="container" >
+    <div class="container">
         {% for ngo_item in ngo_search_result %}
 
         <div class="thumbnail row conatiner main_search_div_con">
             <div class="col-md-4 col-sm-6 col-lg-3 ngo_search_image_div">
-                <img class="ngo_search_res_image_class" src="{{ngo_item.cover_image}}">
+
+                <a href="{% url 'ngo_description' ngo_id=ngo_item.user.username %}">
+                    <img title="{{ngo_item.user.first_name}}" class="ngo_search_res_image_class"
+                         src="{{ngo_item.cover_image}}">
+                </a>
             </div>
             <div class="col-md-4 col-sm-6 col-lg-3 ngo_search_ngo_info_div">
                 <div class="row info_row">
                     <h5>{{ngo_item.user.first_name}}</h5>
                 </div>
-                                <div class="row info_row">
+                <div class="row info_row">
 
                     {{ngo_item.work_domain}}
                 </div>
@@ -62,12 +67,13 @@
                 <p>
                     {{ngo_item.ngo_description | slice:"130"}}....
                 </p>
-                <a href="{% url 'ngo_description' ngo_id=ngo_item.user.username %}" class="search_read_more">Read More...</a>
+                <a href="{% url 'ngo_description' ngo_id=ngo_item.user.username %}" class="search_read_more">Read
+                    More...</a>
             </div>
             <div class="col-md-4 col-sm-6 col-lg-2 ngo_search_donate_div">
                 <button class="btn btn-info" id="donate_button"
                         onclick="window.open('https://rzp.io/l/zisX4BQ', '_blank')"><i class="material-icons"
-                                                                                        style="font-size: 20px;color:white">favorite</i>
+                                                                                       style="font-size: 20px;color:white">favorite</i>
                     &emsp; Donate
                 </button>
             </div>
@@ -88,6 +94,7 @@ $(document).ready(function(){
   source: {{search_suggestion | safe}}
 });
 });
+
 
 
 </script>

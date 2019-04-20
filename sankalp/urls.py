@@ -19,6 +19,7 @@ import social_media.urls as social_urls
 from ngo_app import views
 from django.conf import settings
 from django.conf.urls.static import static
+from contributor_app.views import about_us
 
 urlpatterns = [
     url(r'^$', views.Index.as_view(), name='index'),
@@ -30,6 +31,7 @@ urlpatterns = [
     url(r'^ngos/description/(?P<ngo_id>.+)$', views.ngo_description, name='ngo_description'),
     url(r'^featured_ngo/(?P<category_name>.+)$', views.featured_ngo_category, name='featured_ngo'),
     url(r'^logout', views.logout, name='logout'),
+    url(r'^about_us', about_us, name='about_us'),
     url(r'^admin/', admin.site.urls),
 ]
 

@@ -14,9 +14,11 @@
         <form name="search_form" id='search_form' role="form" method="post" action="{% url 'search_ngo' %}">
 
             {% csrf_token %}
-            <div class="col-sm-8 col-sm-offset-3"><input id="search_query_id" name="search_ngo" type="text" class="form-control ngo_search_input_class" placeholder="Seach NGO, State"></div>
-<!--       <div class="col-lg-1">-->
-<!--           <button class="search_query_class"><i class="material-icons md-48 div_icon_cl" style="font-size: 48px;color:#1dc9cb">search</i></button></div>-->
+            <div class="col-sm-8 col-sm-offset-3"><input id="search_query_id" name="search_ngo" type="text"
+                                                         class="form-control ngo_search_input_class"
+                                                         placeholder="Seach NGO, State"></div>
+            <!--       <div class="col-lg-1">-->
+            <!--           <button class="search_query_class"><i class="material-icons md-48 div_icon_cl" style="font-size: 48px;color:#1dc9cb">search</i></button></div>-->
 
         </form>
 
@@ -36,103 +38,111 @@
 
     <div class="container">
         <div class="row justify-content-center pt-4">
-<a href="{% url 'featured_ngo' category_name='health' %}" style="text-decoration:none">
+            <a href="{% url 'featured_ngo' category_name='health' %}" style="text-decoration:none">
                 <div class="col-md-6 col-lg-3 row-item div_icon">
-                <div class="wrapper">
-                    <div class="card-img pb-3 align-center">
-                        <center><i class="material-icons md-48 div_icon_cl" style="font-size: 48px;color:#1dc9cb">local_hospital</i>
+                    <div class="wrapper">
+                        <div class="card-img pb-3 align-center">
+                            <center><i class="material-icons md-48 div_icon_cl" style="font-size: 48px;color:#1dc9cb">local_hospital</i>
+                            </center>
+                        </div>
+                        <center><h4 class="mbr-fonts-style mbr-card-title align-center display-7 card_heading_class">
+                            Health Contribution</h4>
                         </center>
                     </div>
-                    <center><h4 class="mbr-fonts-style mbr-card-title align-center display-7 card_heading_class">Health Contribution</h4>
-                    </center>
                 </div>
-            </div>
-</a>
+            </a>
 
-<a href="{% url 'featured_ngo' category_name='education' %}" style="text-decoration:none">
+            <a href="{% url 'featured_ngo' category_name='education' %}" style="text-decoration:none">
                 <div class="col-md-6 col-lg-3 row-item cc">
-                <div class="wrapper">
-                    <div class="card-img pb-3 align-center">
-                        <center><i class="material-icons md-48 div_icon_cl"
-                                   style="font-size: 48px;color:#1dc9cb">school</i></center>
-                        <!--<img class ="mbr-iconfont" src="{% static 'images/health.png' %}">-->
+                    <div class="wrapper">
+                        <div class="card-img pb-3 align-center">
+                            <center><i class="material-icons md-48 div_icon_cl"
+                                       style="font-size: 48px;color:#1dc9cb">school</i></center>
+                            <!--<img class ="mbr-iconfont" src="{% static 'images/health.png' %}">-->
+                        </div>
+                        <center><h4 class="mbr-fonts-style mbr-card-title align-center display-7 card_heading_class">
+                            Educational Help</h4>
+                        </center>
                     </div>
-                    <center><h4 class="mbr-fonts-style mbr-card-title align-center display-7 card_heading_class">Educational Help</h4>
-                    </center>
                 </div>
-            </div>
-</a>
+            </a>
 
-<a href="{% url 'featured_ngo' category_name='women' %}" style="text-decoration:none">
+            <a href="{% url 'featured_ngo' category_name='women' %}" style="text-decoration:none">
                 <div class="col-md-6 col-lg-3 row-item">
-                <div class="wrapper">
-                    <div class="card-img pb-3 align-center div_icon_cl">
-                        <center><i class="material-icons md-48 div_icon_cl" style="font-size: 48px;color:#1dc9cb">pregnant_woman</i>
-                        </center>
+                    <div class="wrapper">
+                        <div class="card-img pb-3 align-center div_icon_cl">
+                            <center><i class="material-icons md-48 div_icon_cl" style="font-size: 48px;color:#1dc9cb">pregnant_woman</i>
+                            </center>
+                        </div>
+                        <center><h4 class="mbr-fonts-style mbr-card-title align-center display-7 card_heading_class">
+                            Women
+                            Empowerment</h4></center>
                     </div>
-                    <center><h4 class="mbr-fonts-style mbr-card-title align-center display-7 card_heading_class">Women
-                        Empowerment</h4></center>
                 </div>
-            </div>
-</a>
+            </a>
 
-<a  href="{% url 'featured_ngo' category_name='elderly' %}" style="text-decoration:none">
+            <a href="{% url 'featured_ngo' category_name='elderly' %}" style="text-decoration:none">
                 <div class="col-md-6 col-lg-3 row-item">
-                <div class="wrapper">
-                    <div class="card-img pb-3 align-center">
-                        <center><i class="material-icons md-48 div_icon_cl"
-                                   style="font-size: 48px;color:#1dc9cb">public</i></center>
-                    </div>
-                    <center><h4 class="mbr-fonts-style mbr-card-title align-center display-7 card_heading_class">Public Welfare</h4>
-                    </center>
-                </div>
-            </div>
-</a>
-<a href="{% url 'featured_ngo' category_name='differently abled' %}" style="text-decoration:none">
-                <div class="col-md-6 col-lg-3 row-item">
-                <div class="wrapper">
-                    <div class="card-img pb-3 align-center">
-                        <center><i class="material-icons md-48 div_icon_cl" style="font-size: 48px;color:#1dc9cb">accessible</i>
+                    <div class="wrapper">
+                        <div class="card-img pb-3 align-center">
+                            <center><i class="material-icons md-48 div_icon_cl"
+                                       style="font-size: 48px;color:#1dc9cb">public</i></center>
+                        </div>
+                        <center><h4 class="mbr-fonts-style mbr-card-title align-center display-7 card_heading_class">
+                            Public Welfare</h4>
                         </center>
                     </div>
-                    <center><h4 class="mbr-fonts-style mbr-card-title align-center display-7 card_heading_class" >Differently Abled</h4></center>
                 </div>
-            </div>
-</a>
-<a href="{% url 'featured_ngo' category_name='environment' %}" style="text-decoration:none">
+            </a>
+            <a href="{% url 'featured_ngo' category_name='differently abled' %}" style="text-decoration:none">
                 <div class="col-md-6 col-lg-3 row-item">
-                <div class="wrapper">
-                    <div class="card-img pb-3 align-center">
-                        <center><i class="material-icons md-48 div_icon_cl" style="font-size: 48px;color:#1dc9cb">nature_people</i>
+                    <div class="wrapper">
+                        <div class="card-img pb-3 align-center">
+                            <center><i class="material-icons md-48 div_icon_cl" style="font-size: 48px;color:#1dc9cb">accessible</i>
+                            </center>
+                        </div>
+                        <center><h4 class="mbr-fonts-style mbr-card-title align-center display-7 card_heading_class">
+                            Differently Abled</h4></center>
+                    </div>
+                </div>
+            </a>
+            <a href="{% url 'featured_ngo' category_name='environment' %}" style="text-decoration:none">
+                <div class="col-md-6 col-lg-3 row-item">
+                    <div class="wrapper">
+                        <div class="card-img pb-3 align-center">
+                            <center><i class="material-icons md-48 div_icon_cl" style="font-size: 48px;color:#1dc9cb">nature_people</i>
+                            </center>
+                        </div>
+                        <center><h4 class="mbr-fonts-style mbr-card-title align-center display-7 card_heading_class">
+                            Environment Protection</h4>
                         </center>
                     </div>
-                    <center><h4 class="mbr-fonts-style mbr-card-title align-center display-7 card_heading_class">Environment Protection</h4>
-                    </center>
                 </div>
-            </div>
-</a>
-<a href="{% url 'featured_ngo' category_name='livelihoods' %}" style="text-decoration:none">
+            </a>
+            <a href="{% url 'featured_ngo' category_name='livelihoods' %}" style="text-decoration:none">
                 <div class="col-md-6 col-lg-3 row-item">
-                <div class="wrapper">
-                    <div class="card-img pb-3 align-center">
-                        <center><i class="material-icons md-48 div_icon_cl" style="font-size: 48px;color:#1dc9cb">local_florist</i>
-                        </center>
+                    <div class="wrapper">
+                        <div class="card-img pb-3 align-center">
+                            <center><i class="material-icons md-48 div_icon_cl" style="font-size: 48px;color:#1dc9cb">local_florist</i>
+                            </center>
+                        </div>
+                        <center><h4 class="mbr-fonts-style mbr-card-title align-center display-7 card_heading_class">
+                            Livelihoods</h4></center>
                     </div>
-                    <center><h4 class="mbr-fonts-style mbr-card-title align-center display-7 card_heading_class">Livelihoods</h4></center>
                 </div>
-            </div>
-</a>
-<a href="{% url 'featured_ngo' category_name='children' %}" style="text-decoration:none">
+            </a>
+            <a href="{% url 'featured_ngo' category_name='children' %}" style="text-decoration:none">
                 <div class="col-md-6 col-lg-3 row-item">
-                <div class="wrapper">
-                    <div class="card-img pb-3 align-center">
-                        <center><i class="material-icons md-48 div_icon_cl" style="font-size: 48px;color:#1dc9cb">child_care</i>
-                        </center>
+                    <div class="wrapper">
+                        <div class="card-img pb-3 align-center">
+                            <center><i class="material-icons md-48 div_icon_cl" style="font-size: 48px;color:#1dc9cb">child_care</i>
+                            </center>
+                        </div>
+                        <center><h4 class="mbr-fonts-style mbr-card-title align-center display-7 card_heading_class">
+                            Children Protection</h4></center>
                     </div>
-                    <center><h4 class="mbr-fonts-style mbr-card-title align-center display-7 card_heading_class">Children Protection</h4></center>
                 </div>
-            </div>
-</a>
+            </a>
         </div>
     </div>
 
@@ -146,5 +156,6 @@ $(document).ready(function(){
   source: {{search_suggestion | safe}}
 });
 });
+
 </script>
 {% endblock %}
