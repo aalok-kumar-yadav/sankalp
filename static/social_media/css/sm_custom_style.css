@@ -23,3 +23,12 @@ cursor:pointer;
 .post_icon{
 font-size:18px;
 }
+
+.news_post_image_class{
+border-radius:5px;
+}
+
+.create-post .tools ul.publishing-tools li i:hover {
+color:#27aae1;
+}
+

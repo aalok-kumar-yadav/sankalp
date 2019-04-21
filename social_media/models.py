@@ -33,6 +33,8 @@ class Post(models.Model):
     share_count = models.IntegerField(default=0, null=True)
     is_sharable = models.BooleanField(default=True, null=True)
     visible = models.BooleanField(default=True, null=True)
+    is_shared_post = models.CharField(max_length=100, default=None, null=True)
+    original_posted_by = models.ForeignKey(User, default=None, null=True,  on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
@@ -81,3 +83,27 @@ class UserConnection(models.Model):
 
     def __str__(self):
         return "%s %s" % (self.first_user, self.second_user)
+
+
+class Comment(models.Model):
+    comment_id = models.CharField(max_length=100, unique=True, null=False)
+    comment_desc = models.CharField(max_length=1000, default=None, null=True)
+    post = models.ForeignKey(Post, default=None, null=False,  on_delete=models.CASCADE)
+    commented_user = models.ForeignKey(Contributor or NGO, default=None, null=False,  on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+    def __str__(self):
+        return "%s %s" % (self.comment_id, self.comment_desc)
+
+
+# Model class for Post Comment
+class UserPostLikeDislike(models.Model):
+    post = models.ForeignKey(Post, default=None, null=False,  on_delete=models.CASCADE)
+    user = models.ForeignKey(User, default=None, null=False,  on_delete=models.CASCADE)
+    reaction_types = models.CharField(max_length=40, default=None, null=True)
+    created = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+    def __str__(self):
+        return "%s %s" % (self.post, self.user)

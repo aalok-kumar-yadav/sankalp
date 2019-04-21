@@ -63,7 +63,7 @@ def get_news_feed(request):
     user_post_list = Post.objects.all().order_by('-updated')
     context_data = {'username': session_user, 'user_info': {'first_name': request.session['first_name']},
                     'user_data': session_user_data, 'connected_people': connected_people[0:9],
-                    'recommended_people': recommended_people_list[:5], 'page_type': 'news_feed',
+                    'recommended_people': recommended_people_list[:6], 'page_type': 'news_feed',
                     'user_post_list': user_post_list}
     return context_data
 

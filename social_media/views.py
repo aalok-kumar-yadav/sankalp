@@ -16,14 +16,16 @@ from . import social_media_helpers as social_helper
 from contributor_app.models import Contributor
 from social_media.file_helper import *
 import uuid
-from social_media.models import Post, Event
+from social_media.models import Post, Event, UserPostLikeDislike, Comment
 from social_media.file_helper import upload_file
 from ngo_app.models import NGO
+from django.http.response import JsonResponse
 
 
 # News Feed Generic View
 class NewsFeed(View):
     def get(self, request):
+
         context_data = social_helper.get_news_feed(request)
         # import pdb;pdb.set_trace()
         return render(request, 'news_feed.html', context_data)
@@ -189,3 +191,136 @@ def create_post(request):
     except Exception as e:
         print(e)
     return redirect('news_feed')
+
+
+# view for liking and dis liking user post
+def like_dislike_post(request):
+
+    username = request.session['username']
+    post_id = dict(request.GET)['post_id'][0]
+    rec_type = dict(request.GET)['rec_type'][0]
+    post_ins = Post.objects.get(post_id=post_id)
+    like_count = post_ins.like_count
+    dislike_count = post_ins.dislike_count
+    user_ins = User.objects.get(username=username)
+    # import pdb;pdb.set_trace()
+
+    reaction_ins = UserPostLikeDislike.objects.filter(post__post_id=post_id, user__username=username)
+
+    # case when user first time like the new post
+    if not reaction_ins and rec_type == 'like':
+        print("first exc")
+        try:
+            like_count = like_count + 1
+            Post.objects.filter(post_id=post_id).update(like_count=like_count)
+            user_post_instance = UserPostLikeDislike(user=user_ins, post=post_ins, reaction_types=rec_type)
+            user_post_instance.save()
+        except Exception as e:
+            print(e)
+    # case when user first time dislikes the post
+    elif not reaction_ins and rec_type == 'dislike':
+        print("second exc")
+        try:
+            dislike_count = dislike_count + 1
+            Post.objects.filter(post_id=post_id).update(dislike_count=dislike_count)
+            user_post_instance = UserPostLikeDislike(user=user_ins, post=post_ins, reaction_types=rec_type)
+            user_post_instance.save()
+        except Exception as e:
+            print(e)
+    # case when user likes the already liked post
+    elif reaction_ins and rec_type == 'like' and reaction_ins[0].reaction_types == 'like':
+        print("third exc")
+        try:
+            like_count = like_count - 1
+            Post.objects.filter(post_id=post_id).update(like_count=like_count)
+            UserPostLikeDislike.objects.filter(post__post_id=post_id, user__username=username).update(
+                reaction_types='default')
+        except Exception as e:
+            print(e)
+
+        # case when user likes the already liked post
+    elif reaction_ins and rec_type == 'like' and reaction_ins[0].reaction_types == 'default':
+        print("fourth exc")
+        try:
+            like_count = like_count + 1
+            Post.objects.filter(post_id=post_id).update(like_count=like_count)
+            UserPostLikeDislike.objects.filter(post__post_id=post_id, user__username=username).update(
+                reaction_types=rec_type)
+        except Exception as e:
+            print(e)
+
+    # case when user likes the post already disliked
+    elif reaction_ins and rec_type == 'like' and reaction_ins[0].reaction_types == 'dislike':
+        print("fifth exc")
+        try:
+            like_count = like_count + 1
+            dislike_count = dislike_count - 1
+            Post.objects.filter(post_id=post_id).update(like_count=like_count, dislike_count=dislike_count)
+            UserPostLikeDislike.objects.filter(post__post_id=post_id, user__username=username).update(reaction_types=rec_type)
+        except Exception as e:
+            print(e)
+
+    # case when user dislikes the already dis liked post
+    elif reaction_ins and rec_type == 'dislike' and reaction_ins[0].reaction_types == 'dislike':
+        print("sixth exc")
+        try:
+            dislike_count = dislike_count - 1
+            Post.objects.filter(post_id=post_id).update(dislike_count=dislike_count)
+            UserPostLikeDislike.objects.filter(post__post_id=post_id, user__username=username).update(
+                reaction_types='default')
+        except Exception as e:
+            print(e)
+
+        # case when user dis likes the already dis liked post
+    elif reaction_ins and rec_type == 'dislike' and reaction_ins[0].reaction_types == 'default':
+        print("seventh exc")
+        try:
+            dislike_count = dislike_count + 1
+            Post.objects.filter(post_id=post_id).update(dislike_count=dislike_count)
+            UserPostLikeDislike.objects.filter(post__post_id=post_id, user__username=username).update(
+                reaction_types=rec_type)
+        except Exception as e:
+            print(e)
+
+    # case when user likes the post already disliked
+    elif reaction_ins and rec_type == 'dislike' and reaction_ins[0].reaction_types == 'like':
+        print("eighth exc")
+        try:
+            dislike_count = dislike_count + 1
+            like_count = like_count - 1
+            Post.objects.filter(post_id=post_id).update(like_count=like_count, dislike_count=dislike_count)
+            UserPostLikeDislike.objects.filter(post__post_id=post_id, user__username=username).update(
+                reaction_types=rec_type)
+        except Exception as e:
+            print(e)
+
+    return JsonResponse({'post_id': post_id, 'like_count': like_count, 'dislike_count': dislike_count})
+
+
+# view for sharing user post
+def share_post():
+    return {}
+
+
+# view for commenting user post
+def comment_post(request):
+
+    username = request.session['username']
+    post_id = dict(request.GET)['post_id'][0]
+    comment = str(dict(request.GET)['comment'][0]).replace("%20", " ")
+    post_ins = Post.objects.get(post_id=post_id)
+    comment_ins = None
+    comment_id = str(uuid.uuid4().hex)[:10]
+    status = 'success'
+    try:
+        user_ins = Contributor.objects.get(user__username=username)
+    except:
+        user_ins = NGO.objects.get(user__username=username)
+    try:
+        comment_ins = Comment(comment_id=comment_id, post=post_ins, commented_user=user_ins, comment_desc=comment)
+        comment_ins.save()
+    except Exception as e:
+        status = 'failure'
+        print(e)
+
+    return JsonResponse({'post_id': post_id, 'status': status, 'comment': comment, 'username': username})

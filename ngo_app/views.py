@@ -62,7 +62,7 @@ class Login(View):
             request.session['first_name'] = auth_user.first_name
             try:
                 NGO.objects.get(user__username=user_name)
-                request.session['user_type'] = 'ngo'
+                request.session['f'] = 'ngo'
             except:
                 request.session['user_type'] = 'contributor'
             return redirect('index')

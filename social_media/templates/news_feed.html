@@ -51,7 +51,9 @@
                         <li><a href="{% url 'user_timeline' user_id=con_user.user.username %}"
                                title="{{con_user.user.first_name}} {{con_user.user.last_name}}"><img
                                 src="{{con_user.profile_image}}" alt="user"
-                                class="img-responsive profile-photo"/><span class="online-dot"></span></a></li>
+                                class="img-responsive profile-photo"/>
+                            <span class="online-dot"></span>
+                        </a></li>
 
                         {% endfor %}
                     </ul>
@@ -91,7 +93,7 @@
                                         <li><label for="add_post_video_id"><i title="Add Video"
                                                                               class="ion-ios-videocam post_icon"></i></label>
                                         </li>
-                                        <li><a href="#" title="Location"><i class="ion-ios-location"></i></a></li>
+                                        <li><a id="post_inp_location" title="Location"><i class="ion-ios-location"></i></a></li>
 
                                     </ul>
                                     <input id="add_post_image_id" name="add_post_image" style="display:none"
@@ -114,11 +116,7 @@
                 <!-- Post Content
                ================================================= -->
                 <div class="post-content">
-                    {% if user_post.post_image %}
-                    <img src="{{ user_post.post_image}}" alt="post-image"
-                         class="img-responsive post-image"/>
 
-                    {% endif %}
 
                     {% if user_post.post_video %}
                     <div class="video-wrapper">
@@ -127,8 +125,14 @@
                         </video>
                     </div>
 
-                    {% endif %}
+                    {% else %}
 
+                    {% if user_post.post_image %}
+                    <img src="{{ user_post.post_image}}" alt="post-image"
+                         class="post_image_class img-responsive post-image"/>
+
+                    {% endif %}
+                    {% endif %}
                     <div class="post-container">
                         <a href="{% url 'user_timeline' user_id=user_post.posted_by.user.username %}"> <img
                                 src="{{user_post.posted_by.profile_image}}" alt="user"
@@ -143,23 +147,42 @@
                             </div>
                             <div class="reaction">
                                 <a title="Share" class="btn text-blue"><i class="fa fa-share"></i>
-                                    {{user_post.dislike_count}}</a>
-                                <a title="I like this" class="btn text-green"><i class="icon ion-thumbsup"></i>{{user_post.like_count}}
+                                    {{user_post.share_count}}</a>
+                                <a title="I like this"  class="like_post btn"><i id="{{user_post.post_id}}" style="font-size:28px" onclick="like_post_function(this.id, 'like')" class="like_post icon ion-thumbsup" ></i>
                                 </a>
-                                <a title="i dislike this" class="btn text-red"><i class="fa fa-thumbs-down"></i>
-                                    {{user_post.dislike_count}}</a>
+                                <span id="{{user_post.post_id}}_like_count">{{user_post.like_count}}</span>
+
+                                <a title="i dislike this" class="btn"><i id="{{user_post.post_id}}_ds" class="fa fa-thumbs-down" style="font-size:25px" onclick="like_post_function(this.id.split('_')[0], 'dislike')"></i>
+                                   </a>
+                                <span id="{{user_post.post_id}}_dislike_count">{{user_post.dislike_count}}</span>
                             </div>
-                            <div class="line-divider"></div>
-                            <div class="post-text">
+                            <div calass="line-divider"></div>
+                          <div class="post-text">
                                 <p>{{user_post.post_description}}</p>
                             </div>
+
+                            <div id="{{user_post.post_id}}_post_com_div" class="post-text custom_comment_div" style="display:none">
+                                <div class="line-divider"></div>
+                                 <img src="{{ user_data.profile_image}}" alt=""
+                                     class="profile-photo-sm"/>
+                                <a href="{% url 'user_timeline' user_id=user_post.posted_by.user.username %}"
+                                       class="profile-link">{{user_post.posted_by.user.first_name}}
+                                    {{user_post.posted_by.user.last_name}}</a>
+                                <div class="container" style="padding:1%"><p id="{{user_post.post_id}}_post_com_p"></p></div>
+                            </div>
+
                             <div class="line-divider"></div>
 
                             <div class="post-comment">
-                                <img src="{{ user_data.profile_image}}" alt=""
+
+                                                                    <img src="{{ user_data.profile_image}}" alt=""
                                      class="profile-photo-sm"/>
-                                <input type="text" class="form-control" placeholder="Post a comment">
+                                <input id="{{user_post.post_id}}_com_input" type="text" class="form-control" onkeydown="post_comment(this.id.split('_')[0], this.value)" placeholder="Post a comment">
+
+
+
                             </div>
+
 
                         </div>
                     </div>
@@ -271,5 +294,55 @@
 <!--<div id="spinner-wrapper">-->
 <!--<div class="spinner"></div>-->
 <!--</div>-->
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+
+    function like_post_function(post_id, rec_type){
+            console.log(post_id);
+        $.ajax({
+        type: "GET",
+        url: "{% url 'like_dislike_post' %}",
+        data: {'post_id': post_id, 'rec_type':rec_type},
+        dataType: 'json',
+        contentType: 'json',
+        success: function (response_data) {
+            $('#'+post_id+'_like_count').html(response_data.like_count);
+            $('#'+post_id.split("_")[0]+'_dislike_count').html(response_data.dislike_count);
+            console.log(response_data);
+            },
+        error: function (textStatus, errorThrown) {
+                swal("Unable to like post")
+            }
+    });
+
+    }
+function post_comment(ele, com_value) {
+    if(event.key === 'Enter') {
+                $.ajax({
+        type: "GET",
+        url: "{% url 'comment_post' %}",
+        data: {'post_id': ele, 'comment':com_value},
+        dataType: 'json',
+        contentType: 'json',
+        success: function (response_data) {
+
+            $("#"+ele+"_post_com_p").append(response_data.comment);
+           $( "#"+ele+"_post_com_div").show();
+            },
+        error: function (textStatus, errorThrown) {
+                swal("Failed to comment !!")
+            }
+    });
+
+    }
+}
+
+
+$('#post_inp_location').click(function () {
+    swal("Location feature is not added yet !!")
+});
+
+</script>
 
 {% endblock %}
