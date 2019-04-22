@@ -6,7 +6,12 @@
     <div class="about-profile">
         <div class="about-content-block">
             <h4 class="grey"><i class="ion-ios-information-outline icon-in-title"></i>Profile Bio</h4>
+            {% if user_data.profile_bio %}
             <p>{{user_data.profile_bio}}</p>
+            {% else %}
+            <p>{{user_data.ngo_description}}</p>
+
+            {% endif %}
         </div>
         <div class="about-content-block">
             <h4 class="grey"><i class="ion-ios-briefcase-outline icon-in-title"></i>Profession</h4>
