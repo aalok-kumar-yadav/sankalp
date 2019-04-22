@@ -24,9 +24,9 @@ def get_timeline_context(request, user_id):
     session_instance = Contributor.objects.get(user__username=user_id)
     user_post_list = Post.objects.filter(posted_by__user__username=user_id).order_by('-updated')
     timeline_context = {
-        'username': user_id, 'user_info': {'first_name': request.session['first_name'], 'followers': '204',
-                                           'gender_type': gender_type}, 'timeline_section': 'home',
-        'con_status': con_status, 'user_activity': 'Aalok Kumar liked monisha wamankar post',
+        'username': user_name, 'user_info': {'first_name': request.session['first_name'],
+                                           }, 'timeline_section': 'home',
+        'con_status': con_status, 'user_activity': 'None',
         'user_data': session_instance, 'user_post_list': user_post_list}
 
     return timeline_context
@@ -45,8 +45,9 @@ def get_timeline_about_context(request, user_id):
     contributor_instance = Contributor.objects.get(user__username=user_id)
     timeline_context = {
 
-        'username': user_name, 'user_info': contributor_instance, 'gender_type': gender_type, 'timeline_section':
-            'about', 'con_status': con_status, 'user_activity': 'Aalok Kumar liked monisha wamankar post'}
+        'username': user_name, 'user_info': {'first_name': request.session['first_name'],
+                                           }, 'gender_type': gender_type, 'timeline_section':
+            'about', 'user_data': contributor_instance, 'con_status': con_status, 'user_activity': 'None'}
 
     return timeline_context
 
@@ -70,11 +71,17 @@ def get_news_feed(request):
 
 # Helper function for getting Connected people
 def get_connected_people(request, user_id):
+    user_name = request.session['username']
+    if user_name == user_id:
+        con_status = "edit"
+    else:
+        con_status = "connected"
+
     connected_people = Contributor.objects.all()[:8]
     user_data = Contributor.objects.get(user__username=user_id)
     context_data = {'username': request.session['username'],
                     'user_info': {'first_name': request.session['first_name'], 'followers': '204',
-                                  'gender_type': "him"}, 'timeline_section': 'connected_people', 'con_status': "edit",
+                                  'gender_type': "him"}, 'timeline_section': 'connected_people', 'con_status': con_status,
                     'user_activity': [], 'connected_people': connected_people, 'user_data': user_data}
 
     return context_data

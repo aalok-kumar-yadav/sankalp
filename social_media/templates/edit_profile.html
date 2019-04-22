@@ -33,10 +33,9 @@
                     </div>
                     <div class="col-md-9">
                         <ul class="list-inline profile-menu">
-                            <li><a href="timeline.html">Timeline</a></li>
-                            <li><a href="timeline-about.html" class="active">About</a></li>
-                            <li><a href="timeline-album.html">Album</a></li>
-                            <li><a href="timeline-friends.html">Friends</a></li>
+                            <li><a href="{% url 'user_timeline' user_id=username %}">Timeline</a></li>
+                            <li><a href="{% url 'user_timeline_about' user_id=user_info_edit.user.username %}" class="active">About</a></li>
+                            <li><a href="{% url 'connected_ngo_people' user_id=user_info_edit.user.username %}">Friends</a></li>
                         </ul>
                         <ul class="follow-me list-inline">
                             <li>1,299 people following her</li>
@@ -374,34 +373,7 @@
                     <!--Sticky Timeline Activity Sidebar-->
                     <div id="sticky-sidebar">
                         <h4 class="grey">{{user_info_edit.user.first_name}}'s activity</h4>
-                        <div class="feed-item">
-                            <div class="live-activity">
-                                <p><a href="#" class="profile-link">{{user_info_edit.user.first_name}}</a> Commended on a
-                                    Photo</p>
-                                <p class="text-muted">5 mins ago</p>
-                            </div>
-                        </div>
-                        <div class="feed-item">
-                            <div class="live-activity">
-                                <p><a href="#" class="profile-link">{{user_info_edit.user.first_name}}</a> Has posted a photo
-                                </p>
-                                <p class="text-muted">an hour ago</p>
-                            </div>
-                        </div>
-                        <div class="feed-item">
-                            <div class="live-activity">
-                                <p><a href="#" class="profile-link">{{user_info_edit.user.first_name}}</a> Liked her friend's
-                                    post</p>
-                                <p class="text-muted">4 hours ago</p>
-                            </div>
-                        </div>
-                        <div class="feed-item">
-                            <div class="live-activity">
-                                <p><a href="#" class="profile-link">{{user_info_edit.user.first_name}}</a> has shared an
-                                    album</p>
-                                <p class="text-muted">a day ago</p>
-                            </div>
-                        </div>
+                        <h5 class="grey">{{user_info_edit.user.first_name}} have no activity</h5>
                     </div>
                 </div>
             </div>

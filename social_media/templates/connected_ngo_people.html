@@ -11,11 +11,11 @@
                                 <img src="{% static 'social_media/images/cover-1.jpg' %}" alt="profile-cover"
                                      class="img-responsive cover"/>
                                 <div class="card-info">
-                                    <img src="{{con_people.profile_image}}" alt="user"
+                                    <img  title="{{con_people.user.first_name}} {{con_people.user.last_name}} " src="{{con_people.profile_image}}" alt="user"
                                          class="profile-photo-lg"/>
                                     <div class="friend-info">
                                         <a href="#" class="pull-right text-green">My Friend</a>
-                                        <h5><a href="timeline.html" class="profile-link">{{con_people.user.first_name}} {{con_people.user.last_name}} </a></h5>
+                                        <h5><a href="{% url 'user_timeline' user_id=con_people.user.username %}" class="profile-link">{{con_people.user.first_name}} {{con_people.user.last_name}} </a></h5>
                                         <p>{{con_people.profile_bio | slice:":65"}}...</p>
                                     </div>
                                 </div>

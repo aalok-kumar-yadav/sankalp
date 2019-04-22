@@ -19,7 +19,7 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="profile-info">
-                            <a href="{% url 'user_timeline' user_id=username %}">
+                            <a href="{% url 'user_timeline' user_id=user_data.user.username %}">
                                 <img id="profile_pic_id" src="{{ user_data.profile_image}}" alt=""
                                      class="img-responsive profile-photo"/></a>
 
@@ -29,12 +29,11 @@
                     <div class="col-md-9">
 
                         <ul class="list-inline profile-menu">
-                            <li><a href="{% url 'user_timeline' user_id=username %}" class="active">Timeline</a></li>
-                            <li><a href="{% url 'user_timeline_about' user_id=username %}">About</a></li>
-                            <li><a href="{% url 'connected_ngo_people' user_id=username %}">Friends</a></li>
+                            <li><a href="{% url 'user_timeline' user_id=user_data.user.username %}" class="active">Timeline</a></li>
+                            <li><a href="{% url 'user_timeline_about' user_id=user_data.user.username %}">About</a></li>
+                            <li><a href="{% url 'connected_ngo_people' user_id=user_data.user.username %}">Friends</a></li>
                         </ul>
                         <ul class="follow-me list-inline">
-                            <li>{{user_info.followers}} people following {{user_info.gender_type}}</li>
                             {% if con_status == 'edit' %}
                             <li>
                                 <a class="btn btn-primary" href="{% url 'edit_profile' %}">Edit Profile</a>
@@ -89,32 +88,8 @@
 
                 <div class="col-md-2 static">
                     <div id="sticky-sidebar">
-                        <h4 class="grey">{{user_info.first_name}}'s activity</h4>
-                        <div class="feed-item">
-                            <div class="live-activity">
-                                <p><a href="" class="profile-link">{{user_info.first_name}}</a> Commended on a Photo</p>
-                                <p class="text-muted">5 mins ago</p>
-                            </div>
-                        </div>
-                        <div class="feed-item">
-                            <div class="live-activity">
-                                <p><a href="" class="profile-link">{{user_info.first_name}}</a> Has posted a photo</p>
-                                <p class="text-muted">an hour ago</p>
-                            </div>
-                        </div>
-                        <div class="feed-item">
-                            <div class="live-activity">
-                                <p><a href="" class="profile-link">{{user_info.first_name}}</a> Liked her friend's post
-                                </p>
-                                <p class="text-muted">4 hours ago</p>
-                            </div>
-                        </div>
-                        <div class="feed-item">
-                            <div class="live-activity">
-                                <p><a href="" class="profile-link">{{user_info.first_name}}</a> has shared an album</p>
-                                <p class="text-muted">a day ago</p>
-                            </div>
-                        </div>
+                        <h4 class="grey">{{user_data.user.first_name}}'s activity</h4>
+                        <h5>No user activity available</h5>
                     </div>
                 </div>
             </div>

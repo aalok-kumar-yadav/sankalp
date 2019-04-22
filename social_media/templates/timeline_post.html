@@ -2,7 +2,8 @@
 {% load humanize %}
 <div class="col-md-7">
 
-    <!-- Post Create Box
+    {% ifequal user_data.user.username username %}
+        <!-- Post Create Box
     ================================================= -->
     <div class="create-post">
         <div class="row">
@@ -28,6 +29,16 @@
         </div>
     </div><!-- Post Create Box End-->
 
+    {% endifequal %}
+
+
+    {% if user_post_list %}
+    <center><h4>{{user_data.user.first_name}} {{user_data.user.last_name}} 's Timeline</h4></center>
+
+    {% else %}
+        <center><h4>{{user_data.user.first_name}} {{user_data.user.last_name}} Haven't Posted Anything <i class="em em-blush"></i> </h4></center>
+
+    {% endif %}
     {% for user_post in user_post_list %}
 
     <!-- Post Content
