@@ -25,7 +25,6 @@ from django.http.response import JsonResponse
 # News Feed Generic View
 class NewsFeed(View):
     def get(self, request):
-
         context_data = social_helper.get_news_feed(request)
         # import pdb;pdb.set_trace()
         return render(request, 'news_feed.html', context_data)
@@ -176,10 +175,9 @@ def create_post(request):
         post_file = "/" + upload_file(request, 'post', 'add_post_file')
 
     posted_by = None
-    if request.session['user_type'] == 'contributor':
+    try:
         posted_by = Contributor.objects.get(user__username=request.session['username'])
-
-    else:
+    except:
         posted_by = NGO.objects.get(user__username=request.session['username'])
 
     try:
@@ -195,7 +193,6 @@ def create_post(request):
 
 # view for liking and dis liking user post
 def like_dislike_post(request):
-
     username = request.session['username']
     post_id = dict(request.GET)['post_id'][0]
     rec_type = dict(request.GET)['rec_type'][0]
@@ -256,7 +253,8 @@ def like_dislike_post(request):
             like_count = like_count + 1
             dislike_count = dislike_count - 1
             Post.objects.filter(post_id=post_id).update(like_count=like_count, dislike_count=dislike_count)
-            UserPostLikeDislike.objects.filter(post__post_id=post_id, user__username=username).update(reaction_types=rec_type)
+            UserPostLikeDislike.objects.filter(post__post_id=post_id, user__username=username).update(
+                reaction_types=rec_type)
         except Exception as e:
             print(e)
 
@@ -298,13 +296,30 @@ def like_dislike_post(request):
 
 
 # view for sharing user post
-def share_post():
-    return {}
+def share_post(request, post_id):
+    try:
+        original_post = Post.objects.get(post_id=post_id)
+        new_post_id = uuid.uuid4().hex
+        if original_post.posted_by.user.username != request.session['username']:
+            try:
+                posted_by = Contributor.objects.get(user__username=request.session['username'])
+            except:
+                posted_by = NGO.objects.get(user__username=request.session['username'])
+
+            post_instance = Post(posted_by=posted_by, post_id=new_post_id,
+                                 post_description=original_post.post_description,
+                                 post_image=original_post.post_image,
+                                 post_video=original_post.post_video, post_other_file=original_post.post_other_file,
+                                 is_shared_post='yes', original_posted_by=original_post.posted_by.user)
+
+            post_instance.save()
+    except Exception as e:
+        print(e)
+    return redirect('news_feed')
 
 
 # view for commenting user post
 def comment_post(request):
-
     username = request.session['username']
     post_id = dict(request.GET)['post_id'][0]
     comment = str(dict(request.GET)['comment'][0]).replace("%20", " ")

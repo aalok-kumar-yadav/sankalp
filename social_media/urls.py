@@ -14,5 +14,6 @@ urlpatterns = [
     url(r'^create_post', views.create_post, name='create_post'),
     url(r'^like_dislike_post', views.like_dislike_post, name='like_dislike_post'),
     url(r'^comment_post', views.comment_post, name='comment_post'),
+    url(r'^share_post/(?P<post_id>.+)$', views.share_post, name='share_post'),
     url(r'^faq$', views.Faq.as_view(), name='faq')
 ]
