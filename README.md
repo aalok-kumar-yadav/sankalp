@@ -3,10 +3,6 @@
 To create a common platform for _NGO_ and people we want to indulge with _NGO_’s work with an interactive web application system. This system provides some basic and necessary feature to connect _NGO_ to the common man.
 
 
-#### Problem statement:
-Today the current situation is that we face many issues to connect with _NGO_, one way is to keep visiting their own official website for necessary information like an event, ongoing project. another problem is there isn’t a proper platform(commonplace) for contributing to their associated people.in simple term, there is a little gap between people and others who need it.
-
-
 #### Basic Feature:
 * There will be two types of registration one for the user and another for _NGO_.
 * There will be Log in authentication for both types of user.
@@ -46,5 +42,9 @@ Pytest, Django Test Framework (For testing)
 ```
 #### Live Link
 [https://sankalpngo.herokuapp.com/](https://sankalpngo.herokuapp.com/)
+
+Sankalp Home            |  Sankalp Social Media
+:-------------------------:|:-------------------------:
+![](https://i.ibb.co/LnPW94b/san-home-git.png)  |  ![](https://i.imgur.com/OHEEzFX.png)
 
 ##### Project is under development
