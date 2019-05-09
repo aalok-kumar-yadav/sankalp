@@ -25,7 +25,7 @@ def get_timeline_context(request, user_id):
         session_instance = NGO.objects.get(user__username=user_id)
     user_post_list = Post.objects.filter(posted_by__user__username=user_id).order_by('-updated')
     timeline_context = {
-        'username': user_name, 'user_info': {'first_name': request.session['first_name'],
+        'username': user_id, 'user_info': {'first_name': request.session['first_name'],
                                            }, 'timeline_section': 'home',
         'con_status': con_status, 'user_activity': 'None',
         'user_data': session_instance, 'user_post_list': user_post_list}
