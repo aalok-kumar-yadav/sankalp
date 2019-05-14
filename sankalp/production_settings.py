@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ngo_app',
-    'contributor_app'
+    'contributor_app',
+    'social_media'
 ]
 
 MIDDLEWARE = [
