@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'ngo_app',
     'contributor_app',
     'social_media',
-    'django.contrib.humanizes'
+    'django.contrib.humanize'
 ]
 
 MIDDLEWARE = [
