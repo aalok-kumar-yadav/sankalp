@@ -160,21 +160,13 @@ def handler404(request):
 class SearchNgo(View):
 
     def get(self, request):
-        first_name = None
-        try:
-            first_name = request.session['first_name']
-        except Exception as e:
-            print(e)
+        first_name, username = sm_helper.get_request_user_info(request)
         return render(request, 'ngo_search',
-                      {'first_name': first_name, 'username': request.session['username'], 'ngo_display': 'ngo_search'})
+                      {'first_name': first_name, 'username': username, 'ngo_display': 'ngo_search'})
 
     def post(self, request):
         # import pdb;pdb.set_trace()
-        first_name = None
-        try:
-            first_name = request.session['first_name']
-        except Exception as e:
-            print(e)
+        first_name, username = sm_helper.get_request_user_info(request)
         search_keyword = request.POST.get("search_ngo")
         search_filter_list = State.objects.filter(state_name=search_keyword)
         if not search_filter_list:
@@ -190,7 +182,7 @@ class SearchNgo(View):
         for item in ngo_instance:
             search_suggestion.append({'id': 1, 'name': item.user.first_name})
 
-        return render(request, 'ngo_search.html', {'first_name': first_name, 'username': request.session['username'],
+        return render(request, 'ngo_search.html', {'first_name': first_name, 'username': username,
                                                    'search_keyword': search_keyword,
                                                    'ngo_search_result': search_filter_list,
                                                    'search_suggestion': search_suggestion, 'ngo_display': 'ngo_search'})
