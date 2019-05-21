@@ -25,6 +25,8 @@ urlpatterns = [
     url(r'^$', views.Index.as_view(), name='index'),
     url(r'^social_media/', include(social_urls)),
     url(r'^login$', views.Login.as_view(), name='login'),
+    url(r'login/?', views.Login.as_view(), name ='diff_login'),
+    url(r'accounts/login/', views.Login.as_view(), name='account_login'),
     url(r'^register', views.Register.as_view(), name='register'),
     url(r'^ngos$', views.all_ngo_view, name='all_ngo_view'),
     url(r'^search_ngo', views.SearchNgo.as_view(), name='search_ngo'),

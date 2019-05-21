@@ -6,6 +6,7 @@ from django.views.generic import TemplateView
 from django.db import IntegrityError
 from django.views import View
 from contributor_app.models import Contributor
+from social_media import social_media_helpers as sm_helper
 
 
 class EditContributorProfile(View):
@@ -28,5 +29,6 @@ class EditContributorProfile(View):
 
 # About us view for developer info
 def about_us(request):
-
-    return render(request, 'about_us.html')
+    first_name, username = sm_helper.get_request_user_info(request)
+    return render(request, 'about_us.html',
+                  {'first_name': first_name, 'username': username})

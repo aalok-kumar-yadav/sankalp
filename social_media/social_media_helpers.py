@@ -13,7 +13,7 @@ from django.db.models import Q
 
 # Function for getting timeline context data
 def get_timeline_context(request, user_id):
-    user_name = request.session['username']
+    first_name, user_name = get_request_user_info(request)
     if user_name == user_id:
         con_status = "edit"
     else:
@@ -25,7 +25,7 @@ def get_timeline_context(request, user_id):
         session_instance = NGO.objects.get(user__username=user_id)
     user_post_list = Post.objects.filter(posted_by__user__username=user_id).order_by('-updated')
     timeline_context = {
-        'username': user_id, 'user_info': {'first_name': request.session['first_name'],
+        'username': user_name, 'user_info': {'first_name': first_name,
                                            }, 'timeline_section': 'home',
         'con_status': con_status, 'user_activity': 'None',
         'user_data': session_instance, 'user_post_list': user_post_list}
@@ -90,6 +90,18 @@ def get_connected_people(request, user_id):
                     'user_activity': [], 'connected_people': connected_people, 'user_data': user_data}
 
     return context_data
+
+
+# Function for getting session user info
+def get_request_user_info(request):
+    first_name = None
+    username = None
+    try:
+        first_name = request.session['first_name']
+        username = request.session['username']
+    except Exception as e:
+        print(e)
+    return first_name, username
 
 
 # Function for getting user/NGO Information

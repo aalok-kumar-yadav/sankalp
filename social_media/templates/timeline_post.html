@@ -1,7 +1,6 @@
 {% load static %}
 {% load humanize %}
 <div class="col-md-7">
-
     {% ifequal user_data.user.username username %}
         <!-- Post Create Box
     ================================================= -->
@@ -78,9 +77,9 @@
                 <div class="reaction">
                     <a class="btn text-blue"><i class="fa fa-share"></i>
                         {{user_post.dislike_count}}</a>
-                    <a class="btn text-green"><i class="icon ion-thumbsup"></i>{{user_post.like_count}} </a>
-                    <a class="btn text-red"><i class="fa fa-thumbs-down"></i>
-                        {{user_post.dislike_count}}</a>
+                    <a class=""><i class="like_post fa fa-thumbs-up"></i> {{user_post.like_count}} </a>
+                    <a class=""><i class="like_post fa fa-thumbs-down"></i>
+                         {{user_post.dislike_count}}</a>
                 </div>
                 <div class="line-divider"></div>
                 <div class="post-text">

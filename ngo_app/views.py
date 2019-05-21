@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.shortcuts import redirect
+from django.shortcuts import redirect, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.views.generic import TemplateView
@@ -8,6 +8,8 @@ from django.views import View
 from contributor_app.models import Contributor
 from ngo_app.models import NGO, State
 import random
+from social_media import social_media_helpers as sm_helper
+from django.contrib.auth import authenticate, login
 
 
 # Index generic view for get & post request
@@ -50,22 +52,34 @@ def logout(request):
 # Login generic view for user/NGO login
 class Login(View):
     def get(self, request):
-        return render(request, 'register_login.html', {'message': 'valid', 'type': 'login'})
+        full_path = request.get_full_path()
+        next = ""
+        if 'next' in full_path:
+            next = request.GET['next']
+        return render(request, 'register_login.html', {'message': 'valid', 'type': 'login', 'next': next})
 
     def post(self, request):
         user_name = request.POST.get("email")
         password = request.POST.get("password")
         auth_user = authenticate(username=str(user_name).split('@')[0], password=password)
-
         if auth_user:
             request.session['username'] = str(user_name).split('@')[0]
             request.session['first_name'] = auth_user.first_name
             try:
                 NGO.objects.get(user__username=user_name)
-                request.session['f'] = 'ngo'
+                request.session['user_type'] = 'ngo'
             except:
                 request.session['user_type'] = 'contributor'
-            return redirect('index')
+            login(request, auth_user)
+            next = ""
+            full_path = request.get_full_path()
+            if 'next' in full_path:
+                next = request.GET['next']
+            # import pdb;pdb.set_trace()
+            if next:
+                return HttpResponseRedirect(next)
+            else:
+                return redirect('index')
         else:
             return render(request, 'register_login.html', {'message': 'invalid', 'type': 'login'})
 
@@ -113,35 +127,28 @@ class Register(View):
 
 # All ngo view for getting all NGO
 def all_ngo_view(request):
-    first_name = None
-    try:
-        first_name = request.session['first_name']
-    except Exception as e:
-        print(e)
+    first_name, username = sm_helper.get_request_user_info(request)
     ngo_queryset = list(NGO.objects.all())
     random.shuffle(ngo_queryset)
     return render(request, 'all_ngo.html',
-                  {'first_name': first_name, 'username': request.session['username'], 'ngo_list': ngo_queryset})
+                  {'first_name': first_name, 'username': username, 'ngo_list': ngo_queryset})
 
 
 # Function based view for featured ngo category
 def featured_ngo_category(request, category_name):
+    first_name, username = sm_helper.get_request_user_info(request)
     featured_ngo_list = NGO.objects.filter(work_domain__contains=category_name)
     return render(request, 'ngo_search.html',
-                  {'first_name': request.session['first_name'], 'username': request.session['username'],
+                  {'first_name': first_name, 'username':username,
                    'ngo_display': 'featured', 'search_keyword': category_name, 'ngo_search_result': featured_ngo_list})
 
 
 # Ngo description view
 def ngo_description(request, ngo_id):
-    first_name = None
-    try:
-        first_name = request.session['first_name']
-    except Exception as e:
-        print(e)
+    first_name, username = sm_helper.get_request_user_info(request)
     ngo_instance = NGO.objects.get(user__username=ngo_id)
     return render(request, 'ngo_description.html',
-                  {'first_name': first_name, 'username': request.session['username'], 'ngo_info': ngo_instance})
+                  {'first_name': first_name, 'username': username, 'ngo_info': ngo_instance})
 
 
 # function view for standard custom 404 error

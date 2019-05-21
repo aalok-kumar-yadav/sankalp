@@ -20,9 +20,12 @@ from social_media.models import Post, Event, UserPostLikeDislike, Comment
 from social_media.file_helper import upload_file
 from ngo_app.models import NGO
 from django.http.response import JsonResponse
-
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+from social_media import social_media_helpers as sm_helper
 
 # News Feed Generic View
+@method_decorator(login_required, name='dispatch')
 class NewsFeed(View):
     def get(self, request):
         context_data = social_helper.get_news_feed(request)
@@ -138,8 +141,9 @@ class ContactUs(View):
 # Faq for getting Frequently asked question
 class Faq(View):
     def get(self, request):
-        return render(request, 'faq.html', {'user_info': {'first_name': request.session['first_name']},
-                                            'username': request.session['username']})
+        first_name, username = sm_helper.get_request_user_info(request)
+        return render(request, 'faq.html', {'user_info': {'first_name': first_name},
+                                            'username': username})
 
     def post(self, request):
         return render(request, 'faq.html', {'user_info': {'first_name': request.session['first_name']},

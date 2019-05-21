@@ -1,8 +1,9 @@
 from django.conf.urls import url
 from social_media import views
+from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
-    url(r'^$', views.NewsFeed.as_view(), name='news_feed'),
+    url(r'^$', login_required(views.NewsFeed.as_view()), name='news_feed'),
     url(r'^nearby$', views.NearByNgoPeople.as_view(), name='nearby_ngo_people'),
     url(r'^connected/(?P<user_id>.+)$', views.ConnectedNgoPeople.as_view(), name='connected_ngo_people'),
     url(r'^messages$', views.SocialMediaMessage.as_view(), name='social_media_messages'),

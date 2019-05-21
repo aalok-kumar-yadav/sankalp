@@ -273,8 +273,12 @@
                             <p class="text-muted">Log into your account</p>
 
                             <!--Login Form-->
+                            {% if next %}
+<form  name="Login_form" id='Login_form' action="/login/?next={{next}}" method="post" >
+{%else%}
+<form name="Login_form" id='Login_form' method="post" action="{% url 'login' %}">
+{% endif %}
 
-                            <form name="Login_form" id='Login_form' method="post" action="{% url 'login' %}">
                                 {% csrf_token %}
                                 <div class="row">
                                     <div class="form-group col-xs-12">
@@ -313,7 +317,7 @@
 
 $(document).ready(function(){
 
-   if ( window.location.pathname== '/login'){
+   if ( window.location.pathname.includes('login')){
       $("#ngo").hide();
       $('#login_toggle_id').click()
    }
